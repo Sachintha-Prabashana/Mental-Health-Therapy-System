@@ -33,7 +33,7 @@ public class LoginPageController {
     private Label lblCreateAcc;
 
     @FXML
-    private Label lblNotAcc;
+    private Label lblForgotPassword;
 
     private final AuthService authService = new AuthService(); // Injecting AuthService
 

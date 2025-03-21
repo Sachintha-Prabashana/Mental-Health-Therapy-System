@@ -1,8 +1,63 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.VBox?>
 
+<AnchorPane prefHeight="752.0" prefWidth="1191.0" xmlns="http://javafx.com/javafx/22" xmlns:fx="http://javafx.com/fxml/1" fx:controller="lk.ijse.controller.AdminPageController">
 
-<AnchorPane prefHeight="750.0" prefWidth="1200.0" style="-fx-background-color: blue;" xmlns="http://javafx.com/javafx/22" xmlns:fx="http://javafx.com/fxml/1" fx:controller="lk.ijse.controller.AdminPageController">
+   <!-- Sidebar -->
+   <VBox alignment="TOP_CENTER" layoutY="64.8" prefHeight="686.0" prefWidth="186.0" spacing="20.0" style="-fx-background-color: #2C3E50; -fx-padding: 15;" AnchorPane.leftAnchor="0" AnchorPane.topAnchor="65.0">
+      <ImageView fitHeight="129.0" fitWidth="80" preserveRatio="true">
+         <image>
+            <Image url="@../images/admin-logo.png" />
+         </image>
+      </ImageView>
+      <Label style="-fx-font-size: 18px; -fx-text-fill: white;" text="Admin Dashboard" />
+      <Button fx:id="btnDashboard" onAction="#btnDashboardOnAction" prefHeight="38.0" prefWidth="138.0" style="-fx-background-color: #34495E; -fx-background-radius: 10;" text="Dashboard" textFill="WHITE" />
+      <Button fx:id="btnPatient" onAction="#btnPatientOnAction" prefHeight="38.0" prefWidth="138.0" style="-fx-background-color: #34495E; -fx-background-radius: 10;" text="Patient" textFill="WHITE" />
+      <Button fx:id="btnTherapist" onAction="#btnTherapistOnAction" prefHeight="38.0" prefWidth="138.0" style="-fx-background-color: #34495E; -fx-background-radius: 10;" text="Therapist" textFill="WHITE" />
+      <Button fx:id="btnAppointment" onAction="#btnAppointmentOnAction" prefHeight="38.0" prefWidth="138.0" style="-fx-background-color: #34495E; -fx-background-radius: 10;" text="Appointment" textFill="WHITE" />
+      <Button fx:id="btnPayment" onAction="#btnPaymentOnAction" prefHeight="38.0" prefWidth="138.0" style="-fx-background-color: #34495E; -fx-background-radius: 10;" text="Payment" textFill="WHITE" />
+      <Button fx:id="btnTherapyProgram" onAction="#btnTherapyProgramOnAction" prefHeight="38.0" prefWidth="138.0" style="-fx-background-color: #34495E; -fx-background-radius: 10;" text="Therapy Program" textFill="WHITE" />
+      <VBox alignment="BOTTOM_LEFT" prefHeight="86.0" prefWidth="156.0">
+         <children>
+            <HBox alignment="CENTER" prefHeight="36.0" prefWidth="156.0">
+               <children>
+                  <ImageView fx:id="imgLogout" fitHeight="30" fitWidth="30" onMouseClicked="#onLogoutClick" preserveRatio="true">
+                     <image>
+                        <Image url="@../icons/logout_icon.png" />
+                     </image>
+                  </ImageView>
+                  <ImageView fx:id="imgSettings" fitHeight="30" fitWidth="30" onMouseClicked="#onSettingsClick" preserveRatio="true">
+                     <image>
+                        <Image url="@../icons/setting_icon.png" />
+                     </image>
+                  </ImageView>
+               </children>
+            </HBox>
+         </children>
+      </VBox>
+   </VBox>
+
+   <!-- Top Bar -->
+   <HBox alignment="CENTER_RIGHT" prefHeight="66.0" prefWidth="1200.0" style="-fx-background-color: #34495E; -fx-padding: 10;" AnchorPane.leftAnchor="0.0" AnchorPane.topAnchor="0">
+      <VBox alignment="CENTER">
+         <Label fx:id="lblWelcome" style="-fx-text-fill: white; -fx-font-size: 16px;" text="Welcome, Admin" />
+         <HBox alignment="CENTER">
+            <Label fx:id="lblAdminId" style="-fx-text-fill: white; -fx-font-size: 14px;" text="Admin ID: " />
+            <Label fx:id="lblAdd" style="-fx-text-fill: white; -fx-font-size: 14px; -fx-padding: 0 0 0 10;" />
+         </HBox>
+      </VBox>
+   </HBox>
+
+   <!-- Main Content Area -->
+   <AnchorPane fx:id="mainContent" layoutX="186.0" layoutY="66.0" prefHeight="686.0" prefWidth="1012.0" style="-fx-background-color: white;">
+      <Label layoutX="50" layoutY="120" style="-fx-font-size: 20px; -fx-text-fill: #2C3E50;" text="Welcome to the Admin Page" />
+   </AnchorPane>
 
 </AnchorPane>

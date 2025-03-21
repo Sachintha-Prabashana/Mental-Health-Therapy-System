@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import com.jfoenix.controls.JFXButton?>
+<?import javafx.scene.Cursor?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.paint.LinearGradient?>
+<?import javafx.scene.paint.Stop?>
+<?import javafx.scene.shape.Rectangle?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane prefHeight="686.0" prefWidth="1012.0" xmlns="http://javafx.com/javafx/22" xmlns:fx="http://javafx.com/fxml/1" fx:controller="lk.ijse.controller.ManageTherapistFormController">
+    <children>
+        <!-- Header Section -->
+        <Rectangle arcHeight="5.0" arcWidth="5.0" height="80.0" layoutX="10.0" layoutY="10.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" width="989.0">
+            <fill>
+                <LinearGradient endX="0.048" endY="0.712">
+                    <stops>
+                        <Stop color="#1598d6" />
+                        <Stop color="WHITE" offset="1.0" />
+                    </stops>
+                </LinearGradient>
+            </fill>
+        </Rectangle>
+        <ImageView id="imgHome" fx:id="imgHome" fitHeight="53.0" fitWidth="55.0" layoutX="32.0" layoutY="26.0" onMouseClicked="#navigateToHome" pickOnBounds="true" preserveRatio="true">
+            <image>
+                <Image url="@../images/home-icon.png" />
+            </image>
+            <cursor>
+                <Cursor fx:constant="HAND" />
+            </cursor>
+        </ImageView>
+        <Label layoutX="105.0" layoutY="34.0" text="Manage Therapists">
+            <font>
+                <Font name="Ubuntu" size="27.0" />
+            </font>
+        </Label>
+        <JFXButton id="btnAddNewTherapist" fx:id="btnAddNewTherapist" layoutX="829.0" layoutY="32.0" onAction="#btnAddNew_OnAction" prefHeight="35.0" prefWidth="150.0" style="-fx-cursor: hand; -fx-background-color: #007bff;" text="+ New Therapist" textFill="WHITE" />
+
+        <!-- Therapist Form Fields -->
+        <TextField fx:id="txtTherapistId" layoutX="34.0" layoutY="129.0" prefHeight="26.0" prefWidth="262.0" promptText="Therapist ID:" />
+        <TextField fx:id="txtTherapistName" layoutX="34.0" layoutY="166.0" prefHeight="26.0" prefWidth="606.0" promptText="Therapist Name:" />
+        <TextField fx:id="txtTherapistSpecialty" layoutX="34.0" layoutY="206.0" prefHeight="26.0" prefWidth="606.0" promptText="Specialty:" />
+        <TextField fx:id="txtTherapistAvailability" layoutX="34.0" layoutY="245.0" prefHeight="26.0" prefWidth="606.0" promptText="Availability Schedule:" />
+        <TextField fx:id="txtAssignedProgram" layoutX="34.0" layoutY="284.0" prefHeight="26.0" prefWidth="606.0" promptText="Assigned Therapy Program:" />
+
+        <!-- Action Buttons -->
+        <JFXButton id="btnSave" fx:id="btnSave" layoutX="180.0" layoutY="330.0" onAction="#btnSave_OnAction" prefHeight="28.0" prefWidth="74.0" style="-fx-cursor: hand; -fx-background-color: #218838;" text="Save" />
+        <JFXButton id="btnUpdate" fx:id="btnUpdate" layoutX="270.0" layoutY="330.0" onAction="#btnUpdate_OnAction" prefHeight="28.0" prefWidth="74.0" style="-fx-cursor: hand; -fx-background-color: #F9CB43;" text="Update" />
+        <JFXButton id="btnDelete" fx:id="btnDelete" layoutX="360.0" layoutY="330.0" onAction="#btnDelete_OnAction" prefHeight="28.0" prefWidth="74.0" style="-fx-cursor: hand; -fx-background-color: red;" text="Delete" textFill="WHITE" />
+
+        <!-- Therapist Table -->
+        <TableView fx:id="tblTherapists" layoutX="32.0" layoutY="380.0" prefHeight="286.0" prefWidth="950.0">
+            <columns>
+                <TableColumn fx:id="clmTherapistId" prefWidth="120.0" text="Therapist ID" />
+                <TableColumn fx:id="clmTherapistName" prefWidth="218.40000915527344" text="Therapist Name" />
+                <TableColumn fx:id="clmTherapistSpeciality" prefWidth="200.0" text="Specialty" />
+                <TableColumn fx:id="clmTherapisstAvailability" prefWidth="163.199951171875" text="Availability" />
+                <TableColumn fx:id="clmAssignedPrograme" prefWidth="255.99993896484375" text="Assigned Program" />
+            </columns>
+        </TableView>
+      <JFXButton id="btnAddNewTherapist" fx:id="btnViewTherapyPrograme" layoutX="489.0" layoutY="124.0" onAction="#btnViewTherapyProgrameOnAction" prefHeight="35.0" prefWidth="150.0" style="-fx-cursor: hand; -fx-background-color: #007bff;" text="View Therapy Programs" textFill="WHITE" />
+      <AnchorPane fx:id="viewTherapyProgramePane" layoutX="662.0" layoutY="129.0" prefHeight="230.0" prefWidth="319.0" />
+    </children>
+</AnchorPane>
