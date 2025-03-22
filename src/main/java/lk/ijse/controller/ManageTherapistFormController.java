@@ -6,6 +6,7 @@ import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
+import javafx.fxml.Initializable;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.input.MouseEvent;
@@ -21,12 +22,10 @@ import org.hibernate.Transaction;
 import org.hibernate.query.Query;
 
 import java.io.IOException;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Objects;
-import java.util.Optional;
+import java.net.URL;
+import java.util.*;
 
-public class ManageTherapistFormController {
+public class ManageTherapistFormController implements Initializable {
 
     @FXML
     private JFXButton btnAddNewTherapist, btnDelete, btnSave, btnUpdate, btnViewTherapyPrograme;
@@ -46,14 +45,8 @@ public class ManageTherapistFormController {
     private final FactoryConfiguration factoryConfiguration = new FactoryConfiguration();
     private final TherapistBO therapistBO = new TherapistBOImpl();
 
-    @FXML
-    public void initialize() {
-        // Configure table columns
-//        clmTherapistId.setCellValueFactory(cellData -> cellData.getValue().idProperty());
-//        clmTherapistName.setCellValueFactory(cellData -> cellData.getValue().nameProperty());
-//        clmTherapistSpeciality.setCellValueFactory(cellData -> cellData.getValue().specializationProperty());
-//        clmTherapisstAvailability.setCellValueFactory(cellData -> cellData.getValue().availabilityProperty());
-
+    @Override
+    public void initialize(URL location, ResourceBundle resources) {
         clmTherapistId.setCellValueFactory(new PropertyValueFactory<>("id"));
         clmTherapistName.setCellValueFactory(new PropertyValueFactory<>("name"));
         clmTherapistSpeciality.setCellValueFactory(new PropertyValueFactory<>("specialization"));

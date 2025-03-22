@@ -6,7 +6,7 @@
 
 <AnchorPane prefHeight="259.0" prefWidth="522.0" xmlns="http://javafx.com/javafx/22" xmlns:fx="http://javafx.com/fxml/1" fx:controller="lk.ijse.controller.TherapistTableFormController">
 
-    <TableView fx:id="tblTherapist" prefHeight="259.0" prefWidth="522.0">
+    <TableView fx:id="tblTherapist" onMouseClicked="#tblTherapistOnClick" prefHeight="259.0" prefWidth="522.0">
         <columns>
             <TableColumn fx:id="clmTherapistId" prefWidth="103.19994962215424" text="Therapist ID" />
             <TableColumn fx:id="clmTherapistName" prefWidth="132.00000762939453" text="Therapist Name" />

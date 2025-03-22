@@ -57,16 +57,34 @@ public class ManageTherapyProgramFormController {
     private TableView<?> tblTherapists;
 
     @FXML
-    private TextField txtTherapistAvailability;
+    private TextField txtFee;
+
+    @FXML
+    private TextField txtProgramDuration;
+
+    @FXML
+    private TextField txtProgramId;
+
+    @FXML
+    private TextField txtProgramName;
 
     @FXML
     private TextField txtTherapistId;
 
-    @FXML
-    private TextField txtTherapistName;
+    private static ManageTherapyProgramFormController instance;
 
-    @FXML
-    private TextField txtTherapistSpecialty;
+     // set therapist id to text field
+    public ManageTherapyProgramFormController(){
+        instance = this;
+    }
+
+    public static ManageTherapyProgramFormController getInstance() {
+        return instance;
+    }
+
+    public void setTherapistId(String id) {
+        txtTherapistId.setText(id);
+    }
 
     @FXML
     void btnAddNew_OnAction(ActionEvent event) {
