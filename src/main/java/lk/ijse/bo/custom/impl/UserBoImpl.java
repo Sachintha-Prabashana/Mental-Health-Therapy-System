@@ -1,4 +1,4 @@
-package lk.ijse.bo;
+package lk.ijse.bo.custom.impl;
 
 import lk.ijse.bo.custom.UserBo;
 import lk.ijse.dao.custom.UserDAO;

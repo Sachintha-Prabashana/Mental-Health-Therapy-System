@@ -5,10 +5,9 @@ import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.control.*;
 import javafx.scene.layout.AnchorPane;
-import lk.ijse.bo.UserBoImpl;
+import lk.ijse.bo.custom.impl.UserBoImpl;
 import lk.ijse.bo.custom.UserBo;
 import lk.ijse.util.Role;
-import lk.ijse.util.PasswordEncryptionUtil;
 
 import java.io.IOException;
 

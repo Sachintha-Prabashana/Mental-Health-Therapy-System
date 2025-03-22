@@ -54,7 +54,7 @@
         <JFXButton id="btnDelete" fx:id="btnDelete" layoutX="361.0" layoutY="316.0" onAction="#btnDelete_OnAction" prefHeight="28.0" prefWidth="74.0" style="-fx-cursor: hand; -fx-background-color: red;" text="Delete" textFill="WHITE" />
 
         <!-- Therapist Table -->
-        <TableView fx:id="tblTherapists" layoutX="40.0" layoutY="370.0" prefHeight="333.0" prefWidth="1082.0">
+        <TableView fx:id="tblTherapists" layoutX="40.0" layoutY="370.0" onMouseClicked="#tblTherapistsOnClick" prefHeight="333.0" prefWidth="1082.0">
             <columns>
                 <TableColumn fx:id="clmTherapistId" prefWidth="120.0" text="Therapist ID" />
                 <TableColumn fx:id="clmTherapistName" prefWidth="251.1999969482422" text="Therapist Name" />

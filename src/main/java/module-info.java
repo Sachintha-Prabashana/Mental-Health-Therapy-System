@@ -16,7 +16,8 @@ module lk.ijse {
 
 
     opens lk.ijse.controller to javafx.fxml;
-    opens lk.ijse.entity to org.hibernate.orm.core, javafx.base;
+    opens lk.ijse.view.tdm to javafx.base;
+    opens lk.ijse.entity to org.hibernate.orm.core;
     opens lk.ijse.config to jakarta.persistence;
     exports lk.ijse;
 }

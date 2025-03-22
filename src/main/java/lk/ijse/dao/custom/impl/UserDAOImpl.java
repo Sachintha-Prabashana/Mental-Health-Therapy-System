@@ -7,6 +7,8 @@ import lk.ijse.entity.User;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
 
+import java.util.List;
+
 
 public class UserDAOImpl  implements UserDAO {
     private final FactoryConfiguration factoryConfiguration = new FactoryConfiguration();
@@ -47,5 +49,20 @@ public class UserDAOImpl  implements UserDAO {
             e.printStackTrace();
         }
         return false;
+    }
+
+    @Override
+    public boolean update(User entity) {
+        return false;
+    }
+
+    @Override
+    public boolean deleteByPK(String id) throws Exception {
+        return false;
+    }
+
+    @Override
+    public List<User> getAll() {
+        return List.of();
     }
 }
