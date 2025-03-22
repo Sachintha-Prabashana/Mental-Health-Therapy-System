@@ -14,10 +14,10 @@
 <?import javafx.scene.shape.Rectangle?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane prefHeight="686.0" prefWidth="1012.0" xmlns="http://javafx.com/javafx/22" xmlns:fx="http://javafx.com/fxml/1" fx:controller="lk.ijse.controller.ManageTherapistFormController">
+<AnchorPane prefHeight="732.0" prefWidth="1166.0" xmlns="http://javafx.com/javafx/22" xmlns:fx="http://javafx.com/fxml/1" fx:controller="lk.ijse.controller.ManageTherapistFormController">
     <children>
         <!-- Header Section -->
-        <Rectangle arcHeight="5.0" arcWidth="5.0" height="80.0" layoutX="10.0" layoutY="10.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" width="989.0">
+        <Rectangle arcHeight="5.0" arcWidth="5.0" height="80.0" layoutX="10.0" layoutY="10.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" width="1145.0">
             <fill>
                 <LinearGradient endX="0.048" endY="0.712">
                     <stops>
@@ -40,31 +40,27 @@
                 <Font name="Ubuntu" size="27.0" />
             </font>
         </Label>
-        <JFXButton id="btnAddNewTherapist" fx:id="btnAddNewTherapist" layoutX="829.0" layoutY="32.0" onAction="#btnAddNew_OnAction" prefHeight="35.0" prefWidth="150.0" style="-fx-cursor: hand; -fx-background-color: #007bff;" text="+ New Therapist" textFill="WHITE" />
+        <JFXButton id="btnAddNewTherapist" fx:id="btnAddNewTherapist" layoutX="972.0" layoutY="32.0" onAction="#btnAddNew_OnAction" prefHeight="35.0" prefWidth="150.0" style="-fx-cursor: hand; -fx-background-color: #007bff;" text="+ New Therapist" textFill="WHITE" />
 
         <!-- Therapist Form Fields -->
-        <TextField fx:id="txtTherapistId" layoutX="34.0" layoutY="129.0" prefHeight="26.0" prefWidth="262.0" promptText="Therapist ID:" />
-        <TextField fx:id="txtTherapistName" layoutX="34.0" layoutY="166.0" prefHeight="26.0" prefWidth="606.0" promptText="Therapist Name:" />
-        <TextField fx:id="txtTherapistSpecialty" layoutX="34.0" layoutY="206.0" prefHeight="26.0" prefWidth="606.0" promptText="Specialty:" />
-        <TextField fx:id="txtTherapistAvailability" layoutX="34.0" layoutY="245.0" prefHeight="26.0" prefWidth="606.0" promptText="Availability Schedule:" />
-        <TextField fx:id="txtAssignedProgram" layoutX="34.0" layoutY="284.0" prefHeight="26.0" prefWidth="606.0" promptText="Assigned Therapy Program:" />
+        <TextField fx:id="txtTherapistId" layoutX="34.0" layoutY="132.0" prefHeight="26.0" prefWidth="262.0" promptText="Therapist ID:" />
+        <TextField fx:id="txtTherapistName" layoutX="34.0" layoutY="177.0" prefHeight="26.0" prefWidth="522.0" promptText="Therapist Name:" />
+        <TextField fx:id="txtTherapistSpecialty" layoutX="34.0" layoutY="219.0" prefHeight="26.0" prefWidth="522.0" promptText="Specialty:" />
+        <TextField fx:id="txtTherapistAvailability" layoutX="34.0" layoutY="260.0" prefHeight="26.0" prefWidth="522.0" promptText="Availability Schedule:" />
 
         <!-- Action Buttons -->
-        <JFXButton id="btnSave" fx:id="btnSave" layoutX="180.0" layoutY="330.0" onAction="#btnSave_OnAction" prefHeight="28.0" prefWidth="74.0" style="-fx-cursor: hand; -fx-background-color: #218838;" text="Save" />
-        <JFXButton id="btnUpdate" fx:id="btnUpdate" layoutX="270.0" layoutY="330.0" onAction="#btnUpdate_OnAction" prefHeight="28.0" prefWidth="74.0" style="-fx-cursor: hand; -fx-background-color: #F9CB43;" text="Update" />
-        <JFXButton id="btnDelete" fx:id="btnDelete" layoutX="360.0" layoutY="330.0" onAction="#btnDelete_OnAction" prefHeight="28.0" prefWidth="74.0" style="-fx-cursor: hand; -fx-background-color: red;" text="Delete" textFill="WHITE" />
+        <JFXButton id="btnSave" fx:id="btnSave" layoutX="174.0" layoutY="316.0" onAction="#btnSave_OnAction" prefHeight="28.0" prefWidth="74.0" style="-fx-cursor: hand; -fx-background-color: #218838;" text="Save" />
+        <JFXButton id="btnUpdate" fx:id="btnUpdate" layoutX="268.0" layoutY="316.0" onAction="#btnUpdate_OnAction" prefHeight="28.0" prefWidth="74.0" style="-fx-cursor: hand; -fx-background-color: #F9CB43;" text="Update" />
+        <JFXButton id="btnDelete" fx:id="btnDelete" layoutX="361.0" layoutY="316.0" onAction="#btnDelete_OnAction" prefHeight="28.0" prefWidth="74.0" style="-fx-cursor: hand; -fx-background-color: red;" text="Delete" textFill="WHITE" />
 
         <!-- Therapist Table -->
-        <TableView fx:id="tblTherapists" layoutX="32.0" layoutY="380.0" prefHeight="286.0" prefWidth="950.0">
+        <TableView fx:id="tblTherapists" layoutX="40.0" layoutY="370.0" prefHeight="333.0" prefWidth="1082.0">
             <columns>
                 <TableColumn fx:id="clmTherapistId" prefWidth="120.0" text="Therapist ID" />
-                <TableColumn fx:id="clmTherapistName" prefWidth="218.40000915527344" text="Therapist Name" />
-                <TableColumn fx:id="clmTherapistSpeciality" prefWidth="200.0" text="Specialty" />
-                <TableColumn fx:id="clmTherapisstAvailability" prefWidth="163.199951171875" text="Availability" />
-                <TableColumn fx:id="clmAssignedPrograme" prefWidth="255.99993896484375" text="Assigned Program" />
+                <TableColumn fx:id="clmTherapistName" prefWidth="251.1999969482422" text="Therapist Name" />
+                <TableColumn fx:id="clmTherapistSpeciality" prefWidth="424.0" text="Specialty" />
+                <TableColumn fx:id="clmTherapisstAvailability" prefWidth="288.800048828125" text="Availability" />
             </columns>
         </TableView>
-      <JFXButton id="btnAddNewTherapist" fx:id="btnViewTherapyPrograme" layoutX="489.0" layoutY="124.0" onAction="#btnViewTherapyProgrameOnAction" prefHeight="35.0" prefWidth="150.0" style="-fx-cursor: hand; -fx-background-color: #007bff;" text="View Therapy Programs" textFill="WHITE" />
-      <AnchorPane fx:id="viewTherapyProgramePane" layoutX="662.0" layoutY="129.0" prefHeight="230.0" prefWidth="319.0" />
     </children>
 </AnchorPane>

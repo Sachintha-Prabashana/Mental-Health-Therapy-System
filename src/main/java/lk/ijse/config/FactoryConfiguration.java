@@ -1,5 +1,7 @@
 package lk.ijse.config;
 
+import lk.ijse.entity.Therapist;
+import lk.ijse.entity.TherapyProgram;
 import lk.ijse.entity.User;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
@@ -13,6 +15,8 @@ public class FactoryConfiguration {
         Configuration configuration = new Configuration();
         configuration.configure();
         configuration.addAnnotatedClass(User.class);
+        configuration.addAnnotatedClass(Therapist.class);
+        configuration.addAnnotatedClass(TherapyProgram.class);
         sessionFactory = configuration.buildSessionFactory();
     }
 

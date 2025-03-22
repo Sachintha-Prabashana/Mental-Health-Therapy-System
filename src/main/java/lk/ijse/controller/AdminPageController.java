@@ -78,6 +78,7 @@ public class AdminPageController {
 
     @FXML
     void btnTherapyProgramOnAction(ActionEvent event) {
+        loadUI("/view/Manage-Therapy-Program-Form.fxml");
 
     }
 

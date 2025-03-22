@@ -8,10 +8,10 @@
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.VBox?>
 
-<AnchorPane prefHeight="752.0" prefWidth="1191.0" xmlns="http://javafx.com/javafx/22" xmlns:fx="http://javafx.com/fxml/1" fx:controller="lk.ijse.controller.AdminPageController">
+<AnchorPane prefHeight="800.0" prefWidth="1350.0" xmlns="http://javafx.com/javafx/22" xmlns:fx="http://javafx.com/fxml/1" fx:controller="lk.ijse.controller.AdminPageController">
 
    <!-- Sidebar -->
-   <VBox alignment="TOP_CENTER" layoutY="64.8" prefHeight="686.0" prefWidth="186.0" spacing="20.0" style="-fx-background-color: #2C3E50; -fx-padding: 15;" AnchorPane.leftAnchor="0" AnchorPane.topAnchor="65.0">
+   <VBox alignment="TOP_CENTER" layoutY="64.8" prefHeight="734.0" prefWidth="186.0" spacing="20.0" style="-fx-background-color: #2C3E50; -fx-padding: 15;" AnchorPane.leftAnchor="0" AnchorPane.topAnchor="65.0">
       <ImageView fitHeight="129.0" fitWidth="80" preserveRatio="true">
          <image>
             <Image url="@../images/admin-logo.png" />
@@ -45,7 +45,7 @@
    </VBox>
 
    <!-- Top Bar -->
-   <HBox alignment="CENTER_RIGHT" prefHeight="66.0" prefWidth="1200.0" style="-fx-background-color: #34495E; -fx-padding: 10;" AnchorPane.leftAnchor="0.0" AnchorPane.topAnchor="0">
+   <HBox alignment="CENTER_RIGHT" prefHeight="66.0" prefWidth="1351.0" style="-fx-background-color: #34495E; -fx-padding: 10;" AnchorPane.leftAnchor="0.0" AnchorPane.topAnchor="0">
       <VBox alignment="CENTER">
          <Label fx:id="lblWelcome" style="-fx-text-fill: white; -fx-font-size: 16px;" text="Welcome, Admin" />
          <HBox alignment="CENTER">
@@ -56,7 +56,7 @@
    </HBox>
 
    <!-- Main Content Area -->
-   <AnchorPane fx:id="mainContent" layoutX="186.0" layoutY="66.0" prefHeight="686.0" prefWidth="1012.0" style="-fx-background-color: white;">
+   <AnchorPane fx:id="mainContent" layoutX="186.0" layoutY="66.0" prefHeight="732.0" prefWidth="1166.0" style="-fx-background-color: white;">
       <Label layoutX="50" layoutY="120" style="-fx-font-size: 20px; -fx-text-fill: #2C3E50;" text="Welcome to the Admin Page" />
    </AnchorPane>
 

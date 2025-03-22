@@ -36,7 +36,7 @@ public class UserDAOImpl  implements UserDAO {
     }
 
     @Override
-    public void save(User user) {
+    public boolean save(User user) {
         Transaction transaction = null;
         try (Session session = factoryConfiguration.getSession()) {
             transaction = session.beginTransaction();
@@ -46,5 +46,6 @@ public class UserDAOImpl  implements UserDAO {
             if (transaction != null) transaction.rollback();
             e.printStackTrace();
         }
+        return false;
     }
 }
