@@ -100,14 +100,6 @@ public class ManageTherapistFormController implements Initializable {
         }
 
         TherapistDTO therapistDTO = new TherapistDTO(id, name, specialty, availability);
-
-//        try (Session session = factoryConfiguration.getInstance().getSession()) {
-//            Transaction tx = session.beginTransaction();
-//            session.save(therapist);
-//            tx.commit();
-//        } catch (Exception e) {
-//
-//        }
         try{
             boolean isSaved = therapistBO.saveTherapist(therapistDTO);
 

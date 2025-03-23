@@ -1,7 +1,5 @@
-package lk.ijse.view.tdm;
+package lk.ijse.dto;
 
-import jakarta.persistence.*;
-import lk.ijse.entity.Therapist;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -9,10 +7,10 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @NoArgsConstructor
 @Data
-public class TherapyProgramTM {
+public class TherapyProgramDTO {
     private String id;
     private String name;
     private int duration;
     private double fee;
-    private String therapistId;
+    private String therapistId; // Store therapist's ID instead of full entity reference
 }

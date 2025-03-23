@@ -3,8 +3,9 @@ package lk.ijse.dao.custom.impl;
 import lk.ijse.bo.exception.DuplicateException;
 import lk.ijse.bo.exception.NotFoundException;
 import lk.ijse.config.FactoryConfiguration;
-import lk.ijse.dao.custom.TherapistDAO;
+import lk.ijse.dao.custom.TherapyProgramDAO;
 import lk.ijse.entity.Therapist;
+import lk.ijse.entity.TherapyProgram;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
 import org.hibernate.query.Query;
@@ -12,40 +13,39 @@ import org.hibernate.query.Query;
 import java.util.ArrayList;
 import java.util.List;
 
-public class TherapistDAOImpl implements TherapistDAO {
+public class TherapyProgramDAOImpl implements TherapyProgramDAO {
     private final FactoryConfiguration factoryConfiguration = new FactoryConfiguration();
 
     @Override
-    public boolean save(Therapist therapist) {
+    public boolean save(TherapyProgram entity) {
         Session session = factoryConfiguration.getSession();
-        Transaction transaction = session.beginTransaction();
-        try {
-           //T00-001
-            Therapist existsTherapist = session.get(Therapist.class, therapist.getId());
+        Transaction tx = session.beginTransaction();
+
+        try{
+            Therapist existsTherapist = session.get(Therapist.class, entity.getId());
             if (existsTherapist != null) {
                 throw new DuplicateException("Therapist id duplicated");
             }
-
-            session.persist(therapist);//save
-            transaction.commit();
+            session.persist(entity);
+            tx.commit();
             return true;
-        } catch (Exception e) {
-            transaction.rollback();
+        }catch(Exception e){
+            tx.rollback();
             return false;
-        } finally {
-            if (session != null) {
+        }finally {
+            if(session != null){
                 session.close();
             }
         }
     }
 
     @Override
-    public boolean update(Therapist therapist) {
+    public boolean update(TherapyProgram entity) {
         Session session = factoryConfiguration.getSession();
         Transaction transaction = session.beginTransaction();
 
         try {
-            session.merge(therapist);//update
+            session.merge(entity);//update
             transaction.commit();
             return true;
         }catch (Exception e) {
@@ -65,11 +65,11 @@ public class TherapistDAOImpl implements TherapistDAO {
         Transaction transaction = session.beginTransaction();
 
         try {
-            Therapist therapist = session.get(Therapist.class, id);
-            if (therapist == null) {
-                throw new NotFoundException("Therapist not found");
+            TherapyProgram therapyProgram = session.get(TherapyProgram.class, id);
+            if (therapyProgram == null) {
+                throw new NotFoundException("Therapy Program not found");
             }
-            session.remove(therapist);
+            session.remove(therapyProgram);
             transaction.commit();
             return true;
         }catch (Exception e) {
@@ -83,26 +83,26 @@ public class TherapistDAOImpl implements TherapistDAO {
     }
 
     @Override
-    public List<Therapist> getAll() {
+    public List<TherapyProgram> getAll() {
         Session session = factoryConfiguration.getSession();
-        Query<Therapist> query = session.createQuery("FROM Therapist", Therapist.class);
-        ArrayList<Therapist> therapists = (ArrayList<Therapist>) query.list();
-        return therapists;
+        Query<TherapyProgram> query = session.createQuery("FROM TherapyProgram ", TherapyProgram.class);
+        ArrayList<TherapyProgram> therapyPrograms = (ArrayList<TherapyProgram>) query.list();
+        return therapyPrograms;
     }
 
     @Override
     public String getNextId() {
-        return "";
-    }
+        Session session = factoryConfiguration.getSession();
+        // Get the last user ID from the database
+        String lastId = session.createQuery("SELECT tp.id FROM TherapyProgram tp ORDER BY tp.id DESC", String.class)
+                .setMaxResults(1)
+                .uniqueResult();
 
-    @Override
-    public Therapist getById(String therapistId) {
-        try{
-            Session session = factoryConfiguration.getSession();
-            Therapist therapist = session.get(Therapist.class, therapistId);
-            return therapist;
-        }catch (Exception e){
-            throw new NotFoundException("Therapist not found");
+        if (lastId != null) {
+            int numericPart = Integer.parseInt(lastId.split("-")[1]) + 1;
+            return String.format("TP00-%03d", numericPart);
+        } else {
+            return "TP00-001"; // First user ID
         }
     }
 }

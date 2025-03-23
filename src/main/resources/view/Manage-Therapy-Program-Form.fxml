@@ -47,7 +47,7 @@
       <JFXButton id="btnSave" fx:id="btnSave" layoutX="269.0" layoutY="341.0" onAction="#btnSave_OnAction" prefHeight="28.0" prefWidth="74.0" style="-fx-cursor: hand; -fx-background-color: #218838;" text="Save" />
       <JFXButton id="btnUpdate" fx:id="btnUpdate" layoutX="363.0" layoutY="341.0" onAction="#btnUpdate_OnAction" prefHeight="28.0" prefWidth="74.0" style="-fx-cursor: hand; -fx-background-color: #F9CB43;" text="Update" />
       <JFXButton id="btnDelete" fx:id="btnDelete" layoutX="457.0" layoutY="341.0" onAction="#btnDelete_OnAction" prefHeight="28.0" prefWidth="74.0" style="-fx-cursor: hand; -fx-background-color: red;" text="Delete" textFill="WHITE" />
-      <TableView fx:id="tblTherapists" layoutX="38.0" layoutY="393.0" prefHeight="318.0" prefWidth="1091.0">
+      <TableView fx:id="tblTherapyPrograms" layoutX="38.0" layoutY="393.0" prefHeight="318.0" prefWidth="1091.0">
          <columns>
             <TableColumn fx:id="clmProgramId" prefWidth="155.20000457763672" text="Program ID" />
             <TableColumn fx:id="clmProgramName" prefWidth="304.7999572753906" text="Program Name" />
