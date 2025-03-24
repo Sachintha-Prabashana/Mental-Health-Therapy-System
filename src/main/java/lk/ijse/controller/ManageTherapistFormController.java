@@ -47,13 +47,18 @@ public class ManageTherapistFormController implements Initializable {
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
-        clmTherapistId.setCellValueFactory(new PropertyValueFactory<>("id"));
-        clmTherapistName.setCellValueFactory(new PropertyValueFactory<>("name"));
+        clmTherapistId.setCellValueFactory(new PropertyValueFactory<>("therapistID"));
+        clmTherapistName.setCellValueFactory(new PropertyValueFactory<>("therapistName"));
         clmTherapistSpeciality.setCellValueFactory(new PropertyValueFactory<>("specialization"));
         clmTherapisstAvailability.setCellValueFactory(new PropertyValueFactory<>("availability"));
 
         // Load data into table
         loadTherapists();
+        generateNewId();
+    }
+
+    private void generateNewId() {
+        txtTherapistId.setText(therapistBO.getNaxtTherapistID());
     }
 
     private void loadTherapists() {
@@ -65,8 +70,8 @@ public class ManageTherapistFormController implements Initializable {
             for (TherapistDTO therapistDTO : therapists) {
 
                 TherapistTM therapistTM = new TherapistTM(
-                        therapistDTO.getId(),
-                        therapistDTO.getName(),
+                        therapistDTO.getTherapistID(),
+                        therapistDTO.getTherapistName(),
                         therapistDTO.getSpecialization(),
                         therapistDTO.getAvailability()
                 );
@@ -94,29 +99,32 @@ public class ManageTherapistFormController implements Initializable {
         String specialty = txtTherapistSpecialty.getText();
         String availability = txtTherapistAvailability.getText();
 
+        // Validate input fields
         if (id.isEmpty() || name.isEmpty() || specialty.isEmpty() || availability.isEmpty()) {
             showAlert("Warning", "Please fill all fields!", Alert.AlertType.WARNING);
             return;
         }
 
         TherapistDTO therapistDTO = new TherapistDTO(id, name, specialty, availability);
-        try{
+
+        try {
             boolean isSaved = therapistBO.saveTherapist(therapistDTO);
 
             if (isSaved) {
-                showAlert("Success", "Therapist save successfully!", Alert.AlertType.INFORMATION);
-
+                showAlert("Success", "Therapist saved successfully!", Alert.AlertType.INFORMATION);
             } else {
-                showAlert("Error", "Failed to save therapist!", Alert.AlertType.ERROR);
+                showAlert("Error", "Failed to save therapist! Possible duplicate ID.", Alert.AlertType.ERROR);
             }
 
-        }catch (Exception e){
-            e.printStackTrace();
+        } catch (Exception e) {
+            e.printStackTrace(); // Log error details
+            showAlert("Error", "An unexpected error occurred!", Alert.AlertType.ERROR);
         }
 
-        loadTherapists();
-        clearFields();
+        loadTherapists(); // Refresh therapist list
+        clearFields(); // Clear input fields
     }
+
 
     @FXML
     void btnUpdate_OnAction(ActionEvent event) {
@@ -160,7 +168,7 @@ public class ManageTherapistFormController implements Initializable {
 
         if (result.isPresent() && result.get() == ButtonType.YES) {
             try {
-                boolean isDelete = therapistBO.deleteTherapist(selectedTherapist.getId());
+                boolean isDelete = therapistBO.deleteTherapist(selectedTherapist.getTherapistID());
 
                 if (isDelete) {
                     showAlert("Success", "Therapist deleted successfully!", Alert.AlertType.INFORMATION);
@@ -189,8 +197,8 @@ public class ManageTherapistFormController implements Initializable {
         if (selectedItem == null) {
             showAlert("Warning", "Please select a therapist", Alert.AlertType.WARNING);
         }else {
-            txtTherapistId.setText(selectedItem.getId());
-            txtTherapistName.setText(selectedItem.getName());
+            txtTherapistId.setText(selectedItem.getTherapistID());
+            txtTherapistName.setText(selectedItem.getTherapistName());
             txtTherapistSpecialty.setText(selectedItem.getSpecialization());
             txtTherapistAvailability.setText(selectedItem.getAvailability());
 

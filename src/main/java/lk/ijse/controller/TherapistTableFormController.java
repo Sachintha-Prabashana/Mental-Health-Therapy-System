@@ -47,8 +47,8 @@ public class TherapistTableFormController implements Initializable {
             for (TherapistDTO therapistDTO : therapists) {
 
                 TherapistTM therapistTM = new TherapistTM(
-                        therapistDTO.getId(),
-                        therapistDTO.getName(),
+                        therapistDTO.getTherapistID(),
+                        therapistDTO.getTherapistName(),
                         therapistDTO.getSpecialization(),
                         therapistDTO.getAvailability()
                 );
@@ -76,7 +76,7 @@ public class TherapistTableFormController implements Initializable {
         if (selectedItem == null) {
             showAlert("Warning", "Please select a therapist", Alert.AlertType.WARNING);
         }else {
-            ManageTherapyProgramFormController.getInstance().setTherapistId(selectedItem.getId());
+//            ManageTherapyProgramFormController.getInstance().setTherapistId(selectedItem.getTherapistID());
 
         }
 

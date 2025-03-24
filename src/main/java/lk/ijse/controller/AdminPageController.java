@@ -53,6 +53,7 @@ public class AdminPageController {
 
     @FXML
     void btnAppointmentOnAction(ActionEvent event) {
+        loadUI("/view/Manage-Therapy-Session-Form.fxml");
 
     }
 

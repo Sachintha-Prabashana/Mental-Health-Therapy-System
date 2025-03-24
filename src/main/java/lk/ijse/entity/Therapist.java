@@ -7,17 +7,18 @@ import lombok.NoArgsConstructor;
 
 import java.util.List;
 
+@Entity
+@Data
 @AllArgsConstructor
 @NoArgsConstructor
-@Data
-@Entity
 @Table(name = "therapist")
 public class Therapist {
     @Id
-    private String id;
+    @Column(name = "therapist_id", nullable = false, length = 50)
+    private String therapistID;
 
     @Column(nullable = false)
-    private String name;
+    private String therapistName;
 
     @Column(nullable = false)
     private String specialization;
@@ -26,7 +27,8 @@ public class Therapist {
     private String availability;
 
     @OneToMany(mappedBy = "therapist", cascade = CascadeType.ALL)
-    private List<TherapyProgram> therapyPrograms;
+    private List<TherapistProgram> therapistPrograms;
 
-
+    @OneToMany(mappedBy = "therapist", cascade = CascadeType.ALL)
+    private List<TherapySession> therapySessions;
 }

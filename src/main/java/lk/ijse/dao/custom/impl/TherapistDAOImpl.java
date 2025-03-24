@@ -21,7 +21,7 @@ public class TherapistDAOImpl implements TherapistDAO {
         Transaction transaction = session.beginTransaction();
         try {
            //T00-001
-            Therapist existsTherapist = session.get(Therapist.class, therapist.getId());
+            Therapist existsTherapist = session.get(Therapist.class, therapist.getTherapistID());
             if (existsTherapist != null) {
                 throw new DuplicateException("Therapist id duplicated");
             }
@@ -92,7 +92,18 @@ public class TherapistDAOImpl implements TherapistDAO {
 
     @Override
     public String getNextId() {
-        return "";
+        Session session = factoryConfiguration.getSession();
+        // Get the last user ID from the database
+        String lastId = session.createQuery("SELECT t.id FROM Therapist t ORDER BY t.id DESC", String.class)
+                .setMaxResults(1)
+                .uniqueResult();
+
+        if (lastId != null) {
+            int numericPart = Integer.parseInt(lastId.split("-")[1]) + 1;
+            return String.format("T00-%03d", numericPart);
+        } else {
+            return "T00-001"; // First user ID
+        }
     }
 
     @Override
