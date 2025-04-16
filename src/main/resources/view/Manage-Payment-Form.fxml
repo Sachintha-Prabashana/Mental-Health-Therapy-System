@@ -1,0 +1,88 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import com.jfoenix.controls.JFXButton?>
+<?import javafx.scene.Cursor?>
+<?import javafx.scene.control.ComboBox?>
+<?import javafx.scene.control.DatePicker?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.effect.DropShadow?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.paint.LinearGradient?>
+<?import javafx.scene.paint.Stop?>
+<?import javafx.scene.shape.Rectangle?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane xmlns:fx="http://javafx.com/fxml/1"
+            xmlns="http://javafx.com/javafx/22"
+            fx:controller="lk.ijse.controller.ManagePaymentFormController"
+            prefHeight="632.0" prefWidth="963.0">
+
+    <children>
+        <!-- Header Background -->
+        <Rectangle arcHeight="20.0" arcWidth="20.0" height="80.0" layoutX="20.0" layoutY="20.0" width="923.0">
+            <effect>
+                <DropShadow color="#444444" radius="10" />
+            </effect>
+            <fill>
+                <LinearGradient startX="0" startY="0" endX="1" endY="1">
+                    <stops>
+                        <Stop offset="0" color="#00B4DB"/>
+                        <Stop offset="1" color="#0083B0"/>
+                    </stops>
+                </LinearGradient>
+            </fill>
+        </Rectangle>
+
+        <!-- Header -->
+        <ImageView fx:id="imgHome" layoutX="32.0" layoutY="38.0" fitHeight="53.0" fitWidth="55.0"
+                   onMouseClicked="#navigateToHome" preserveRatio="true" pickOnBounds="true">
+            <image>
+                <Image url="@../images/home-icon.png" />
+            </image>
+            <cursor>
+                <Cursor fx:constant="HAND"/>
+            </cursor>
+        </ImageView>
+
+        <Label layoutX="105.0" layoutY="40.0" text="Manage Payment">
+            <font>
+                <Font name="Ubuntu" size="27.0"/>
+            </font>
+        </Label>
+
+        <!-- Form Fields -->
+        <TextField fx:id="txtPaymentId" layoutX="25.0" layoutY="144.0" prefWidth="237.0" promptText="Payment ID"/>
+        <TextField fx:id="txtAmount" layoutX="25.0" layoutY="181.0" prefWidth="237.0" promptText="Amount"/>
+        <DatePicker fx:id="dpPaymentDate" layoutX="394.0" layoutY="144.0" prefWidth="200.0"/>
+        <TextField fx:id="txtStatus" layoutX="394.0" layoutY="181.0" prefWidth="200.0" promptText="Status"/>
+        <ComboBox fx:id="cmbPatient" layoutX="25.0" layoutY="218.0" prefWidth="237.0" promptText="Select Patient"/>
+        <ComboBox fx:id="cmbInvoice" layoutX="394.0" layoutY="218.0" prefWidth="200.0" promptText="Select Invoice"/>
+
+        <!-- Buttons -->
+        <JFXButton fx:id="btnSave" layoutX="708.0" layoutY="144.0" onAction="#btnSave_OnAction"
+                   prefWidth="100.0" text="Save" style="-fx-background-color: #28a745; -fx-text-fill: white;" />
+        <JFXButton fx:id="btnUpdate" layoutX="708.0" layoutY="181.0" onAction="#btnUpdate_OnAction"
+                   prefWidth="100.0" text="Update" style="-fx-background-color: #ffc107; -fx-text-fill: black;" />
+        <JFXButton fx:id="btnDelete" layoutX="825.0" layoutY="144.0" onAction="#btnDelete_OnAction"
+                   prefWidth="100.0" text="Delete" style="-fx-background-color: #dc3545; -fx-text-fill: white;" />
+        <JFXButton fx:id="btnClear" layoutX="825.0" layoutY="181.0" onAction="#btnClear_OnAction"
+                   prefWidth="100.0" text="Clear" style="-fx-background-color: #17a2b8; -fx-text-fill: white;" />
+
+        <!-- Table -->
+        <TableView fx:id="tblPayment" layoutX="23.0" layoutY="275.0" prefWidth="914.0" prefHeight="331.0">
+            <columns>
+                <TableColumn fx:id="colPaymentId" text="Payment ID" prefWidth="150.0" />
+                <TableColumn fx:id="colAmount" text="Amount" prefWidth="100.0" />
+                <TableColumn fx:id="colDate" text="Date" prefWidth="150.0" />
+                <TableColumn fx:id="colStatus" text="Status" prefWidth="100.0" />
+                <TableColumn fx:id="colPatient" text="Patient" prefWidth="200.0" />
+                <TableColumn fx:id="colInvoice" text="Invoice" prefWidth="190.0" />
+            </columns>
+        </TableView>
+    </children>
+</AnchorPane>

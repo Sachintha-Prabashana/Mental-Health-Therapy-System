@@ -35,9 +35,9 @@ public class SignupPageController {
 
     @FXML
     void btnSignUpOnAction(ActionEvent event) {
-        String username = txtUsername.getText().trim();
-        String password = txtPassword.getText().trim();
-        String confirmPassword = txtConfirmPassword.getText().trim();
+        String username = txtUsername.getText();
+        String password = txtPassword.getText();
+        String confirmPassword = txtConfirmPassword.getText();
         String selectedRole = cmbRole.getValue();
 
         if (username.isEmpty() || password.isEmpty() || confirmPassword.isEmpty() || selectedRole == null) {

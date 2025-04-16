@@ -25,7 +25,7 @@ public class User {
 
     @Enumerated(EnumType.STRING)
     @Column(nullable = false)
-    private Role role; // Enum (ADMIN, RECEPTIONIST, THERAPIST)
+    private Role role; // Enum (ADMIN, RECEPTIONIST)
 
     public User(String username, String hashedPassword, Role role) {
         this.username = username;

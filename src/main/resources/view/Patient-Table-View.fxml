@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.layout.AnchorPane?>
+
+<AnchorPane prefHeight="398.0" prefWidth="518.0" xmlns="http://javafx.com/javafx/22" xmlns:fx="http://javafx.com/fxml/1" fx:controller="lk.ijse.controller.PatientTableFormController">
+   <children>
+      <TableView fx:id="tblPatient" layoutX="4.0" layoutY="4.0" onMouseClicked="#tblPatientOnClick" prefHeight="390.0" prefWidth="511.0">
+         <columns>
+            <TableColumn fx:id="clmPatientId" prefWidth="79.2000093460083" text="Patient ID" />
+            <TableColumn fx:id="clmPatientName" prefWidth="116.0" text="Patient Name" />
+            <TableColumn fx:id="clmContact" prefWidth="92.80006408691406" text="Contact Info" />
+            <TableColumn fx:id="clmGender" prefWidth="75.199951171875" text="Gender" />
+            <TableColumn fx:id="clmHistory" prefWidth="144.800048828125" text="Medical History" />
+         </columns>
+      </TableView>
+   </children>
+</AnchorPane>

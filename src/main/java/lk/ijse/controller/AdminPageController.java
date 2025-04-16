@@ -64,6 +64,7 @@ public class AdminPageController {
 
     @FXML
     void btnPatientOnAction(ActionEvent event) {
+        loadUI("/view/Manage-Patient-Form.fxml");
 
     }
 

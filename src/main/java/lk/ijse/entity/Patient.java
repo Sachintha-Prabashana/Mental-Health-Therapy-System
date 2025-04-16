@@ -17,6 +17,7 @@ public class Patient {
 
     private String name;
     private String contactInfo;
+    private String gender;
     private String medicalHistory;
 
     @OneToMany(mappedBy = "patient" , cascade = CascadeType.ALL)
