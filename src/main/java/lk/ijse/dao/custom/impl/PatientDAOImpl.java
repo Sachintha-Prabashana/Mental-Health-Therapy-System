@@ -71,4 +71,12 @@ public class PatientDAOImpl implements PatientDAO {
             return "P00-001"; // First user ID
         }
     }
+
+    @Override
+    public Patient findById(String id) {
+        Session session = factoryConfiguration.getSession();
+        Patient patient = session.get(Patient.class, id);
+        session.close();
+        return patient;
+    }
 }

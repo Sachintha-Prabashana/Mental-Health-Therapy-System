@@ -5,15 +5,24 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.control.Alert;
 import javafx.scene.control.DatePicker;
 import javafx.scene.control.TextField;
 import javafx.scene.image.ImageView;
+import javafx.scene.input.KeyEvent;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
+import javafx.stage.Stage;
+import lk.ijse.bo.custom.TherapySessionBO;
+import lk.ijse.bo.custom.impl.TherapySessionBOImpl;
+import lk.ijse.dto.TherapySessionDTO;
 
 import java.io.IOException;
 import java.net.URL;
+import java.time.LocalDate;
+import java.time.LocalTime;
 import java.util.Objects;
 import java.util.ResourceBundle;
 
@@ -47,6 +56,9 @@ public class ManageTherapySessionController implements Initializable {
     private AnchorPane mainPane;
 
     @FXML
+    private AnchorPane sessionPane;
+
+    @FXML
     private TextField txtPatientId;
 
     @FXML
@@ -78,14 +90,11 @@ public class ManageTherapySessionController implements Initializable {
 
     public void setTherapistId(String id) {txtTherapistId.setText(id);}
 
+    private final  TherapySessionBO therapySessionBO = new TherapySessionBOImpl();
+
     @Override
     public void initialize(URL location, ResourceBundle resources) {
         loadUI("/view/Patient-Table-View.fxml");
-
-    }
-
-    @FXML
-    void btnAddNew_OnAction(ActionEvent event) {
 
     }
 
@@ -107,12 +116,68 @@ public class ManageTherapySessionController implements Initializable {
 
     @FXML
     void btnCompleteSetupOnAction(ActionEvent event) {
+        try {
+            String sessionId = txtSessionId.getText();
+            String patientId = txtPatientId.getText();
+            String therapistId = txtTherapistId.getText();
+            String programId = txtprogramId.getText();
+            LocalDate date = dpSessionDate.getValue();
+            LocalTime time = LocalTime.parse(txtSessionTime.getText());
+
+            therapySessionBO.bookSession(sessionId, patientId, therapistId, programId, date, time);
+
+            showAlert("Success", "Therapy session booked!", Alert.AlertType.INFORMATION);
+            clearFields();
+        } catch (Exception e) {
+            showAlert("Error", e.getMessage(), Alert.AlertType.ERROR);
+        }
 
     }
 
     @FXML
-    void btnSeeAllOnAction(ActionEvent event) {
+    void btnCancelOnAction(ActionEvent event) {
 
+    }
+
+    @FXML
+    void btnRescheduleOnAction(ActionEvent event) {
+
+    }
+
+    @FXML
+    void searchPatient(KeyEvent event) {
+        String name = ((TextField) event.getSource()).getText();
+
+        try {
+            TherapySessionDTO sessionDTO = therapySessionBO.getSessionByPatientName(name);
+
+            if (sessionDTO != null) {
+                txtSessionId.setText(sessionDTO.getSessionId());
+                txtPatientId.setText(sessionDTO.getPatientId());
+                txtTherapistId.setText(sessionDTO.getTherapistId());
+                txtprogramId.setText(sessionDTO.getProgramId());
+                dpSessionDate.setValue(sessionDTO.getSessionDate());
+                txtSessionTime.setText(sessionDTO.getSessionTime().toString());
+            } else {
+                clearFields();
+            }
+
+        } catch (Exception e) {
+            showAlert("Error", "Failed to search therapy session", Alert.AlertType.ERROR);
+            e.printStackTrace();
+        }
+    }
+
+
+    @FXML
+    void btnSeeAllOnAction(ActionEvent event) {
+        try {
+            AnchorPane pane = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("/view/TherapySession-Table-View.fxml")));
+            sessionPane.getChildren().setAll(pane);
+        } catch (IOException e) {
+            showAlert("Error", "Failed to load session list!", Alert.AlertType.ERROR);
+            e.printStackTrace();
+        }
     }
 
     @FXML
@@ -135,6 +200,16 @@ public class ManageTherapySessionController implements Initializable {
         alert.setContentText(message);
         alert.showAndWait();
     }
+
+    private void clearFields() {
+        txtSessionId.clear();
+        txtPatientId.clear();
+        txtTherapistId.clear();
+        txtprogramId.clear();
+        txtSessionTime.clear();
+        dpSessionDate.setValue(null);
+    }
+
 
 
 }

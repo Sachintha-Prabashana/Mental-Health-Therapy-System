@@ -107,6 +107,14 @@ public class TherapistDAOImpl implements TherapistDAO {
     }
 
     @Override
+    public Therapist findById(String id) {
+        Session session = factoryConfiguration.getSession();
+        Therapist therapist = session.get(Therapist.class, id);
+        session.close();
+        return therapist;
+    }
+
+    @Override
     public Therapist getById(String therapistId) {
         try{
             Session session = factoryConfiguration.getSession();

@@ -60,4 +60,9 @@ public class PatientBOImpl implements PatientBO {
     public String getNextPatientID() throws SQLException, ClassNotFoundException {
         return patientDAO.getNextId();
     }
+
+    @Override
+    public Patient findById(String id) {
+        return null;
+    }
 }
