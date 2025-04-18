@@ -13,7 +13,7 @@
 <?import javafx.scene.shape.Rectangle?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane prefHeight="632.0" prefWidth="963.0" xmlns="http://javafx.com/javafx/22" xmlns:fx="http://javafx.com/fxml/1" fx:controller="lk.ijse.controller.TherapySessionTableFormController">
+<AnchorPane fx:id="recordPane" prefHeight="632.0" prefWidth="963.0" xmlns="http://javafx.com/javafx/22" xmlns:fx="http://javafx.com/fxml/1" fx:controller="lk.ijse.controller.TherapySessionTableFormController">
    <children>
       <TableView fx:id="tblTherapySession" layoutX="78.0" layoutY="157.0" prefHeight="374.0" prefWidth="806.0">
          <columns>
@@ -26,8 +26,7 @@
             <TableColumn fx:id="clmTherapistId" prefWidth="136.79998779296875" text="Therapist ID" />
          </columns>
       </TableView>
-      <JFXButton id="btnAddTherapist" fx:id="btnReschedule" layoutX="619.0" layoutY="559.0" onAction="#btnRescheduleOnAction" prefHeight="35.0" prefWidth="110.0" style="-fx-background-color: #007bff; -fx-text-fill: white;" text="Reschedule" />
-      <JFXButton id="btnAddTherapist" fx:id="btnCancel" layoutX="773.0" layoutY="559.0" onAction="#btnCancelOnAction" prefHeight="35.0" prefWidth="110.0" style="-fx-background-color: #007bff; -fx-text-fill: white;" text="Cancel" />
+      <JFXButton id="btnAddTherapist" fx:id="btnBack" layoutX="773.0" layoutY="559.0" onAction="#btnBackOnAction" prefHeight="35.0" prefWidth="110.0" style="-fx-background-color: #007bff; -fx-text-fill: white;" text="Back" />
       <Rectangle arcHeight="5.0" arcWidth="5.0" height="80.0" layoutX="20.0" layoutY="20.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" width="922.0">
          <fill>
             <LinearGradient endX="0.048" endY="0.712">

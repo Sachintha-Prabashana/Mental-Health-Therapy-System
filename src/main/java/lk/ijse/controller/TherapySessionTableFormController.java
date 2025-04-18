@@ -5,6 +5,7 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Alert;
 import javafx.scene.control.TableColumn;
@@ -12,6 +13,7 @@ import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
+import javafx.scene.layout.AnchorPane;
 import lk.ijse.bo.custom.TherapySessionBO;
 import lk.ijse.bo.custom.impl.TherapySessionBOImpl;
 import lk.ijse.dto.TherapistDTO;
@@ -19,19 +21,15 @@ import lk.ijse.dto.TherapySessionDTO;
 import lk.ijse.view.tdm.TherapistTM;
 import lk.ijse.view.tdm.TherapySessionTM;
 
+import java.io.IOException;
 import java.net.URL;
 import java.time.LocalDate;
 import java.time.LocalTime;
 import java.util.ArrayList;
+import java.util.Objects;
 import java.util.ResourceBundle;
 
 public class TherapySessionTableFormController implements Initializable {
-
-    @FXML
-    private JFXButton btnCancel;
-
-    @FXML
-    private JFXButton btnReschedule;
 
     @FXML
     private TableColumn<TherapySessionTM, LocalDate> clmDate;
@@ -56,6 +54,10 @@ public class TherapySessionTableFormController implements Initializable {
 
     @FXML
     private ImageView imgHome;
+
+    @FXML
+    private AnchorPane recordPane;
+
 
     @FXML
     private TableView<TherapySessionTM> tblTherapySession;
@@ -117,29 +119,15 @@ public class TherapySessionTableFormController implements Initializable {
 
     }
 
+
     @FXML
-    void btnRescheduleOnAction(ActionEvent event) {
-        TherapySessionTM selected = tblTherapySession.getSelectionModel().getSelectedItem();
-        if (selected == null) {
-            showAlert("Warning", "Please select a session to reschedule!", Alert.AlertType.WARNING);
-            return;
-        }
-
-        // For now, reschedule to a new hardcoded time (e.g., next day, same time)
-        LocalDate newDate = selected.getSessionDate().plusDays(1); // you can show date/time pickers
-        LocalTime newTime = selected.getSessionTime(); // or change time here
-
-        boolean isUpdated = therapySessionBO.rescheduleSession(
-                selected.getSessionId(),
-                newDate,
-                newTime
-        );
-
-        if (isUpdated) {
-            showAlert("Success", "Session rescheduled successfully!", Alert.AlertType.INFORMATION);
-            loadSessions();
-        } else {
-            showAlert("Error", "Failed to reschedule the session.", Alert.AlertType.ERROR);
+    void btnBackOnAction(ActionEvent event) {
+        try {
+            AnchorPane pane = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("/view/Manage-Therapy-Session-Form.fxml")));
+            recordPane.getChildren().setAll(pane);
+        } catch (IOException e) {
+            showAlert("Error", "Failed to load session list!", Alert.AlertType.ERROR);
+            e.printStackTrace();
         }
 
     }

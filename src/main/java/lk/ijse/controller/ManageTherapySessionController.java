@@ -18,6 +18,7 @@ import javafx.stage.Stage;
 import lk.ijse.bo.custom.TherapySessionBO;
 import lk.ijse.bo.custom.impl.TherapySessionBOImpl;
 import lk.ijse.dto.TherapySessionDTO;
+import lk.ijse.view.tdm.TherapySessionTM;
 
 import java.io.IOException;
 import java.net.URL;
@@ -142,6 +143,29 @@ public class ManageTherapySessionController implements Initializable {
     @FXML
     void btnRescheduleOnAction(ActionEvent event) {
 
+
+        // For now, reschedule to a new hardcoded time (e.g., next day, same time)
+        LocalDate newDate = dpSessionDate.getValue(); // you can show date/time pickers
+        LocalTime newTime = LocalTime.parse(txtSessionTime.getText()); // or change time here
+
+        boolean isUpdated = therapySessionBO.rescheduleSession(
+                txtSessionId.getText(),
+                newDate,
+                newTime
+        );
+
+        if (isUpdated) {
+            showAlert("Success", "Session rescheduled successfully!", Alert.AlertType.INFORMATION);
+            try {
+                AnchorPane pane = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("/view/TherapySession-Table-View.fxml")));
+                sessionPane.getChildren().setAll(pane);
+            } catch (IOException e) {
+                showAlert("Error", "Failed to load session list!", Alert.AlertType.ERROR);
+                e.printStackTrace();
+            }
+        } else {
+            showAlert("Error", "Failed to reschedule the session.", Alert.AlertType.ERROR);
+        }
     }
 
     @FXML

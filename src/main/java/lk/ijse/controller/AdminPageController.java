@@ -59,6 +59,7 @@ public class AdminPageController {
 
     @FXML
     void btnDashboardOnAction(ActionEvent event) {
+        loadUI("view/MainDashboardView.fxml");
 
     }
 
