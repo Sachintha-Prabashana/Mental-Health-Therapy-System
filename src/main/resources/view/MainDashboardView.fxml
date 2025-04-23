@@ -1,15 +1,58 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.scene.chart.CategoryAxis?>
+<?import javafx.scene.chart.LineChart?>
+<?import javafx.scene.chart.NumberAxis?>
 <?import javafx.scene.control.Label?>
-<?import javafx.scene.layout.AnchorPane?>
-<?import javafx.scene.text.Font?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.VBox?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="686.0" prefWidth="1012.0" style="-fx-background-color: beige;" xmlns="http://javafx.com/javafx/22" xmlns:fx="http://javafx.com/fxml/1" fx:controller="lk.ijse.controller.DashboardController">
-   <children>
-      <Label layoutX="280.0" layoutY="244.0" text="Welcome back">
-         <font>
-            <Font size="48.0" />
-         </font>
-      </Label>
-   </children>
-</AnchorPane>
+<BorderPane prefHeight="632.0" prefWidth="963.0" xmlns="http://javafx.com/javafx/22" xmlns:fx="http://javafx.com/fxml/1" fx:controller="lk.ijse.controller.DashboardController">
+   <top>
+      <HBox alignment="CENTER" style="-fx-background-color: #5D9CEC; -fx-padding: 20;">
+         <Label style="-fx-text-fill: white; -fx-font-size: 24; -fx-font-weight: bold;" text="Mental Health Therapy Dashboard" />
+      </HBox>
+   </top>
+
+   <center>
+      <VBox spacing="20" style="-fx-padding: 20;">
+         <!-- Metrics Cards -->
+         <HBox alignment="CENTER" spacing="20">
+            <!-- Total Sessions Card -->
+            <VBox fx:id="sessionsCard" alignment="CENTER" prefHeight="150" prefWidth="250" style="-fx-background-color: white; -fx-background-radius: 10; -fx-padding: 20; -fx-effect: dropshadow(three-pass-box, rgba(0,0,0,0.1), 10, 0, 0, 0);">
+               <Label style="-fx-text-fill: #6c757d; -fx-font-size: 16;" text="Total Sessions" />
+               <Label fx:id="totalSessionsLabel" style="-fx-font-size: 32; -fx-font-weight: bold; -fx-text-fill: #5D9CEC;" />
+               <Label style="-fx-text-fill: #6c757d; -fx-font-size: 14;" text="This Month" />
+            </VBox>
+
+            <!-- Available Therapists Card -->
+            <VBox fx:id="therapistsCard" alignment="CENTER" prefHeight="150" prefWidth="250" style="-fx-background-color: white; -fx-background-radius: 10; -fx-padding: 20; -fx-effect: dropshadow(three-pass-box, rgba(0,0,0,0.1), 10, 0, 0, 0);">
+               <Label style="-fx-text-fill: #6c757d; -fx-font-size: 16;" text="Available Therapists" />
+               <Label fx:id="availableTherapistsLabel" style="-fx-font-size: 32; -fx-font-weight: bold; -fx-text-fill: #4CD1A1;" />
+               <Label style="-fx-text-fill: #6c757d; -fx-font-size: 14;" text="Active Professionals" />
+            </VBox>
+
+            <!-- Patients Card -->
+            <VBox fx:id="patientsCard" alignment="CENTER" prefHeight="150" prefWidth="250" style="-fx-background-color: white; -fx-background-radius: 10; -fx-padding: 20; -fx-effect: dropshadow(three-pass-box, rgba(0,0,0,0.1), 10, 0, 0, 0);">
+               <Label style="-fx-text-fill: #6c757d; -fx-font-size: 16;" text="Active Patients" />
+               <Label fx:id="activePatientsLabel" style="-fx-font-size: 32; -fx-font-weight: bold; -fx-text-fill: #FF7676;" />
+               <Label style="-fx-text-fill: #6c757d; -fx-font-size: 14;" text="Currently in Therapy" />
+            </VBox>
+         </HBox>
+
+         <!-- Charts Section -->
+         <VBox spacing="10" style="-fx-padding: 20; -fx-background-color: white; -fx-background-radius: 10; -fx-effect: dropshadow(three-pass-box, rgba(0,0,0,0.1), 10, 0, 0, 0);">
+            <Label style="-fx-font-size: 18; -fx-font-weight: bold;" text="Sessions Overview" />
+            <LineChart fx:id="sessionsChart" animated="false" legendVisible="false" style="-fx-background-color: transparent;" title="Monthly Sessions">
+               <xAxis>
+                  <CategoryAxis label="Month" />
+               </xAxis>
+               <yAxis>
+                  <NumberAxis label="Number of Sessions" />
+               </yAxis>
+            </LineChart>
+         </VBox>
+      </VBox>
+   </center>
+</BorderPane>

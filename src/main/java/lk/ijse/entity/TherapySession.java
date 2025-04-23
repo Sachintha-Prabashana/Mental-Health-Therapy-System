@@ -32,4 +32,8 @@ public class TherapySession {
     @ManyToOne
     @JoinColumn(name = "therapist_id")
     private Therapist therapist;
+
+    @OneToOne(mappedBy = "session", cascade = CascadeType.ALL)
+    private Payment payment;
+
 }

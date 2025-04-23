@@ -14,4 +14,5 @@ public interface PatientBO {
     ArrayList<PatientDTO> loadAllPatient() throws SQLException, ClassNotFoundException ;
     String getNextPatientID() throws SQLException, ClassNotFoundException;
     Patient findById(String id);
+    ArrayList<Patient> loadAllpatientsInCombo();
 }

@@ -26,6 +26,6 @@ public class Payment {
     private Patient patient;
 
     @OneToOne
-    @JoinColumn(name = "invoice_id") // Foreign key in Payment table
-    private Invoice invoice;
+    @JoinColumn(name = "session_id")
+    private TherapySession session;
 }

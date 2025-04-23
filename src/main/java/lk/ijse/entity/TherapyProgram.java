@@ -5,6 +5,7 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @Data
@@ -26,8 +27,8 @@ public class TherapyProgram {
     @Column(nullable = false)
     private double fee;
 
-    @OneToMany(mappedBy = "therapyProgram", cascade = CascadeType.ALL)
-    private List<TherapistProgram> therapistPrograms;
+    @ManyToMany(mappedBy = "therapyPrograms")
+    private List<Therapist> therapists = new ArrayList<>();
 
     @OneToMany(mappedBy = "therapyProgram", cascade = CascadeType.ALL)
     private List<TherapySession> therapySessions;

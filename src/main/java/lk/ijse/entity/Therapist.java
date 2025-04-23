@@ -5,6 +5,7 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @Entity
@@ -26,9 +27,16 @@ public class Therapist {
     @Column(nullable = false)
     private String availability;
 
-    @OneToMany(mappedBy = "therapist", cascade = CascadeType.ALL)
-    private List<TherapistProgram> therapistPrograms;
+    @ManyToMany(cascade = {CascadeType.PERSIST, CascadeType.MERGE})
+    @JoinTable(
+            name = "therapist_program",
+            joinColumns = @JoinColumn(name = "therapist_id"),
+            inverseJoinColumns = @JoinColumn(name = "program_id")
+    )
+    private List<TherapyProgram> therapyPrograms = new ArrayList<>();
 
-    @OneToMany(mappedBy = "therapist", cascade = CascadeType.ALL)
+    @OneToMany(mappedBy = "therapist", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<TherapySession> therapySessions;
+
+
 }

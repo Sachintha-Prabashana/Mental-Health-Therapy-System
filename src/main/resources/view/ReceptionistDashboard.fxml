@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.paint.Color?>
+<?import javafx.scene.effect.DropShadow?>
+
+<AnchorPane prefHeight="700.0" prefWidth="1150.0" xmlns="http://javafx.com/javafx/22" xmlns:fx="http://javafx.com/fxml/1" fx:controller="lk.ijse.controller.ReceptionistPageController">
+
+    <!-- Sidebar -->
+    <VBox alignment="TOP_CENTER" layoutY="66.4" prefHeight="632.0" prefWidth="186.0" spacing="20.0" style="-fx-background-color: #5D9CEC; -fx-padding: 20;" AnchorPane.leftAnchor="0" AnchorPane.topAnchor="66.0">
+        <ImageView fitHeight="129.0" fitWidth="80" preserveRatio="true">
+            <image>
+                <Image url="@../images/admin-logo.png" />
+            </image>
+        </ImageView>
+        <Label style="-fx-font-size: 18px; -fx-text-fill: white;" text="Receptionist Dashboard" />
+        <Button fx:id="btnDashboard" onAction="#btnDashboardOnAction" prefHeight="38.0" prefWidth="138.0" style="-fx-background-color: #5D9CEC; -fx-background-radius: 10;" text="Dashboard" textFill="WHITE">
+            <effect><DropShadow><color><Color red="1.0" green="1.0" blue="1.0"/></color></DropShadow></effect></Button>
+        <Button fx:id="btnPatient" onAction="#btnPatientOnAction" prefHeight="38.0" prefWidth="138.0" style="-fx-background-color: #5D9CEC; -fx-background-radius: 10;" text="Patients" textFill="WHITE">
+            <effect><DropShadow><color><Color red="1.0" green="1.0" blue="1.0"/></color></DropShadow></effect></Button>
+        <Button fx:id="btnAppointment" onAction="#btnAppointmentOnAction" prefHeight="38.0" prefWidth="138.0" style="-fx-background-color: #5D9CEC; -fx-background-radius: 10;" text="Appointments" textFill="WHITE">
+            <effect><DropShadow><color><Color red="1.0" green="1.0" blue="1.0"/></color></DropShadow></effect></Button>
+        <Button fx:id="btnPayment" onAction="#btnPaymentOnAction" prefHeight="38.0" prefWidth="138.0" style="-fx-background-color: #5D9CEC; -fx-background-radius: 10;" text="Payments" textFill="WHITE">
+            <effect><DropShadow><color><Color red="1.0" green="1.0" blue="1.0"/></color></DropShadow></effect></Button>
+        <Button fx:id="btnReports" onAction="#btnReportsOnAction" prefHeight="38.0" prefWidth="138.0" style="-fx-background-color: #5D9CEC; -fx-background-radius: 10;" text="Reports" textFill="WHITE">
+            <effect><DropShadow><color><Color red="1.0" green="1.0" blue="1.0"/></color></DropShadow></effect></Button>
+        <Button fx:id="btnHistory" onAction="#btnHistoryOnAction" prefHeight="38.0" prefWidth="138.0" style="-fx-background-color: #5D9CEC; -fx-background-radius: 10;" text="Therapy History" textFill="WHITE">
+            <effect><DropShadow><color><Color red="1.0" green="1.0" blue="1.0"/></color></DropShadow></effect></Button>
+        <VBox alignment="BOTTOM_LEFT" prefHeight="86.0" prefWidth="156.0">
+            <children>
+                <HBox alignment="CENTER" prefHeight="36.0" prefWidth="156.0">
+                    <children>
+                        <ImageView fx:id="imgLogout" fitHeight="30" fitWidth="30" onMouseClicked="#onLogoutClick" preserveRatio="true">
+                            <image>
+                                <Image url="@../icons/logout_icon.png" />
+                            </image>
+                        </ImageView>
+                        <ImageView fx:id="imgSettings" fitHeight="30" fitWidth="30" onMouseClicked="#onSettingsClick" preserveRatio="true">
+                            <image>
+                                <Image url="@../icons/setting_icon.png" />
+                            </image>
+                        </ImageView>
+                    </children>
+                </HBox>
+            </children>
+        </VBox>
+    </VBox>
+
+    <!-- Top Bar -->
+    <HBox alignment="CENTER_RIGHT" prefHeight="66.0" prefWidth="1150.0" style="-fx-background-color: #5D9CEC; -fx-padding: 10;" AnchorPane.leftAnchor="0.0" AnchorPane.topAnchor="0">
+        <VBox alignment="CENTER">
+            <Label fx:id="lblWelcome" style="-fx-text-fill: white; -fx-font-size: 16px;" text="Welcome, Receptionist" />
+            <HBox alignment="CENTER">
+                <Label fx:id="lblReceptionistId" style="-fx-text-fill: white; -fx-font-size: 14px;" text="Receptionist ID: " />
+                <Label fx:id="lblUserId" style="-fx-text-fill: white; -fx-font-size: 14px; -fx-padding: 0 0 0 10;" />
+            </HBox>
+        </VBox>
+    </HBox>
+
+    <!-- Main Content Area -->
+    <AnchorPane fx:id="mainContent" layoutX="186.0" layoutY="66.0" prefHeight="632.0" prefWidth="963.0" style="-fx-background-color: white;">
+        <Label layoutX="50" layoutY="120" style="-fx-font-size: 20px; -fx-text-fill: #2C3E50;" text="Welcome to the Receptionist Dashboard" />
+    </AnchorPane>
+
+</AnchorPane>

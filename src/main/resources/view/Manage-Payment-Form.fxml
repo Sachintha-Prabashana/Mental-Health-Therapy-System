@@ -17,72 +17,71 @@
 <?import javafx.scene.shape.Rectangle?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane xmlns:fx="http://javafx.com/fxml/1"
-            xmlns="http://javafx.com/javafx/22"
-            fx:controller="lk.ijse.controller.ManagePaymentFormController"
-            prefHeight="632.0" prefWidth="963.0">
+<AnchorPane prefHeight="632.0" prefWidth="963.0" xmlns="http://javafx.com/javafx/22" xmlns:fx="http://javafx.com/fxml/1" fx:controller="lk.ijse.controller.ManagePaymentFormController">
 
     <children>
         <!-- Header Background -->
-        <Rectangle arcHeight="20.0" arcWidth="20.0" height="80.0" layoutX="20.0" layoutY="20.0" width="923.0">
+        <Rectangle arcHeight="20.0" arcWidth="20.0" height="80.0" layoutX="20.0" layoutY="20.0" width="921.0">
             <effect>
                 <DropShadow color="#444444" radius="10" />
             </effect>
             <fill>
-                <LinearGradient startX="0" startY="0" endX="1" endY="1">
+                <LinearGradient endX="1" endY="1" startX="0" startY="0">
                     <stops>
-                        <Stop offset="0" color="#00B4DB"/>
-                        <Stop offset="1" color="#0083B0"/>
+                        <Stop color="#00B4DB" offset="0" />
+                        <Stop color="#0083B0" offset="1" />
                     </stops>
                 </LinearGradient>
             </fill>
         </Rectangle>
 
         <!-- Header -->
-        <ImageView fx:id="imgHome" layoutX="32.0" layoutY="38.0" fitHeight="53.0" fitWidth="55.0"
-                   onMouseClicked="#navigateToHome" preserveRatio="true" pickOnBounds="true">
+        <ImageView fx:id="imgHome" fitHeight="53.0" fitWidth="55.0" layoutX="32.0" layoutY="38.0" onMouseClicked="#navigateToHome" pickOnBounds="true" preserveRatio="true">
             <image>
                 <Image url="@../images/home-icon.png" />
             </image>
             <cursor>
-                <Cursor fx:constant="HAND"/>
+                <Cursor fx:constant="HAND" />
             </cursor>
         </ImageView>
 
         <Label layoutX="105.0" layoutY="40.0" text="Manage Payment">
             <font>
-                <Font name="Ubuntu" size="27.0"/>
+                <Font name="Ubuntu Bold" size="27.0" />
             </font>
         </Label>
 
-        <!-- Form Fields -->
-        <TextField fx:id="txtPaymentId" layoutX="25.0" layoutY="144.0" prefWidth="237.0" promptText="Payment ID"/>
-        <TextField fx:id="txtAmount" layoutX="25.0" layoutY="181.0" prefWidth="237.0" promptText="Amount"/>
-        <DatePicker fx:id="dpPaymentDate" layoutX="394.0" layoutY="144.0" prefWidth="200.0"/>
-        <TextField fx:id="txtStatus" layoutX="394.0" layoutY="181.0" prefWidth="200.0" promptText="Status"/>
-        <ComboBox fx:id="cmbPatient" layoutX="25.0" layoutY="218.0" prefWidth="237.0" promptText="Select Patient"/>
-        <ComboBox fx:id="cmbInvoice" layoutX="394.0" layoutY="218.0" prefWidth="200.0" promptText="Select Invoice"/>
+        <!-- Form Fields Group -->
+        <Label layoutX="25.0" layoutY="115.0" style="-fx-font-size: 16; -fx-font-weight: bold;" text="Payment Details" />
+
+        <TextField fx:id="txtPaymentId" layoutX="25.0" layoutY="145.0" prefWidth="237.0" promptText="Payment ID" />
+        <TextField fx:id="txtAmount" layoutX="25.0" layoutY="185.0" prefWidth="237.0" promptText="Payment Amount" />
+        <DatePicker fx:id="dpPaymentDate" layoutX="394.0" layoutY="145.0" prefWidth="200.0" />
+        <ComboBox fx:id="cmbFilterStatus" layoutX="718.0" layoutY="114.0" onAction="#cmbFilterStatusOnAction" prefHeight="26.0" prefWidth="221.0" promptText="Select Payment Status For Filter" />
+
+        <Label layoutX="25.0" layoutY="225.0" style="-fx-font-size: 16; -fx-font-weight: bold;" text="Patient and Session Info" />
+
+        <ComboBox fx:id="cmbPatient" layoutX="25.0" layoutY="255.0" onAction="#cmbPatientOnAction" prefWidth="237.0" promptText="Select Patient" />
+        <TextField fx:id="txtSessionId" layoutX="25.0" layoutY="295.0" prefWidth="237.0" promptText="Session ID" />
 
         <!-- Buttons -->
-        <JFXButton fx:id="btnSave" layoutX="708.0" layoutY="144.0" onAction="#btnSave_OnAction"
-                   prefWidth="100.0" text="Save" style="-fx-background-color: #28a745; -fx-text-fill: white;" />
-        <JFXButton fx:id="btnUpdate" layoutX="708.0" layoutY="181.0" onAction="#btnUpdate_OnAction"
-                   prefWidth="100.0" text="Update" style="-fx-background-color: #ffc107; -fx-text-fill: black;" />
-        <JFXButton fx:id="btnDelete" layoutX="825.0" layoutY="144.0" onAction="#btnDelete_OnAction"
-                   prefWidth="100.0" text="Delete" style="-fx-background-color: #dc3545; -fx-text-fill: white;" />
-        <JFXButton fx:id="btnClear" layoutX="825.0" layoutY="181.0" onAction="#btnClear_OnAction"
-                   prefWidth="100.0" text="Clear" style="-fx-background-color: #17a2b8; -fx-text-fill: white;" />
+        <JFXButton fx:id="btnSave" layoutX="709.0" layoutY="255.0" onAction="#btnSave_OnAction" prefWidth="100.0" style="-fx-background-color: #28a745; -fx-text-fill: white;" text="Save" />
+        <JFXButton fx:id="btnClear" layoutX="839.0" layoutY="255.0" onAction="#btnClear_OnAction" prefWidth="100.0" style="-fx-background-color: #17a2b8; -fx-text-fill: white;" text="Clear" />
+        <JFXButton fx:id="btnGetInvoice" layoutX="819.0" layoutY="295.0" onAction="#btnGetInvoice_OnAction" prefWidth="120.0" style="-fx-background-color: #6c63ff; -fx-text-fill: white;" text="Get Invoice" />
 
-        <!-- Table -->
-        <TableView fx:id="tblPayment" layoutX="23.0" layoutY="275.0" prefWidth="914.0" prefHeight="331.0">
+        <!-- Payment Table -->
+        <Label layoutX="25.0" layoutY="340.0" style="-fx-font-size: 16; -fx-font-weight: bold;" text="Payment Records" />
+
+        <TableView fx:id="tblPayment" layoutX="25.0" layoutY="370.0" prefHeight="242.0" prefWidth="913.0">
             <columns>
-                <TableColumn fx:id="colPaymentId" text="Payment ID" prefWidth="150.0" />
-                <TableColumn fx:id="colAmount" text="Amount" prefWidth="100.0" />
-                <TableColumn fx:id="colDate" text="Date" prefWidth="150.0" />
-                <TableColumn fx:id="colStatus" text="Status" prefWidth="100.0" />
-                <TableColumn fx:id="colPatient" text="Patient" prefWidth="200.0" />
-                <TableColumn fx:id="colInvoice" text="Invoice" prefWidth="190.0" />
+                <TableColumn fx:id="colPaymentId" prefWidth="148.79998397827148" text="Payment ID" />
+                <TableColumn fx:id="colAmount" prefWidth="103.19999694824219" text="Amount" />
+                <TableColumn fx:id="colDate" prefWidth="111.199951171875" text="Date" />
+                <TableColumn fx:id="colStatus" prefWidth="147.20001220703125" text="Status" />
+                <TableColumn fx:id="colPatient" prefWidth="231.199951171875" text="Patient" />
+                <TableColumn fx:id="colSession" prefWidth="172.7999267578125" text="Session ID" />
             </columns>
         </TableView>
+      <ComboBox fx:id="cmbStatus" layoutX="394.0" layoutY="184.0" prefHeight="26.0" prefWidth="200.0" promptText="Set Status" />
     </children>
 </AnchorPane>

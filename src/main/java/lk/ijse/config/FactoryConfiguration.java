@@ -15,10 +15,8 @@ public class FactoryConfiguration {
         configuration.addAnnotatedClass(User.class);
         configuration.addAnnotatedClass(Therapist.class);
         configuration.addAnnotatedClass(TherapyProgram.class);
-        configuration.addAnnotatedClass(TherapistProgram.class);
         configuration.addAnnotatedClass(Patient.class);
         configuration.addAnnotatedClass(Payment.class);
-        configuration.addAnnotatedClass(Invoice.class);
         configuration.addAnnotatedClass(TherapySession.class);
         sessionFactory = configuration.buildSessionFactory();
     }

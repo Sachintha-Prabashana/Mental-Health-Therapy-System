@@ -21,10 +21,7 @@ import lk.ijse.view.tdm.TherapyProgramTM;
 
 import java.io.IOException;
 import java.net.URL;
-import java.util.ArrayList;
-import java.util.Objects;
-import java.util.Optional;
-import java.util.ResourceBundle;
+import java.util.*;
 
 public class ManageTherapyProgramFormController implements Initializable {
 
@@ -67,6 +64,9 @@ public class ManageTherapyProgramFormController implements Initializable {
     @FXML
     private TextField txtProgramName;
 
+    @FXML
+    private AnchorPane programListContainer;
+
     private final TherapyProgramsBO therapyProgramsBO = new TherapyProgramsBOImpl();
 //    private static ManageTherapyProgramFormController instance;
 
@@ -82,6 +82,7 @@ public class ManageTherapyProgramFormController implements Initializable {
 //    public void setTherapistId(String id) {
 //        txtTherapistId.setText(id);
 //    }
+
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {

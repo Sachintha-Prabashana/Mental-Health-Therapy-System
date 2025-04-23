@@ -16,7 +16,7 @@ import java.net.URL;
 import java.util.Objects;
 import java.util.ResourceBundle;
 
-public class AdminPageController implements Initializable {
+public class ReceptionistPageController implements Initializable {
 
     @FXML
     private Button btnAppointment;
@@ -25,16 +25,16 @@ public class AdminPageController implements Initializable {
     private Button btnDashboard;
 
     @FXML
+    private Button btnHistory;
+
+    @FXML
     private Button btnPatient;
 
     @FXML
     private Button btnPayment;
 
     @FXML
-    private Button btnTherapist;
-
-    @FXML
-    private Button btnTherapyProgram;
+    private Button btnReports;
 
     @FXML
     private ImageView imgLogout;
@@ -43,10 +43,10 @@ public class AdminPageController implements Initializable {
     private ImageView imgSettings;
 
     @FXML
-    private Label lblAdd;
+    private Label lblReceptionistId;
 
     @FXML
-    private Label lblAdminId;
+    private Label lblUserId;
 
     @FXML
     private Label lblWelcome;
@@ -57,35 +57,30 @@ public class AdminPageController implements Initializable {
     @FXML
     void btnAppointmentOnAction(ActionEvent event) {
         loadUI("/view/Manage-Therapy-Session-Form.fxml");
-
     }
 
     @FXML
     void btnDashboardOnAction(ActionEvent event) {
         loadUI("/view/MainDashboardView.fxml");
+    }
+
+    @FXML
+    void btnHistoryOnAction(ActionEvent event) {
 
     }
 
     @FXML
     void btnPatientOnAction(ActionEvent event) {
         loadUI("/view/Manage-Patient-Form.fxml");
-
     }
 
     @FXML
     void btnPaymentOnAction(ActionEvent event) {
         loadUI("/view/Manage-Payment-Form.fxml");
-
     }
 
     @FXML
-    void btnTherapistOnAction(ActionEvent event) {
-        loadUI("/view/Manage-Therapist-Form.fxml");
-    }
-
-    @FXML
-    void btnTherapyProgramOnAction(ActionEvent event) {
-        loadUI("/view/Manage-Therapy-Program-Form.fxml");
+    void btnReportsOnAction(ActionEvent event) {
 
     }
 
@@ -119,4 +114,5 @@ public class AdminPageController implements Initializable {
     public void initialize(URL location, ResourceBundle resources) {
         loadUI("/view/MainDashboardView.fxml");
     }
+
 }
