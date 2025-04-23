@@ -81,6 +81,7 @@ public class ReceptionistPageController implements Initializable {
 
     @FXML
     void btnReportsOnAction(ActionEvent event) {
+        loadUI("/view/ReportForm.fxml");
 
     }
 
