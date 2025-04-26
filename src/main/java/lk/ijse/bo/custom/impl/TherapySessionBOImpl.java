@@ -26,24 +26,24 @@ public class TherapySessionBOImpl implements TherapySessionBO {
     private final TherapyProgramDAO programDAO = new TherapyProgramDAOImpl();
     private final PaymentBO paymentBO = new PaymentBOImpl();
 
-    public boolean bookSession(String sessionId, String patientId, String therapistId, String programId,
-                               LocalDate date, LocalTime time) {
+    public boolean bookSession(TherapySessionDTO sessionDTO) {
 
         // Check for conflicts
-        List<TherapySession> existing = sessionDAO.findByTherapistAndTime(therapistId, date, time);
+        List<TherapySession> existing = sessionDAO.findByTherapistAndTime(sessionDTO.getTherapistId(),sessionDTO.getSessionDate(),sessionDTO.getStartTime(),sessionDTO.getEndTime());
         if (!existing.isEmpty()) {
             System.out.println("Therapist is not available at this time.");
             return false;
         }
 
         TherapySession session = new TherapySession();
-        session.setSessionId(sessionId);
-        session.setSessionDate(date);
-        session.setSessionTime(time);
+        session.setSessionId(sessionDTO.getSessionId());
+        session.setSessionDate(sessionDTO.getSessionDate());
+        session.setStartTime(sessionDTO.getStartTime());
+        session.setEndTime(sessionDTO.getEndTime());
         session.setStatus("BOOKED");
-        session.setPatient(patientDAO.findById(patientId));
-        session.setTherapist(therapistDAO.findById(therapistId));
-        session.setTherapyProgram(programDAO.findById(programId));
+        session.setPatient(patientDAO.findById(sessionDTO.getPatientId()));
+        session.setTherapist(therapistDAO.findById(sessionDTO.getTherapistId()));
+        session.setTherapyProgram(programDAO.findById(sessionDTO.getProgramId()));
 
         boolean sessionSaved = sessionDAO.save(session);
         if (!sessionSaved) {
@@ -53,31 +53,53 @@ public class TherapySessionBOImpl implements TherapySessionBO {
 
 //         Optional: Set availability manually if you want to reflect it elsewhere
          Therapist therapist = session.getTherapist();
-        therapist.setAvailability("BUSY");
-        therapistDAO.update(therapist); // Ensure update() exists in TherapistDAO
+        therapist.setAvailability("NO");
+        therapistDAO.update(therapist);
 
 //        System.out.println("Session booked successfully.");
         return true;
     }
 
-    public boolean rescheduleSession(String sessionId, LocalDate newDate, LocalTime newTime) {
-        TherapySession session = sessionDAO.findById(sessionId);
-
-        List<TherapySession> conflict = sessionDAO.findByTherapistAndTime(
-                session.getTherapist().getTherapistID(), newDate, newTime);
-
-        if (!conflict.isEmpty()) {
-            System.out.println("Therapist not available at new time.");
+    // TherapySessionBOImpl.java
+    @Override
+    public boolean rescheduleSession(TherapySessionDTO sessionDTO) {
+        TherapySession session = sessionDAO.findById(sessionDTO.getSessionId());
+        if (session == null) {
+            System.out.println("Session not found with ID: " + sessionDTO.getSessionId());
             return false;
         }
 
-        session.setSessionDate(newDate);
-        session.setSessionTime(newTime);
-        session.setStatus("RESCHEDULED");
+        // Check for time conflicts
+        List<TherapySession> conflicts = sessionDAO.findByTherapistAndTime(
+                sessionDTO.getTherapistId(),
+                sessionDTO.getSessionDate(),
+                sessionDTO.getStartTime(),
+                sessionDTO.getEndTime()
+        );
 
-        sessionDAO.save(session);
-        return true;
+        // Exclude current session from conflict check
+        conflicts.removeIf(s -> s.getSessionId().equals(sessionDTO.getSessionId()));
+
+        if (!conflicts.isEmpty()) {
+            System.out.println("Therapist is not available at the new time.");
+            return false;
+        }
+
+        // Update session details
+        session.setSessionDate(sessionDTO.getSessionDate());
+        session.setStartTime(sessionDTO.getStartTime());
+        session.setPatient(patientDAO.findById(sessionDTO.getPatientId()));
+        session.setTherapist(therapistDAO.findById(sessionDTO.getTherapistId()));
+        session.setTherapyProgram(programDAO.findById(sessionDTO.getProgramId()));
+
+        return sessionDAO.update(session);
     }
+
+    @Override
+    public String getNextSessionID() {
+        return sessionDAO.getNextId();
+    }
+
 
     public boolean cancelSession(String sessionId) {
         TherapySession session = sessionDAO.findById(sessionId);
@@ -97,7 +119,8 @@ public class TherapySessionBOImpl implements TherapySessionBO {
                     new TherapySessionDTO(
                             session.getSessionId(),
                             session.getSessionDate(),
-                            session.getSessionTime(),
+                            session.getStartTime(),
+                            session.getEndTime(),
                             session.getStatus(),
                             session.getPatient().getId(),
                             session.getTherapyProgram().getProgramId(),
@@ -116,7 +139,8 @@ public class TherapySessionBOImpl implements TherapySessionBO {
             return new TherapySessionDTO(
                     ts.getSessionId(),
                     ts.getSessionDate(),
-                    ts.getSessionTime(),
+                    ts.getStartTime(),
+                    ts.getEndTime(),
                     ts.getStatus(),
                     ts.getPatient().getId(),
                     ts.getTherapyProgram().getProgramId(),
@@ -125,11 +149,6 @@ public class TherapySessionBOImpl implements TherapySessionBO {
         } else {
             return null;
         }
-    }
-
-    @Override
-    public boolean bookSessionWithPayment(String sessionId, String patientId, String therapistId, String programId, LocalDate sessionDate, LocalTime sessionTime, String paymentId) {
-        return false;
     }
 
 }

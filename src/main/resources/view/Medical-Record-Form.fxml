@@ -1,0 +1,188 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import com.jfoenix.controls.JFXButton?>
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.Cursor?>
+<?import javafx.scene.control.ComboBox?>
+<?import javafx.scene.control.DatePicker?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.control.TextArea?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.effect.DropShadow?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.paint.Color?>
+<?import javafx.scene.paint.LinearGradient?>
+<?import javafx.scene.paint.Stop?>
+<?import javafx.scene.shape.Rectangle?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane prefHeight="784.0" prefWidth="1085.0" style="-fx-background-color: #f5f7fa;" xmlns="http://javafx.com/javafx/22" xmlns:fx="http://javafx.com/fxml/1" fx:controller="lk.ijse.controller.MedicalRecordFormController">
+    <children>
+        <!-- Modern Header Section with gradient and shadow -->
+        <Rectangle arcHeight="15.0" arcWidth="15.0" height="90.0" layoutX="20.0" layoutY="20.0" stroke="TRANSPARENT" strokeType="INSIDE" width="1046.0">
+            <fill>
+                <LinearGradient endX="1.0" endY="0.0">
+                    <stops>
+                        <Stop>
+                            <color>
+                                <Color red="0.365" green="0.608" blue="0.929" />
+                            </color>
+                        </Stop>
+                        <Stop offset="1.0">
+                            <color>
+                                <Color red="0.565" green="0.773" blue="0.965" />
+                            </color>
+                        </Stop>
+                    </stops>
+                </LinearGradient>
+            </fill>
+            <effect>
+                <DropShadow height="10.0" radius="4.5" width="10.0">
+                    <color>
+                        <Color opacity="0.25" />
+                    </color>
+                </DropShadow>
+            </effect>
+        </Rectangle>
+
+        <HBox alignment="CENTER_LEFT" layoutX="20.0" layoutY="20.0" prefHeight="90.0" prefWidth="1046.0" spacing="15.0">
+            <padding>
+                <Insets left="15.0" />
+            </padding>
+
+            <ImageView id="imgHome" fx:id="imgHome" fitHeight="50.0" fitWidth="50.0" onMouseClicked="#navigateToHome" pickOnBounds="true" preserveRatio="true">
+                <image>
+                    <Image url="@../images/home-icon.png" />
+                </image>
+                <cursor>
+                    <Cursor fx:constant="HAND" />
+                </cursor>
+            </ImageView>
+
+            <Label prefHeight="40.0" prefWidth="342.0" text="Medical Records" textFill="WHITE">
+                <font>
+                    <Font name="System Bold" size="28.0" />
+                </font>
+            </Label>
+
+            <HBox alignment="CENTER_RIGHT" prefHeight="90.0" prefWidth="579.0">
+                <HBox.margin>
+                    <Insets left="5.0" />
+                </HBox.margin>
+                <padding>
+                    <Insets left="5.0" />
+                </padding>
+                <children>
+                    <ComboBox fx:id="cmbFilterByPatient" onAction="#cmbFilterByPatientOnAction" prefHeight="40.0" prefWidth="241.0" promptText="Filter By Patient" style="-fx-background-radius: 8; -fx-border-radius: 8; -fx-border-color: #e0e0e0; -fx-background-color: #f9f9f9;">
+                        <cursor>
+                            <Cursor fx:constant="HAND" />
+                        </cursor>
+                    </ComboBox>
+                </children>
+            </HBox>
+        </HBox>
+
+        <!-- Left Panel - Record Form -->
+        <AnchorPane layoutX="20.0" layoutY="125.0" prefHeight="634.0" prefWidth="381.0" style="-fx-background-color: white; -fx-background-radius: 15;">
+            <effect>
+                <DropShadow height="10.0" radius="4.5" width="10.0">
+                    <color>
+                        <Color opacity="0.1" />
+                    </color>
+                </DropShadow>
+            </effect>
+
+            <children>
+                <VBox layoutX="16.0" layoutY="20.0" prefHeight="604.0" prefWidth="350.0" spacing="12.0">
+                    <Label style="-fx-font-size: 16px; -fx-font-weight: bold; -fx-text-fill: #37474f;" text="Record Information" />
+
+                    <TextField fx:id="txtRecordId" promptText="Record ID (Auto-generated)" style="-fx-background-radius: 8; -fx-border-radius: 8; -fx-border-color: #e0e0e0; -fx-background-color: #f9f9f9;" />
+
+                    <DatePicker fx:id="datePicker" prefHeight="35.0" prefWidth="390.0" promptText="Record Date" style="-fx-background-radius: 8; -fx-border-radius: 8; -fx-border-color: #e0e0e0; -fx-background-color: #f9f9f9;" />
+
+                    <ComboBox fx:id="comboPatient" prefHeight="35.0" prefWidth="390.0" promptText="Select Patient" style="-fx-background-radius: 8; -fx-border-radius: 8; -fx-border-color: #e0e0e0; -fx-background-color: #f9f9f9;">
+                        <cursor>
+                            <Cursor fx:constant="HAND" />
+                        </cursor>
+                    </ComboBox>
+
+                    <Label style="-fx-font-size: 14px; -fx-text-fill: #37474f;" text="Diagnosis:" />
+                    <TextArea fx:id="txtDiagnosis" prefHeight="100.0" promptText="Enter diagnosis details" style="-fx-background-radius: 8; -fx-border-radius: 8; -fx-border-color: #e0e0e0; -fx-background-color: #f9f9f9;" wrapText="true" />
+
+                    <Label style="-fx-font-size: 14px; -fx-text-fill: #37474f;" text="Medical History:" />
+                    <TextArea fx:id="txtMedicalHistory" prefHeight="100.0" promptText="Enter medical history" style="-fx-background-radius: 8; -fx-border-radius: 8; -fx-border-color: #e0e0e0; -fx-background-color: #f9f9f9;" wrapText="true" />
+
+                    <Label style="-fx-font-size: 14px; -fx-text-fill: #37474f;" text="Therapy Notes:" />
+                    <TextArea fx:id="txtTherapyNotes" prefHeight="100.0" promptText="Enter therapy notes" style="-fx-background-radius: 8; -fx-border-radius: 8; -fx-border-color: #e0e0e0; -fx-background-color: #f9f9f9;" wrapText="true" />
+
+                    <HBox alignment="CENTER" prefHeight="48.0" prefWidth="390.0" spacing="15.0">
+                        <JFXButton id="btnSave" fx:id="btnSave" onAction="#handleSave" prefHeight="40.0" prefWidth="120.0" style="-fx-background-color: #5D9CEC; -fx-text-fill: white; -fx-font-weight: bold; -fx-background-radius: 20;" text="Save">
+                            <cursor>
+                                <Cursor fx:constant="HAND" />
+                            </cursor>
+                        </JFXButton>
+
+                        <JFXButton id="btnClear" fx:id="btnClear" onAction="#handleClear" prefHeight="40.0" prefWidth="120.0" style="-fx-background-color: #E0E7FF; -fx-text-fill: #5a6a8a; -fx-font-weight: bold; -fx-background-radius: 20;" text="Clear">
+                            <cursor>
+                                <Cursor fx:constant="HAND" />
+                            </cursor>
+                        </JFXButton>
+
+                        <JFXButton id="btnDelete" fx:id="btnDelete" onAction="#handleDelete" prefHeight="40.0" prefWidth="120.0" style="-fx-background-color: #FF5A5F; -fx-text-fill: white; -fx-font-weight: bold; -fx-background-radius: 20;" text="Delete">
+                            <cursor>
+                                <Cursor fx:constant="HAND" />
+                            </cursor>
+                        </JFXButton>
+                    </HBox>
+                </VBox>
+            </children>
+        </AnchorPane>
+
+        <!-- Right Panel - Records Table -->
+        <AnchorPane layoutX="415.0" layoutY="125.0" prefHeight="634.0" prefWidth="652.0" style="-fx-background-color: white; -fx-background-radius: 15;">
+            <effect>
+                <DropShadow height="10.0" radius="4.5" width="10.0">
+                    <color>
+                        <Color opacity="0.1" />
+                    </color>
+                </DropShadow>
+            </effect>
+
+            <children>
+                <VBox layoutX="15.0" layoutY="20.0" prefHeight="604.0" prefWidth="624.0" spacing="15.0">
+                    <HBox alignment="CENTER_LEFT" prefHeight="40.0" prefWidth="580.0">
+                        <children>
+                            <Label prefHeight="26.0" prefWidth="161.0" style="-fx-font-size: 16px; -fx-font-weight: bold; -fx-text-fill: #37474f;" text="Medical Records" />
+                            <HBox alignment="CENTER_RIGHT" prefHeight="40.0" prefWidth="502.0">
+                                <children>
+                                    <TextField fx:id="txtSearch" prefHeight="35.0" prefWidth="250.0" promptText="Search records..." style="-fx-background-radius: 8; -fx-border-radius: 8; -fx-border-color: #e0e0e0; -fx-background-color: #f9f9f9;">
+                                        <font>
+                                            <Font size="14.0" />
+                                        </font>
+                                    </TextField>
+                                </children>
+                            </HBox>
+                        </children>
+                    </HBox>
+
+                    <TableView fx:id="tblMedicalRecords" onMouseClicked="#handleTableClick" prefHeight="546.0" prefWidth="603.0" style="-fx-background-radius: 8; -fx-border-radius: 8; -fx-border-color: #e0e0e0;">
+                        <columns>
+                            <TableColumn fx:id="colRecordId" prefWidth="74.4000244140625" text="Record ID" />
+                            <TableColumn fx:id="colDate" prefWidth="94.39996337890625" text="Date" />
+                            <TableColumn fx:id="colDiagnosis" prefWidth="105.5999755859375" text="Diagnosis" />
+                            <TableColumn fx:id="colHistory" prefWidth="143.20001220703125" text="Medical History" />
+                     <TableColumn fx:id="colTherapyNotes" prefWidth="113.59991455078125" text="Therapy Notes" />
+                            <TableColumn fx:id="colPatientId" prefWidth="87.20001220703125" text="Patient ID" />
+                        </columns>
+                    </TableView>
+                </VBox>
+            </children>
+        </AnchorPane>
+    </children>
+</AnchorPane>

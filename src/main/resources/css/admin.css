@@ -1,0 +1,115 @@
+/* Base Styles */
+.root {
+    -fx-font-family: 'Segoe UI', Arial, sans-serif;
+    -fx-font-smoothing-type: gray;
+}
+
+/* Sidebar Styles */
+.sidebar-button {
+    -fx-background-color: transparent;
+    -fx-text-fill: white;
+    -fx-font-size: 14px;
+    -fx-font-weight: bold;
+    -fx-padding: 12px 20px;
+    -fx-alignment: CENTER_LEFT;
+    -fx-border-radius: 5px;
+    -fx-background-radius: 5px;
+    -fx-cursor: hand;
+    -fx-effect: none;
+    -fx-font-family: 'FontAwesome', 'Segoe UI';
+}
+
+.sidebar-button:hover {
+    -fx-background-color: rgba(255, 255, 255, 0.1);
+    -fx-text-fill: white;
+}
+
+.sidebar-button:focused {
+    -fx-background-color: rgba(255, 255, 255, 0.2);
+    -fx-text-fill: white;
+}
+
+/* Active Button Style */
+.sidebar-button.active {
+    -fx-background-color: rgba(255, 255, 255, 0.2);
+    -fx-text-fill: white;
+    -fx-border-width: 0 0 0 3px;
+    -fx-border-color: white;
+}
+
+/* Icon Styles */
+ImageView {
+    -fx-cursor: hand;
+}
+
+ImageView:hover {
+    -fx-effect: dropshadow(three-pass-box, rgba(255,255,255,0.8), 10, 0, 0, 0);
+}
+
+/* Main Content Area */
+#mainContent {
+    -fx-background-color: #F4F7FE;
+    -fx-padding: 20px;
+}
+
+/* Welcome Label */
+#mainContent > Label {
+    -fx-font-size: 24px;
+    -fx-text-fill: #2C3E50;
+    -fx-font-weight: bold;
+    -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.1), 2, 0, 0, 1);
+}
+
+/* Logout/Settings Icons */
+#imgLogout, #imgSettings {
+    -fx-effect: dropshadow(three-pass-box, rgba(0,0,0,0.1), 5, 0, 0, 1);
+}
+
+#imgLogout:hover {
+    -fx-effect: dropshadow(three-pass-box, rgba(231,76,60,0.5), 10, 0, 0, 0);
+}
+
+#imgSettings:hover {
+    -fx-effect: dropshadow(three-pass-box, rgba(52,152,219,0.5), 10, 0, 0, 0);
+}
+
+/* Gradient Background for Sidebar */
+.vbox {
+    -fx-background-color: linear-gradient(to bottom, #6A11CB, #2575FC);
+}
+
+/* FontAwesome Icons */
+@font-face {
+    font-family: 'FontAwesome';
+    src: url('../fonts/fontawesome-webfont.ttf');
+}
+
+/* Button Hover Effects */
+.button:hover {
+    -fx-scale-x: 1.02;
+    -fx-scale-y: 1.02;
+    -fx-transition: all 0.3s;
+}
+
+/* Responsive Adjustments */
+@media (max-width: 1200px) {
+    .sidebar-button {
+        -fx-font-size: 12px;
+        -fx-padding: 10px 15px;
+    }
+
+    #mainContent {
+        -fx-padding: 15px;
+    }
+}
+
+/* Animation for Active Button */
+@keyframes pulse {
+    0% { -fx-scale-x: 1; -fx-scale-y: 1; }
+    50% { -fx-scale-x: 1.05; -fx-scale-y: 1.05; }
+    100% { -fx-scale-x: 1; -fx-scale-y: 1; }
+}
+
+.sidebar-button.active {
+    -fx-animation: pulse 0.5s ease-in-out;
+}

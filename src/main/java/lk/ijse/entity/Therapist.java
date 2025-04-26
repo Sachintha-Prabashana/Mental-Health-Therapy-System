@@ -25,18 +25,17 @@ public class Therapist {
     private String specialization;
 
     @Column(nullable = false)
+    private int contactNumber;
+
+    @Column(nullable = false)
+    private String mail;
+
+    @Column(nullable = false)
     private String availability;
 
-    @ManyToMany(cascade = {CascadeType.PERSIST, CascadeType.MERGE})
-    @JoinTable(
-            name = "therapist_program",
-            joinColumns = @JoinColumn(name = "therapist_id"),
-            inverseJoinColumns = @JoinColumn(name = "program_id")
-    )
-    private List<TherapyProgram> therapyPrograms = new ArrayList<>();
+    @OneToMany(mappedBy = "therapist", cascade = CascadeType.ALL, orphanRemoval = true)
+    private List<TherapistProgram> therapistPrograms = new ArrayList<>();
 
     @OneToMany(mappedBy = "therapist", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<TherapySession> therapySessions;
-
-
 }

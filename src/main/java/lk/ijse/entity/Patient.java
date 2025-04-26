@@ -4,6 +4,8 @@ import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+
+import java.util.ArrayList;
 import java.util.List;
 
 @AllArgsConstructor
@@ -18,11 +20,13 @@ public class Patient {
     private String name;
     private String contactInfo;
     private String gender;
-    private String medicalHistory;
 
     @OneToMany(mappedBy = "patient" , cascade = CascadeType.ALL)
     private List<TherapySession> therapySessions;
 
     @OneToMany(mappedBy = "patient", cascade = CascadeType.ALL)
     private List<Payment> payments;
+
+    @OneToMany(mappedBy = "patient", cascade = CascadeType.ALL)
+    private List<MedicalRecord> medicalRecords;
 }

@@ -1,98 +1,108 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.Cursor?>
 <?import javafx.scene.chart.BarChart?>
 <?import javafx.scene.chart.CategoryAxis?>
 <?import javafx.scene.chart.NumberAxis?>
 <?import javafx.scene.control.Button?>
-<?import javafx.scene.control.DatePicker?>
 <?import javafx.scene.control.Label?>
-<?import javafx.scene.control.Tab?>
-<?import javafx.scene.control.TabPane?>
 <?import javafx.scene.control.TableColumn?>
 <?import javafx.scene.control.TableView?>
-<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.effect.DropShadow?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.VBox?>
+<?import javafx.scene.paint.Color?>
+<?import javafx.scene.paint.LinearGradient?>
+<?import javafx.scene.paint.Stop?>
+<?import javafx.scene.shape.Rectangle?>
+<?import javafx.scene.text.Font?>
 
-<BorderPane prefHeight="632.0" prefWidth="963.0" style="-fx-background-color: #f5f7fa;" xmlns="http://javafx.com/javafx/22" xmlns:fx="http://javafx.com/fxml/1" fx:controller="lk.ijse.controller.ReportFormController">
+<AnchorPane prefHeight="784.0" prefWidth="1085.0" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/22" fx:controller="lk.ijse.controller.ReportFormController">
+   <Rectangle arcHeight="15.0" arcWidth="15.0" height="90.0" layoutX="17.0" layoutY="20.0" stroke="TRANSPARENT" strokeType="INSIDE" width="1046.0">
+      <fill>
+         <LinearGradient endX="1.0" endY="0.0">
+            <stops>
+               <Stop>
+                  <color>
+                     <Color red="0.082" green="0.596" blue="0.839" />
+                  </color>
+               </Stop>
+               <Stop offset="1.0">
+                  <color>
+                     <Color red="0.278" green="0.710" blue="0.894" />
+                  </color>
+               </Stop>
+            </stops>
+         </LinearGradient>
+      </fill>
+      <effect>
+         <DropShadow height="10.0" radius="4.5" width="10.0">
+            <color>
+               <Color opacity="0.25" />
+            </color>
+         </DropShadow>
+      </effect>
+   </Rectangle>
+   <HBox alignment="CENTER_LEFT" layoutX="17.0" layoutY="20.0" prefHeight="90.0" prefWidth="1046.0" spacing="15.0">
+      <padding>
+         <Insets left="15.0" />
+      </padding>
+      <children>
+         <ImageView id="imgHome" fx:id="imgHome" fitHeight="50.0" fitWidth="50.0" onMouseClicked="#navigateToHome" pickOnBounds="true" preserveRatio="true">
+            <image>
+               <Image url="@../images/home-icon.png" />
+            </image>
+            <cursor>
+               <Cursor fx:constant="HAND" />
+            </cursor>
+         </ImageView>
+         <Label prefHeight="40.0" prefWidth="462.0" text="Therapist Performance Report" textFill="WHITE">
+            <font>
+               <Font name="System Bold" size="28.0" />
+            </font>
+         </Label>
+         <HBox alignment="CENTER_RIGHT" prefHeight="90.0" prefWidth="579.0">
+            <HBox.margin>
+               <Insets left="5.0" />
+            </HBox.margin>
+            <padding>
+               <Insets left="5.0" />
+            </padding>
+         </HBox>
+      </children>
+   </HBox>
 
-    <top>
-        <HBox alignment="CENTER" prefWidth="963.0" style="-fx-background-color: #1a73e8; -fx-padding: 15;">
-            <Label style="-fx-text-fill: white; -fx-font-size: 20; -fx-font-weight: bold;" text="Therapy Center Financial Dashboard" />
+    <VBox alignment="TOP_CENTER" layoutY="126.4" prefHeight="638.0" prefWidth="1045.0" spacing="20" AnchorPane.bottomAnchor="20" AnchorPane.leftAnchor="20" AnchorPane.rightAnchor="20" AnchorPane.topAnchor="126.0">
+
+        <!-- TableView -->
+        <TableView fx:id="therapistTable" prefHeight="258.0" prefWidth="1046.0" style="-fx-border-color: #e0e0e0; -fx-background-radius: 8; -fx-border-radius: 8;">
+            <columns>
+            <TableColumn fx:id="colTherapistId" prefWidth="192.0" text="Therapist ID" />
+                <TableColumn fx:id="colName" prefWidth="275.2000427246094" text="Therapist Name" />
+                <TableColumn fx:id="colSessions" prefWidth="283.99993896484375" text="Sessions" />
+                <TableColumn fx:id="colPatients" prefWidth="291.1999755859374" text="Total Patients" />
+            </columns>
+        </TableView>
+
+        <!-- Bar Chart -->
+        <BarChart fx:id="sessionChart" animated="true" legendVisible="false" prefHeight="286.0" prefWidth="1046.0" title="Therapist vs Sessions">
+            <xAxis>
+                <CategoryAxis label="Therapist" />
+            </xAxis>
+            <yAxis>
+                <NumberAxis label="Sessions" />
+            </yAxis>
+        </BarChart>
+
+        <!-- Buttons -->
+        <HBox alignment="CENTER" spacing="15">
+            <Button onAction="#onRefresh" style="-fx-background-color: #4CAF50; -fx-text-fill: white; -fx-font-weight: bold;" text="Refresh" />
+            <Button onAction="#onDownloadPdf" style="-fx-background-color: #2196F3; -fx-text-fill: white; -fx-font-weight: bold;" text="Download as PDF" />
         </HBox>
-    </top>
 
-    <center>
-        <TabPane style="-fx-background-color: transparent;" tabClosingPolicy="UNAVAILABLE">
-
-            <!-- Financial Overview Tab -->
-            <Tab text="Financial Overview">
-                <VBox spacing="15" style="-fx-padding: 20;">
-                    <HBox spacing="20">
-                        <!-- Summary Cards -->
-                        <VBox spacing="5" style="-fx-background-color: white; -fx-background-radius: 5; -fx-effect: dropshadow(three-pass-box, rgba(0,0,0,0.1), 5, 0, 0, 0); -fx-padding: 15;">
-                            <Label style="-fx-font-size: 14;" text="Total Revenue" />
-                            <Label fx:id="lblTotalRevenue" style="-fx-font-size: 24; -fx-font-weight: bold; -fx-text-fill: #1a73e8;" />
-                        </VBox>
-
-                        <VBox spacing="5" style="-fx-background-color: white; -fx-background-radius: 5; -fx-effect: dropshadow(three-pass-box, rgba(0,0,0,0.1), 5, 0, 0, 0); -fx-padding: 15;">
-                            <Label style="-fx-font-size: 14;" text="Total Expenses" />
-                            <Label fx:id="lblTotalExpenses" style="-fx-font-size: 24; -fx-font-weight: bold; -fx-text-fill: #ea4335;" />
-                        </VBox>
-
-                        <VBox spacing="5" style="-fx-background-color: white; -fx-background-radius: 5; -fx-effect: dropshadow(three-pass-box, rgba(0,0,0,0.1), 5, 0, 0, 0); -fx-padding: 15;">
-                            <Label style="-fx-font-size: 14;" text="Net Profit" />
-                            <Label fx:id="lblNetProfit" style="-fx-font-size: 24; -fx-font-weight: bold; -fx-text-fill: #34a853;" />
-                        </VBox>
-                    </HBox>
-
-                    <!-- Profit Chart -->
-                    <BarChart fx:id="profitChart" legendVisible="false" style="-fx-background-color: white; -fx-effect: dropshadow(three-pass-box, rgba(0,0,0,0.1), 5, 0, 0, 0);" title="Monthly Profit Analysis">
-                        <xAxis>
-                            <CategoryAxis label="Month" />
-                        </xAxis>
-                        <yAxis>
-                            <NumberAxis label="Amount (LKR)" />
-                        </yAxis>
-                    </BarChart>
-
-                    <!-- Date Range Selector -->
-                    <HBox alignment="CENTER_LEFT" spacing="15" style="-fx-padding: 10 0;">
-                        <Label style="-fx-font-weight: bold;" text="Date Range:" />
-                        <DatePicker fx:id="dpStartDate" promptText="Start Date" />
-                        <Label text="to" />
-                        <DatePicker fx:id="dpEndDate" promptText="End Date" />
-                        <Button onAction="#loadFinancialData" style="-fx-background-color: #1a73e8; -fx-text-fill: white;" text="Update Report" />
-                    </HBox>
-                </VBox>
-            </Tab>
-
-            <!-- Detailed Reports Tab -->
-            <Tab text="Detailed Reports">
-                <VBox spacing="15" style="-fx-padding: 20;">
-                    <TableView fx:id="tblFinancialDetails" style="-fx-background-color: white; -fx-effect: dropshadow(three-pass-box, rgba(0,0,0,0.1), 5, 0, 0, 0);">
-                        <columns>
-                            <TableColumn fx:id="colDate" prefWidth="120" text="Date" />
-                            <TableColumn fx:id="colRevenue" prefWidth="150" text="Revenue" />
-                            <TableColumn fx:id="colExpenses" prefWidth="150" text="Expenses" />
-                            <TableColumn fx:id="colProfit" prefWidth="150" text="Profit" />
-                            <TableColumn fx:id="colDescription" prefWidth="300" text="Description" />
-                        </columns>
-                    </TableView>
-
-                    <HBox alignment="CENTER_RIGHT" spacing="10">
-                        <Button style="-fx-background-color: #34a853; -fx-text-fill: white;" text="Export to Excel" />
-                        <Button style="-fx-background-color: #1a73e8; -fx-text-fill: white;" text="Print Report" />
-                    </HBox>
-                </VBox>
-            </Tab>
-        </TabPane>
-    </center>
-
-    <bottom>
-        <HBox alignment="CENTER" style="-fx-background-color: #f1f3f4; -fx-padding: 10;">
-            <Label text="© 2023 Therapy Center Management System | Generated on: " />
-            <Label fx:id="lblReportDate" />
-        </HBox>
-    </bottom>
-</BorderPane>
+    </VBox>
+</AnchorPane>

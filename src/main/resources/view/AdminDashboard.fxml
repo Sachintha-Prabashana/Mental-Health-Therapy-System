@@ -1,107 +1,60 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import java.net.URL?>
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.Label?>
-<?import javafx.scene.effect.DropShadow?>
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.VBox?>
-<?import javafx.scene.paint.Color?>
 
-<AnchorPane prefHeight="700.0" prefWidth="1150.0" xmlns="http://javafx.com/javafx/22" xmlns:fx="http://javafx.com/fxml/1" fx:controller="lk.ijse.controller.AdminPageController">
+<AnchorPane prefHeight="800.0" prefWidth="1300.0" xmlns="http://javafx.com/javafx/22" xmlns:fx="http://javafx.com/fxml/1" fx:controller="lk.ijse.controller.AdminPageController">
 
    <!-- Sidebar -->
-   <VBox alignment="TOP_CENTER" layoutY="66.4" prefHeight="632.0" prefWidth="186.0" spacing="20.0" style="-fx-background-color: #5D9CEC; -fx-padding: 20;" AnchorPane.leftAnchor="0" AnchorPane.topAnchor="66.0">
-      <ImageView fitHeight="129.0" fitWidth="80" preserveRatio="true">
+   <VBox alignment="TOP_CENTER" layoutX="6.0" layoutY="7.0" prefHeight="784.0" prefWidth="188.0" spacing="20.0" style="-fx-background-color: linear-gradient(to bottom, #6A11CB, #2575FC); -fx-padding: 20; -fx-background-radius: 20;" AnchorPane.leftAnchor="6.0" AnchorPane.topAnchor="7.0">
+      <ImageView fitHeight="120.0" fitWidth="80" preserveRatio="true">
          <image>
             <Image url="@../images/admin-logo.png" />
          </image>
       </ImageView>
-      <Label style="-fx-font-size: 18px; -fx-text-fill: white;" text="Admin Dashboard" />
-      <Button fx:id="btnDashboard" onAction="#btnDashboardOnAction" prefHeight="38.0" prefWidth="138.0" style="-fx-background-color: #5D9CEC; -fx-background-radius: 10;" text="Dashboard" textFill="WHITE">
-         <effect>
-            <DropShadow>
-               <color>
-                  <Color red="1.0" green="1.0" blue="1.0" />
-               </color>
-            </DropShadow>
-         </effect></Button>
-      <Button fx:id="btnPatient" onAction="#btnPatientOnAction" prefHeight="38.0" prefWidth="138.0" style="-fx-background-color: #5D9CEC; -fx-background-radius: 10;" text="Patient" textFill="WHITE">
-         <effect>
-            <DropShadow>
-               <color>
-                  <Color red="1.0" green="1.0" blue="1.0" />
-               </color>
-            </DropShadow>
-         </effect></Button>
-      <Button fx:id="btnTherapist" onAction="#btnTherapistOnAction" prefHeight="38.0" prefWidth="138.0" style="-fx-background-color: #5D9CEC; -fx-background-radius: 10;" text="Therapist" textFill="WHITE">
-         <effect>
-            <DropShadow>
-               <color>
-                  <Color red="1.0" green="1.0" blue="1.0" />
-               </color>
-            </DropShadow>
-         </effect></Button>
-      <Button fx:id="btnAppointment" onAction="#btnAppointmentOnAction" prefHeight="38.0" prefWidth="138.0" style="-fx-background-color: #5D9CEC; -fx-background-radius: 10;" text="Appointment" textFill="WHITE">
-         <effect>
-            <DropShadow>
-               <color>
-                  <Color red="1.0" green="1.0" blue="1.0" />
-               </color>
-            </DropShadow>
-         </effect></Button>
-      <Button fx:id="btnPayment" onAction="#btnPaymentOnAction" prefHeight="38.0" prefWidth="138.0" style="-fx-background-color: #5D9CEC; -fx-background-radius: 10;" text="Payment" textFill="WHITE">
-         <effect>
-            <DropShadow>
-               <color>
-                  <Color red="1.0" green="1.0" blue="1.0" />
-               </color>
-            </DropShadow>
-         </effect></Button>
-      <Button fx:id="btnTherapyProgram" onAction="#btnTherapyProgramOnAction" prefHeight="38.0" prefWidth="138.0" style="-fx-background-color: #5D9CEC; -fx-background-radius: 10;" text="Therapy Program" textFill="WHITE">
-         <effect>
-            <DropShadow>
-               <color>
-                  <Color red="1.0" green="1.0" blue="1.0" />
-               </color>
-            </DropShadow>
-         </effect></Button>
-      <VBox alignment="BOTTOM_LEFT" prefHeight="86.0" prefWidth="156.0">
+      <Label style="-fx-font-size: 20px; -fx-text-fill: white; -fx-font-weight: bold;" text="Admin Panel" />
+
+      <!-- Sidebar Buttons with FontAwesome icons -->
+      <Button fx:id="btnDashboard" onAction="#btnDashboardOnAction" styleClass="sidebar-button" text=" Dashboard" />
+      <Button fx:id="btnPatient" onAction="#btnPatientOnAction" styleClass="sidebar-button" text="Patients" />
+      <Button fx:id="btnTherapist" onAction="#btnTherapistOnAction" styleClass="sidebar-button" text="Therapists" />
+      <Button fx:id="btnTherapyProgram" onAction="#btnTherapyProgramOnAction" styleClass="sidebar-button" text="Programs" />
+      <Button fx:id="btnAssignPrograms" layoutX="45.0" layoutY="470.0" onAction="#btnAssignProgramsOnAction" prefHeight="39.0" prefWidth="162.0" styleClass="sidebar-button" text="Assign Programs" />
+      <Button fx:id="btnAppointment" onAction="#btnAppointmentOnAction" styleClass="sidebar-button" text="Appointments" />
+      <Button fx:id="btnPayment" onAction="#btnPaymentOnAction" styleClass="sidebar-button" text="Payments" />
+      <Button fx:id="btnMediRepo" layoutX="35.0" layoutY="233.0" onAction="#btnMediRepoOnAction" styleClass="sidebar-button" text="Modical Record" />
+
+      <VBox alignment="BOTTOM_LEFT" prefHeight="148.0" prefWidth="165.0">
          <children>
-            <HBox alignment="CENTER" prefHeight="36.0" prefWidth="156.0">
-               <children>
-                  <ImageView fx:id="imgLogout" fitHeight="30" fitWidth="30" onMouseClicked="#onLogoutClick" preserveRatio="true">
-                     <image>
-                        <Image url="@../icons/logout_icon.png" />
-                     </image>
-                  </ImageView>
-                  <ImageView fx:id="imgSettings" fitHeight="30" fitWidth="30" onMouseClicked="#onSettingsClick" preserveRatio="true">
-                     <image>
-                        <Image url="@../icons/setting_icon.png" />
-                     </image>
-                  </ImageView>
-               </children>
+            <HBox alignment="CENTER" prefHeight="34.0" prefWidth="146.0" spacing="20.0">
+               <ImageView fx:id="imgLogout" fitHeight="24" fitWidth="24" onMouseClicked="#onLogoutClick" preserveRatio="true">
+                  <image>
+                     <Image url="@../icons/logout_icon.png" />
+                  </image>
+               </ImageView>
+               <ImageView fx:id="imgSettings" fitHeight="24" fitWidth="24" onMouseClicked="#onSettingsClick" preserveRatio="true">
+                  <image>
+                     <Image url="@../icons/setting_icon.png" />
+                  </image>
+               </ImageView>
             </HBox>
          </children>
       </VBox>
    </VBox>
 
-   <!-- Top Bar -->
-   <HBox alignment="CENTER_RIGHT" prefHeight="66.0" prefWidth="1150.0" style="-fx-background-color: #5D9CEC; -fx-padding: 10;" AnchorPane.leftAnchor="0.0" AnchorPane.topAnchor="0">
-      <VBox alignment="CENTER">
-         <Label fx:id="lblWelcome" style="-fx-text-fill: white; -fx-font-size: 16px;" text="Welcome, Admin" />
-         <HBox alignment="CENTER">
-            <Label fx:id="lblAdminId" style="-fx-text-fill: white; -fx-font-size: 14px;" text="Admin ID: " />
-            <Label fx:id="lblAdd" style="-fx-text-fill: white; -fx-font-size: 14px; -fx-padding: 0 0 0 10;" />
-         </HBox>
-      </VBox>
-   </HBox>
-
    <!-- Main Content Area -->
-   <AnchorPane fx:id="mainContent" layoutX="186.0" layoutY="66.0" prefHeight="632.0" prefWidth="963.0" style="-fx-background-color: white;">
-      <Label layoutX="50" layoutY="120" style="-fx-font-size: 20px; -fx-text-fill: #2C3E50;" text="Welcome to the Admin Page" />
+   <AnchorPane fx:id="mainContent" layoutX="204.0" layoutY="7.0" prefHeight="784.0" prefWidth="1085.0" style="-fx-background-color: linear-gradient(to bottom right, #e3f2fd, #ffffff); -fx-background-radius: 20;">
+      <Label layoutX="50" layoutY="60" style="-fx-font-size: 22px; -fx-text-fill: #2C3E50; -fx-font-weight: bold;" text="Welcome to the Admin Dashboard" />
    </AnchorPane>
+
+   <stylesheets>
+      <URL value="@../css/admin.css" />
+   </stylesheets>
 
 </AnchorPane>

@@ -18,6 +18,15 @@ public class User {
     private String id;
 
     @Column(nullable = false, unique = true)
+    private String firstName;
+
+    @Column(nullable = false, unique = true)
+    private String lastName;
+
+    @Column(nullable = false, unique = true)
+    private String email;
+
+    @Column(nullable = false, unique = true)
     private String username;
 
     @Column(nullable = false)
@@ -26,11 +35,5 @@ public class User {
     @Enumerated(EnumType.STRING)
     @Column(nullable = false)
     private Role role; // Enum (ADMIN, RECEPTIONIST)
-
-    public User(String username, String hashedPassword, Role role) {
-        this.username = username;
-        this.password = hashedPassword;
-        this.role = (role != null) ? role : Role.RECEPTIONIST;
-    }
 
 }

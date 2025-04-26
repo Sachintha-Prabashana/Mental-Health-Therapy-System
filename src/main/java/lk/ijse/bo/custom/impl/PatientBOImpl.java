@@ -14,6 +14,8 @@ import java.util.List;
 
 public class PatientBOImpl implements PatientBO {
 
+
+
     private final PatientDAO patientDAO = new PatientDAOImpl();
     @Override
     public boolean savePatient(PatientDTO patientDTO) {
@@ -22,7 +24,7 @@ public class PatientBOImpl implements PatientBO {
                 patientDTO.getName(),
                 patientDTO.getContactInfo(),
                 patientDTO.getGender(),
-                patientDTO.getMedicalHistory(),
+                new ArrayList<>(),
                 new ArrayList<>(),
                 new ArrayList<>()
         ));
@@ -30,12 +32,20 @@ public class PatientBOImpl implements PatientBO {
 
     @Override
     public boolean updatePatient(PatientDTO patientDTO) {
-        return false;
+        return  patientDAO.update(new Patient(
+                patientDTO.getId(),
+                patientDTO.getName(),
+                patientDTO.getContactInfo(),
+                patientDTO.getGender(),
+                new ArrayList<>(),
+                new ArrayList<>(),
+                new ArrayList<>()
+        ));
     }
 
     @Override
     public boolean deletePatient(String id) throws Exception {
-        return false;
+        return patientDAO.deleteByPK(id);
     }
 
     @Override
@@ -49,8 +59,7 @@ public class PatientBOImpl implements PatientBO {
                           patient.getId(),
                           patient.getName(),
                           patient.getContactInfo(),
-                          patient.getGender(),
-                          patient.getMedicalHistory()
+                          patient.getGender()
                     ));
 
         }
@@ -78,5 +87,7 @@ public class PatientBOImpl implements PatientBO {
         }
         return patients;
     }
+
+
 
 }

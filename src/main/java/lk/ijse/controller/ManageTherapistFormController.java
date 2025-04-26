@@ -28,19 +28,32 @@ import java.util.*;
 public class ManageTherapistFormController implements Initializable {
 
     @FXML
-    private JFXButton btnAddNewTherapist, btnDelete, btnSave, btnUpdate, btnViewTherapyPrograme;
+    private JFXButton btnAddNewTherapist, btnDelete, btnSave, btnUpdate;
 
     @FXML
-    private TableColumn<TherapistTM, String> clmTherapisstAvailability, clmTherapistId, clmTherapistName, clmTherapistSpeciality;
+    private TableColumn<TherapistTM, String>  clmTherapistId, clmTherapistName, clmTherapistSpeciality, clmEmail;
+
+    @FXML
+    private TableColumn<TherapistTM, String> clmAvailability;
+
+    @FXML
+    private TableColumn<TherapistTM, Integer> clmContactNumber;
 
     @FXML
     private TableView<TherapistTM> tblTherapists;
 
     @FXML
-    private TextField txtTherapistAvailability, txtTherapistId, txtTherapistName, txtTherapistSpecialty;
+    private TextField  txtTherapistId, txtTherapistName, txtTherapistSpecialty;
 
     @FXML
-    private AnchorPane viewTherapyProgramePane;
+    private TextField txtContactNumber;
+
+    @FXML
+    private TextField txtEmail;
+
+    @FXML
+    private TextField txtAvilability;
+
 
     private final FactoryConfiguration factoryConfiguration = new FactoryConfiguration();
     private final TherapistBO therapistBO = new TherapistBOImpl();
@@ -50,7 +63,11 @@ public class ManageTherapistFormController implements Initializable {
         clmTherapistId.setCellValueFactory(new PropertyValueFactory<>("therapistID"));
         clmTherapistName.setCellValueFactory(new PropertyValueFactory<>("therapistName"));
         clmTherapistSpeciality.setCellValueFactory(new PropertyValueFactory<>("specialization"));
-        clmTherapisstAvailability.setCellValueFactory(new PropertyValueFactory<>("availability"));
+        clmContactNumber.setCellValueFactory(new PropertyValueFactory<>("contactNumber"));
+        clmEmail.setCellValueFactory(new PropertyValueFactory<>("mail"));
+        clmAvailability.setCellValueFactory(new PropertyValueFactory<>("availability"));
+
+        txtAvilability.setText("YES");
 
         // Load data into table
         loadTherapists();
@@ -73,6 +90,8 @@ public class ManageTherapistFormController implements Initializable {
                         therapistDTO.getTherapistID(),
                         therapistDTO.getTherapistName(),
                         therapistDTO.getSpecialization(),
+                        therapistDTO.getContactNumber(),
+                        therapistDTO.getMail(),
                         therapistDTO.getAvailability()
                 );
 
@@ -97,15 +116,17 @@ public class ManageTherapistFormController implements Initializable {
         String id = txtTherapistId.getText();
         String name = txtTherapistName.getText();
         String specialty = txtTherapistSpecialty.getText();
-        String availability = txtTherapistAvailability.getText();
+        int contact = Integer.parseInt(txtContactNumber.getText());
+        String mail = txtEmail.getText();
+        String availability = txtAvilability.getText();
 
         // Validate input fields
-        if (id.isEmpty() || name.isEmpty() || specialty.isEmpty() || availability.isEmpty()) {
+        if (id.isEmpty() || name.isEmpty() || specialty.isEmpty() || mail.isEmpty() || availability.isEmpty() ) {
             showAlert("Warning", "Please fill all fields!", Alert.AlertType.WARNING);
             return;
         }
 
-        TherapistDTO therapistDTO = new TherapistDTO(id, name, specialty, availability);
+        TherapistDTO therapistDTO = new TherapistDTO(id, name, specialty, contact, mail, availability);
 
         try {
             boolean isSaved = therapistBO.saveTherapist(therapistDTO);
@@ -131,15 +152,17 @@ public class ManageTherapistFormController implements Initializable {
         String id = txtTherapistId.getText();
         String name = txtTherapistName.getText();
         String specialty = txtTherapistSpecialty.getText();
-        String availability = txtTherapistAvailability.getText();
+        int contact = Integer.parseInt(txtContactNumber.getText());
+        String mail = txtEmail.getText();
+        String availability = txtAvilability.getText();
 
-        if (id.isEmpty() || name.isEmpty() || specialty.isEmpty() || availability.isEmpty()) {
+        if (id.isEmpty() || name.isEmpty() || specialty.isEmpty() || mail.isEmpty() || availability.isEmpty() ) {
             showAlert("Warning", "Please fill all fields!", Alert.AlertType.WARNING);
             return;
         }
 
         try {
-            TherapistDTO therapistDTO = new TherapistDTO(id, name, specialty, availability);
+            TherapistDTO therapistDTO = new TherapistDTO(id, name, specialty, contact, mail, availability);
 
             boolean isUpdate = therapistBO.updateTherapist(therapistDTO);
             if (isUpdate) {
@@ -187,7 +210,7 @@ public class ManageTherapistFormController implements Initializable {
 
     @FXML
     void navigateToHome(MouseEvent event) {
-        loadUI("/view/Home.fxml");
+
     }
 
     @FXML
@@ -200,7 +223,9 @@ public class ManageTherapistFormController implements Initializable {
             txtTherapistId.setText(selectedItem.getTherapistID());
             txtTherapistName.setText(selectedItem.getTherapistName());
             txtTherapistSpecialty.setText(selectedItem.getSpecialization());
-            txtTherapistAvailability.setText(selectedItem.getAvailability());
+            txtContactNumber.setText(String.valueOf(selectedItem.getContactNumber()));
+            txtEmail.setText(selectedItem.getMail());
+            txtAvilability.setText(selectedItem.getAvailability());
 
             btnSave.setDisable(true);
             btnDelete.setDisable(false);
@@ -209,20 +234,12 @@ public class ManageTherapistFormController implements Initializable {
 
     }
 
-    private void loadUI(String resource) {
-        viewTherapyProgramePane.getChildren().clear();
-        try {
-            viewTherapyProgramePane.getChildren().add(FXMLLoader.load(Objects.requireNonNull(getClass().getResource(resource))));
-        } catch (IOException e) {
-            showAlert("Error", "Failed to load the requested view!", Alert.AlertType.ERROR);
-        }
-    }
-
     private void clearFields() {
         txtTherapistId.clear();
         txtTherapistName.clear();
         txtTherapistSpecialty.clear();
-        txtTherapistAvailability.clear();
+        txtContactNumber.clear();
+        txtEmail.clear();
     }
 
     private void showAlert(String title, String message, Alert.AlertType alertType) {

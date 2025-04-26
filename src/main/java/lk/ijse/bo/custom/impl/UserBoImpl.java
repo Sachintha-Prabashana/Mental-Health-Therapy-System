@@ -10,14 +10,14 @@ import lk.ijse.util.Role;
 public class UserBoImpl implements UserBo {
     private final UserDAO userDAO = new UserDAOImpl();
 
-    public boolean registerUser(String username, String password, Role role) {
+    public boolean registerUser(String firstName, String lastName,  String eMail, String username, String password, Role role) {
         if (userDAO.getUserByUsername(username) != null) {
             return false; // User already exists
         }
 
         String hashedPassword = PasswordEncryptionUtil.hashPassword(password);
         String newUserId = userDAO.getNextId(); // Generate new ID
-        User user = new User(newUserId, username, hashedPassword, role);
+        User user = new User(newUserId, firstName, lastName, eMail, username, hashedPassword, role);
         userDAO.save(user);
         return true;
     }

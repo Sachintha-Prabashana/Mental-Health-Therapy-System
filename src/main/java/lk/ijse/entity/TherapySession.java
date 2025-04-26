@@ -15,16 +15,24 @@ import java.time.LocalTime;
 @Table(name = "therapy_session")
 public class TherapySession {
     @Id
+    @Column(name = "session_id")
     private String sessionId;
 
+    @Column(name = "session_date", nullable = false)
     private LocalDate sessionDate;
-    private LocalTime sessionTime;
+
+    @Column(name = "start_time", nullable = false)
+    private LocalTime startTime;
+
+    @Column(name = "end_time", nullable = false)
+    private LocalTime endTime;
+
     private String status;
 
     @ManyToOne
     @JoinColumn(name = "patient_id")
     private Patient patient;
-
+ 
     @ManyToOne
     @JoinColumn(name = "program_id")
     private TherapyProgram therapyProgram;

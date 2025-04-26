@@ -22,13 +22,13 @@ public class TherapyProgram {
     private String programName;
 
     @Column(nullable = false)
-    private int duration;
+    private String duration;
 
     @Column(nullable = false)
     private double fee;
 
-    @ManyToMany(mappedBy = "therapyPrograms")
-    private List<Therapist> therapists = new ArrayList<>();
+    @OneToMany(mappedBy = "therapyProgram", cascade = CascadeType.ALL, orphanRemoval = true)
+    private List<TherapistProgram> therapistPrograms = new ArrayList<>();
 
     @OneToMany(mappedBy = "therapyProgram", cascade = CascadeType.ALL)
     private List<TherapySession> therapySessions;

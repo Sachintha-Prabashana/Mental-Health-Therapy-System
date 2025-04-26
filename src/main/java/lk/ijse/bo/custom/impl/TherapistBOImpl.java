@@ -4,10 +4,12 @@ import lk.ijse.bo.custom.TherapistBO;
 import lk.ijse.dao.custom.TherapistDAO;
 import lk.ijse.dao.custom.impl.TherapistDAOImpl;
 import lk.ijse.dto.TherapistDTO;
+import lk.ijse.entity.Patient;
 import lk.ijse.entity.Therapist;
 
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.List;
 
 public class TherapistBOImpl implements TherapistBO {
 
@@ -21,7 +23,7 @@ public class TherapistBOImpl implements TherapistBO {
         for (Therapist therapist : therapists) {
             therapistDTOS.add(
                     new TherapistDTO
-                            (therapist.getTherapistID(), therapist.getTherapistName(), therapist.getSpecialization(), therapist.getAvailability()
+                            (therapist.getTherapistID(), therapist.getTherapistName(), therapist.getSpecialization(), therapist.getContactNumber(), therapist.getMail(), therapist.getAvailability()
 
             ));
         }
@@ -34,11 +36,33 @@ public class TherapistBOImpl implements TherapistBO {
     }
 
     @Override
+    public ArrayList<Therapist> loadAllTherapistsInCombo() {
+        ArrayList<Therapist> therapists = new ArrayList<>();
+        try {
+            List<Therapist> allTherapists = therapistDAO.getAll(); // DAO method
+            therapists.addAll(allTherapists);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return therapists;
+    }
+
+    @Override
+    public String getTherapistIdByName(String selectedTherapistName) {
+        return therapistDAO.getTherapistIdByName(selectedTherapistName);
+    }
+
+    @Override
     public boolean saveTherapist(TherapistDTO therapistDTO) {
         return therapistDAO.save(
-                new Therapist(therapistDTO.getTherapistID(), therapistDTO.getTherapistName(),
-                        therapistDTO.getSpecialization(), therapistDTO.getAvailability(),
-                        new ArrayList<>(), new ArrayList<>())
+                new Therapist(therapistDTO.getTherapistID(),
+                        therapistDTO.getTherapistName(),
+                        therapistDTO.getSpecialization(),
+                        therapistDTO.getContactNumber(),
+                        therapistDTO.getMail(),
+                        therapistDTO.getAvailability(),
+                        new ArrayList<>(),
+                        new ArrayList<>())
         );
 
     }
@@ -46,7 +70,13 @@ public class TherapistBOImpl implements TherapistBO {
     @Override
     public boolean updateTherapist(TherapistDTO therapistDTO) {
         return therapistDAO.update(
-                new Therapist(therapistDTO.getTherapistID(), therapistDTO.getTherapistName(), therapistDTO.getSpecialization(), therapistDTO.getAvailability(), new ArrayList<>(), new ArrayList<>())
+                new Therapist(therapistDTO.getTherapistID(),
+                        therapistDTO.getTherapistName(), therapistDTO.getSpecialization(),
+                        therapistDTO.getContactNumber(),
+                        therapistDTO.getMail(),
+                        therapistDTO.getAvailability(),
+                        new ArrayList<>(),
+                        new ArrayList<>())
         );
     }
 

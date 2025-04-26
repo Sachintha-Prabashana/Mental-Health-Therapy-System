@@ -14,9 +14,12 @@ import java.time.LocalTime;
 public class TherapySessionTM {
     private String sessionId;
     private LocalDate sessionDate;
-    private LocalTime sessionTime;
+    private LocalTime startTime;
+    private LocalTime endTime;
     private String status;
     private String patientId;
     private String programId;
+//    private String programName;
     private String therapistId;
+//    private String therapistName;
 }

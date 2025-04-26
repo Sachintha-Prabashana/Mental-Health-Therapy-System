@@ -9,7 +9,7 @@ import java.util.List;
 public interface TherapySessionDAO extends CrudDAO<TherapySession> {
     TherapySession findById(String sessionId) ;
 
-    List<TherapySession> findByTherapistAndTime(String therapistId, LocalDate date, LocalTime time) ;
+    List<TherapySession> findByTherapistAndTime(String therapistId, LocalDate date, LocalTime startTime, LocalTime endTime) ;
     TherapySession getSessionByPatientName(String name) ;
 
 }

@@ -1,6 +1,7 @@
 package lk.ijse.bo.custom;
 
 import lk.ijse.dto.TherapistDTO;
+import lk.ijse.entity.Therapist;
 
 import java.sql.SQLException;
 import java.util.ArrayList;
@@ -13,4 +14,7 @@ public interface TherapistBO {
     ArrayList<TherapistDTO> loadAllTherapists() throws SQLException, ClassNotFoundException ;
     String getNaxtTherapistID();
 
+    ArrayList<Therapist> loadAllTherapistsInCombo();
+
+    String getTherapistIdByName(String selectedTherapistName);
 }

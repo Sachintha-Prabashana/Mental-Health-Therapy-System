@@ -12,6 +12,7 @@ module lk.ijse {
     requires jbcrypt;
     requires org.hibernate.orm.core;
     requires java.naming;
+    requires jasperreports;
 
 
     opens lk.ijse.view.tdm to javafx.base;

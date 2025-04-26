@@ -1,0 +1,349 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Created with Jaspersoft Studio -->
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports"
+              xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+              xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd"
+              name="PatientTherapyHistoryReport"
+              pageWidth="595"
+              pageHeight="842"
+              columnWidth="555"
+              leftMargin="20"
+              rightMargin="20"
+              topMargin="20"
+              bottomMargin="20"
+              uuid="9a3e59f5-6675-48cf-ad74-9c42b5a5b290">
+
+    <property name="com.jaspersoft.studio.data.defaultdataadapter" value="One Empty Record"/>
+    <property name="com.jaspersoft.studio.report.description" value="Patient Therapy History Report - Read Only Access"/>
+
+    <!-- Parameters -->
+    <parameter name="patientId" class="java.lang.String"/>
+    <parameter name="startDate" class="java.util.Date"/>
+    <parameter name="endDate" class="java.util.Date"/>
+    <parameter name="reportTitle" class="java.lang.String" isForPrompting="false">
+        <defaultValueExpression><![CDATA["Patient Therapy History Report"]]></defaultValueExpression>
+    </parameter>
+    <parameter name="reportGenerationDate" class="java.util.Date" isForPrompting="false">
+        <defaultValueExpression><![CDATA[new java.util.Date()]]></defaultValueExpression>
+    </parameter>
+
+    <!-- Query -->
+    <queryString>
+        <![CDATA[SELECT
+            p.patient_id,
+            p.first_name,
+            p.last_name,
+            p.date_of_birth,
+            t.therapy_id,
+            t.therapy_date,
+            t.therapy_type,
+            t.therapist_name,
+            t.session_duration,
+            t.notes,
+            t.progress_rating,
+            t.treatment_plan_id
+        FROM
+            patients p
+        JOIN
+            therapy_sessions t ON p.patient_id = t.patient_id
+        WHERE
+            p.patient_id = $P{patientId}
+        AND
+            t.therapy_date BETWEEN $P{startDate} AND $P{endDate}
+        ORDER BY
+            t.therapy_date DESC]]>
+    </queryString>
+
+    <!-- Fields -->
+    <field name="patient_id" class="java.lang.String"/>
+    <field name="first_name" class="java.lang.String"/>
+    <field name="last_name" class="java.lang.String"/>
+    <field name="date_of_birth" class="java.sql.Date"/>
+    <field name="therapy_id" class="java.lang.Integer"/>
+    <field name="therapy_date" class="java.sql.Timestamp"/>
+    <field name="therapy_type" class="java.lang.String"/>
+    <field name="therapist_name" class="java.lang.String"/>
+    <field name="session_duration" class="java.lang.Integer"/>
+    <field name="notes" class="java.lang.String"/>
+    <field name="progress_rating" class="java.lang.Integer"/>
+    <field name="treatment_plan_id" class="java.lang.Integer"/>
+
+    <!-- Variables -->
+    <variable name="sessionCount" class="java.lang.Integer" calculation="Count">
+        <variableExpression><![CDATA[$F{therapy_id}]]></variableExpression>
+        <initialValueExpression><![CDATA[0]]></initialValueExpression>
+    </variable>
+
+    <variable name="totalTherapyTime" class="java.lang.Integer" calculation="Sum">
+        <variableExpression><![CDATA[$F{session_duration}]]></variableExpression>
+        <initialValueExpression><![CDATA[0]]></initialValueExpression>
+    </variable>
+
+    <variable name="averageProgressRating" class="java.lang.Double" calculation="Average">
+        <variableExpression><![CDATA[$F{progress_rating}]]></variableExpression>
+    </variable>
+
+    <!-- Styles -->
+    <style name="Title" fontName="Arial" fontSize="26" isBold="true"/>
+    <style name="SubTitle" forecolor="#666666" fontName="Arial" fontSize="18"/>
+    <style name="ColumnHeader" forecolor="#FFFFFF" backcolor="#454545" fontName="Arial" fontSize="12" isBold="true"/>
+    <style name="DetailHeader" mode="Opaque" backcolor="#E6E6E6" fontName="Arial" fontSize="11" isBold="true"/>
+    <style name="Detail" fontName="Arial" fontSize="10"/>
+    <style name="Footer" forecolor="#666666" fontName="Arial" fontSize="10" isBold="true"/>
+    <style name="ReadOnlyNote" forecolor="#FF0000" fontName="Arial" fontSize="10" isBold="true"/>
+
+    <!-- Page Header -->
+    <pageHeader>
+        <band height="90" splitType="Stretch">
+            <textField>
+                <reportElement style="Title" x="0" y="0" width="555" height="30" uuid="a29e9b17-4b04-4d71-9ab9-519aa5ad6db3"/>
+                <textElement textAlignment="Center" verticalAlignment="Middle"/>
+                <textFieldExpression><![CDATA[$P{reportTitle}]]></textFieldExpression>
+            </textField>
+
+            <textField>
+                <reportElement style="ReadOnlyNote" x="0" y="30" width="555" height="20" uuid="73b1d90e-e4f7-4dbf-b8b7-dc4b76eb9f04"/>
+                <textElement textAlignment="Center" verticalAlignment="Middle"/>
+                <textFieldExpression><![CDATA["READ-ONLY ACCESS - This report is for viewing purposes only"]]></textFieldExpression>
+            </textField>
+
+            <textField pattern="MMMMM dd, yyyy">
+                <reportElement x="400" y="60" width="155" height="20" uuid="ea85e3fa-9c26-4bd9-8923-c5a3ae3dbfed"/>
+                <textElement textAlignment="Right" verticalAlignment="Middle"/>
+                <textFieldExpression><![CDATA["Report generated: " + new SimpleDateFormat("MMM dd, yyyy HH:mm").format($P{reportGenerationDate})]]></textFieldExpression>
+            </textField>
+        </band>
+    </pageHeader>
+
+    <!-- Patient Info -->
+    <title>
+        <band height="110" splitType="Stretch">
+            <staticText>
+                <reportElement style="SubTitle" x="0" y="10" width="555" height="20" uuid="d7282e30-c94e-4a5e-9667-fb31a5b20c3f"/>
+                <textElement verticalAlignment="Middle">
+                    <font isBold="true"/>
+                </textElement>
+                <text><![CDATA[Patient Information]]></text>
+            </staticText>
+
+            <staticText>
+                <reportElement style="DetailHeader" x="0" y="40" width="120" height="20" uuid="71f8f3f5-c1b8-4bd1-95a4-d4af5a0e3a0c"/>
+                <textElement verticalAlignment="Middle"/>
+                <text><![CDATA[Patient ID:]]></text>
+            </staticText>
+
+            <textField>
+                <reportElement style="Detail" x="120" y="40" width="160" height="20" uuid="c76c9bc0-f13c-4d80-a476-7d0cef7c3fe6"/>
+                <textElement verticalAlignment="Middle"/>
+                <textFieldExpression><![CDATA[$F{patient_id}]]></textFieldExpression>
+            </textField>
+
+            <staticText>
+                <reportElement style="DetailHeader" x="0" y="60" width="120" height="20" uuid="493c4ebe-a44e-4a25-afd9-f2bf30145404"/>
+                <textElement verticalAlignment="Middle"/>
+                <text><![CDATA[Name:]]></text>
+            </staticText>
+
+            <textField>
+                <reportElement style="Detail" x="120" y="60" width="160" height="20" uuid="32b7d4d9-64fa-4d32-8ee9-2c9a7cc6b199"/>
+                <textElement verticalAlignment="Middle"/>
+                <textFieldExpression><![CDATA[$F{first_name} + " " + $F{last_name}]]></textFieldExpression>
+            </textField>
+
+            <staticText>
+                <reportElement style="DetailHeader" x="300" y="40" width="120" height="20" uuid="af4d9bb4-9346-4584-a3f9-62b0995e03e7"/>
+                <textElement verticalAlignment="Middle"/>
+                <text><![CDATA[Date of Birth:]]></text>
+            </staticText>
+
+            <textField pattern="MMM dd, yyyy">
+                <reportElement style="Detail" x="420" y="40" width="135" height="20" uuid="d76dab6c-b74a-4da3-9325-c82dbe788c7f"/>
+                <textElement verticalAlignment="Middle"/>
+                <textFieldExpression><![CDATA[$F{date_of_birth}]]></textFieldExpression>
+            </textField>
+
+            <staticText>
+                <reportElement style="DetailHeader" x="300" y="60" width="120" height="20" uuid="8b432242-6f4e-48e4-90e5-a3821b6d9d77"/>
+                <textElement verticalAlignment="Middle"/>
+                <text><![CDATA[Report Period:]]></text>
+            </staticText>
+
+            <textField pattern="MMM dd, yyyy">
+                <reportElement style="Detail" x="420" y="60" width="135" height="20" uuid="e1ed3923-8b3d-4ec6-8a0f-79d0d62c2c83"/>
+                <textElement verticalAlignment="Middle"/>
+                <textFieldExpression><![CDATA[new SimpleDateFormat("MMM dd, yyyy").format($P{startDate}) + " - " + new SimpleDateFormat("MMM dd, yyyy").format($P{endDate})]]></textFieldExpression>
+            </textField>
+
+            <line>
+                <reportElement x="0" y="90" width="555" height="1" uuid="9d52a8ab-702b-4ab9-aa9e-3c5a918f8e78"/>
+            </line>
+        </band>
+    </title>
+
+    <!-- Column Headers -->
+    <columnHeader>
+        <band height="30" splitType="Stretch">
+            <staticText>
+                <reportElement style="ColumnHeader" x="0" y="0" width="60" height="30" uuid="ae96be41-8674-4205-bc1c-1f9f6ff3898d"/>
+                <textElement textAlignment="Center" verticalAlignment="Middle"/>
+                <text><![CDATA[Session ID]]></text>
+            </staticText>
+
+            <staticText>
+                <reportElement style="ColumnHeader" x="60" y="0" width="80" height="30" uuid="b7898d58-67e7-4d4d-b41a-7a62ae036cc1"/>
+                <textElement textAlignment="Center" verticalAlignment="Middle"/>
+                <text><![CDATA[Date]]></text>
+            </staticText>
+
+            <staticText>
+                <reportElement style="ColumnHeader" x="140" y="0" width="100" height="30" uuid="d92c9c85-ae9e-4a3b-be33-eb0171446d7a"/>
+                <textElement textAlignment="Center" verticalAlignment="Middle"/>
+                <text><![CDATA[Therapy Type]]></text>
+            </staticText>
+
+            <staticText>
+                <reportElement style="ColumnHeader" x="240" y="0" width="140" height="30" uuid="c48c73e1-aa30-4382-91b1-0c6321d80cf6"/>
+                <textElement textAlignment="Center" verticalAlignment="Middle"/>
+                <text><![CDATA[Therapist]]></text>
+            </staticText>
+
+            <staticText>
+                <reportElement style="ColumnHeader" x="380" y="0" width="75" height="30" uuid="2f6c6b0a-e6a5-44ad-a123-6a26711139c1"/>
+                <textElement textAlignment="Center" verticalAlignment="Middle"/>
+                <text><![CDATA[Duration (min)]]></text>
+            </staticText>
+
+            <staticText>
+                <reportElement style="ColumnHeader" x="455" y="0" width="100" height="30" uuid="f3da2b5c-789d-4ce3-a15a-71a26a5a9988"/>
+                <textElement textAlignment="Center" verticalAlignment="Middle"/>
+                <text><![CDATA[Progress Rating]]></text>
+            </staticText>
+        </band>
+    </columnHeader>
+
+    <!-- Detail Band -->
+    <detail>
+        <band height="90" splitType="Stretch">
+            <textField>
+                <reportElement style="Detail" x="0" y="0" width="60" height="20" uuid="e4bda3b6-6e14-4d1b-8d05-23c67863ff77"/>
+                <textElement textAlignment="Center" verticalAlignment="Middle"/>
+                <textFieldExpression><![CDATA[$F{therapy_id}]]></textFieldExpression>
+            </textField>
+
+            <textField pattern="MMM dd, yyyy HH:mm">
+                <reportElement style="Detail" x="60" y="0" width="80" height="20" uuid="b7d63e44-87d5-47d5-9855-6c9e9017cb2a"/>
+                <textElement textAlignment="Center" verticalAlignment="Middle"/>
+                <textFieldExpression><![CDATA[$F{therapy_date}]]></textFieldExpression>
+            </textField>
+
+            <textField>
+                <reportElement style="Detail" x="140" y="0" width="100" height="20" uuid="68fc2a76-92a9-4b94-b249-c23dc2e6fdfc"/>
+                <textElement textAlignment="Center" verticalAlignment="Middle"/>
+                <textFieldExpression><![CDATA[$F{therapy_type}]]></textFieldExpression>
+            </textField>
+
+            <textField>
+                <reportElement style="Detail" x="240" y="0" width="140" height="20" uuid="3b6d5892-e7a6-47b7-9b38-1a58edecb7c3"/>
+                <textElement textAlignment="Center" verticalAlignment="Middle"/>
+                <textFieldExpression><![CDATA[$F{therapist_name}]]></textFieldExpression>
+            </textField>
+
+            <textField>
+                <reportElement style="Detail" x="380" y="0" width="75" height="20" uuid="95c0a1da-b6ce-450d-b1a4-90ce89bea3fa"/>
+                <textElement textAlignment="Center" verticalAlignment="Middle"/>
+                <textFieldExpression><![CDATA[$F{session_duration}]]></textFieldExpression>
+            </textField>
+
+            <textField>
+                <reportElement style="Detail" x="455" y="0" width="100" height="20" uuid="c8e1fe4a-3af8-49be-9faf-0b25c6b05db1"/>
+                <textElement textAlignment="Center" verticalAlignment="Middle"/>
+                <textFieldExpression><![CDATA[$F{progress_rating} + "/10"]]></textFieldExpression>
+            </textField>
+
+            <staticText>
+                <reportElement style="DetailHeader" x="0" y="25" width="80" height="20" uuid="e74abe6e-9b93-4a4e-8d3d-0fa6fea7940c"/>
+                <textElement verticalAlignment="Middle"/>
+                <text><![CDATA[Session Notes:]]></text>
+            </staticText>
+
+            <textField isStretchWithOverflow="true">
+                <reportElement style="Detail" x="0" y="45" width="555" height="40" uuid="1f1f49d1-9cbd-40bb-b40e-22c4caaed7bc"/>
+                <textElement verticalAlignment="Top"/>
+                <textFieldExpression><![CDATA[$F{notes}]]></textFieldExpression>
+            </textField>
+
+            <line>
+                <reportElement x="0" y="89" width="555" height="1" uuid="697248a9-fd27-4a55-9925-5060d4e8996f"/>
+                <graphicElement>
+                    <pen lineStyle="Dashed"/>
+                </graphicElement>
+            </line>
+        </band>
+    </detail>
+
+    <!-- Summary -->
+    <summary>
+        <band height="100" splitType="Stretch">
+            <staticText>
+                <reportElement style="SubTitle" x="0" y="10" width="555" height="20" uuid="4ecf9e44-6c3c-4bc9-8c5a-3b468276613d"/>
+                <textElement verticalAlignment="Middle">
+                    <font isBold="true"/>
+                </textElement>
+                <text><![CDATA[Therapy Summary]]></text>
+            </staticText>
+
+            <staticText>
+                <reportElement style="DetailHeader" x="0" y="40" width="170" height="20" uuid="f1a7670d-2d5c-4c3e-87b2-8c357b6e2e73"/>
+                <textElement verticalAlignment="Middle"/>
+                <text><![CDATA[Total Number of Sessions:]]></text>
+            </staticText>
+
+            <textField>
+                <reportElement style="Detail" x="170" y="40" width="100" height="20" uuid="75c9df78-b113-4a2a-92fb-f05ae8a5ca7a"/>
+                <textElement verticalAlignment="Middle"/>
+                <textFieldExpression><![CDATA[$V{sessionCount}]]></textFieldExpression>
+            </textField>
+
+            <staticText>
+                <reportElement style="DetailHeader" x="0" y="60" width="170" height="20" uuid="9ff6f4e3-d7c5-4dd6-832f-8e7590d34c66"/>
+                <textElement verticalAlignment="Middle"/>
+                <text><![CDATA[Total Therapy Time (minutes):]]></text>
+            </staticText>
+
+            <textField>
+                <reportElement style="Detail" x="170" y="60" width="100" height="20" uuid="4e3bc2b7-3f9d-49dc-9b5f-d0478a3df85f"/>
+                <textElement verticalAlignment="Middle"/>
+                <textFieldExpression><![CDATA[$V{totalTherapyTime}]]></textFieldExpression>
+            </textField>
+
+            <staticText>
+                <reportElement style="DetailHeader" x="280" y="40" width="170" height="20" uuid="4e55c6b5-d63e-4e0d-b19c-8f6a77ff3ebf"/>
+                <textElement verticalAlignment="Middle"/>
+                <text><![CDATA[Average Progress Rating:]]></text>
+            </staticText>
+
+            <textField pattern="#0.00">
+                <reportElement style="Detail" x="450" y="40" width="100" height="20" uuid="ba19ac8c-cfed-4d45-b810-a2954057c2d6"/>
+                <textElement verticalAlignment="Middle"/>
+                <textFieldExpression><![CDATA[$V{averageProgressRating} + "/10"]]></textFieldExpression>
+            </textField>
+        </band>
+    </summary>
+
+    <!-- Page Footer -->
+    <pageFooter>
+        <band height="30" splitType="Stretch">
+            <textField>
+                <reportElement style="Footer" x="0" y="5" width="280" height="20" uuid="bfde13cc-e454-4b97-b82c-d1001f490af5"/>
+                <textElement verticalAlignment="Middle"/>
+                <textFieldExpression><![CDATA["CONFIDENTIAL - FOR AUTHORIZED PERSONNEL ONLY"]]></textFieldExpression>
+            </textField>
+
+            <textField evaluationTime="Report">
+                <reportElement style="Footer" x="435" y="5" width="120" height="20" uuid="b465c7e5-0f3b-4d51-aed1-83afb4d7bb96"/>
+                <textElement textAlignment="Right" verticalAlignment="Middle"/>
+                <textFieldExpression><![CDATA["Page " + $V{PAGE_NUMBER} + " of " + $V{PAGE_NUMBER}]]></textFieldExpression>
+            </textField>
+        </band>
+    </pageFooter>
+</jasperReport>

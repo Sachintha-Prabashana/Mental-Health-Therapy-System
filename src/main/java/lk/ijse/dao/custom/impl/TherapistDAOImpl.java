@@ -124,4 +124,26 @@ public class TherapistDAOImpl implements TherapistDAO {
             throw new NotFoundException("Therapist not found");
         }
     }
+
+    @Override
+    public String getTherapistIdByName(String selectedTherapistName) {
+        Session session = FactoryConfiguration.getInstance().getSession();
+        Transaction transaction = session.beginTransaction();
+
+        try {
+            String hql = "SELECT t.therapistID FROM Therapist t WHERE t.therapistName = :name";
+            String therapistId = session.createQuery(hql, String.class)
+                    .setParameter("name", selectedTherapistName)
+                    .uniqueResult();
+
+            transaction.commit();
+            return therapistId;
+        } catch (Exception e) {
+            transaction.rollback();
+            e.printStackTrace();
+            return null;
+        } finally {
+            session.close();
+        }
+    }
 }

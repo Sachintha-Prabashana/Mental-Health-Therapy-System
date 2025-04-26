@@ -2,43 +2,102 @@
 
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.Label?>
+<?import javafx.scene.control.PasswordField?>
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.shape.Rectangle?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane fx:id="loginPage" prefHeight="700.0" prefWidth="1150.0" style="-fx-background-color: #2C3E50;" xmlns="http://javafx.com/javafx/22" xmlns:fx="http://javafx.com/fxml/1" fx:controller="lk.ijse.controller.LoginPageController">
+<AnchorPane fx:id="loginPage" prefHeight="800.0" prefWidth="1300.0" style="-fx-background-color: #5D9CEC;" xmlns="http://javafx.com/javafx/22" xmlns:fx="http://javafx.com/fxml/1" fx:controller="lk.ijse.controller.LoginPageController">
    <children>
-      <!-- Left Side: Login Form -->
-      <AnchorPane layoutX="100.0" layoutY="106.0" prefHeight="532.0" prefWidth="450.0" style="-fx-background-color: white; -fx-background-radius: 25;">
+      <!-- Left Side: Image -->
+      <AnchorPane layoutX="80.0" layoutY="100.0" prefHeight="600.0" prefWidth="500.0" style="-fx-background-color: #5D9CEC; -fx-background-radius: 20;">
          <children>
-            <Label layoutX="134.0" layoutY="44.0" text="Welcome again!">
-               <font>
-                  <Font name="System Bold" size="24.0" />
-               </font>
-            </Label>
-            <Label layoutX="65.0" layoutY="100.0" text="Enter your username" />
-            <TextField fx:id="txtUsername" layoutX="65.0" layoutY="120.0" prefHeight="40.0" prefWidth="320.0" />
-
-            <Label layoutX="65.0" layoutY="180.0" text="Enter your password" />
-            <TextField fx:id="txtPassword" layoutX="65.0" layoutY="200.0" prefHeight="40.0" prefWidth="320.0" />
-
-            <Button fx:id="btnSignIn" layoutX="65.0" layoutY="323.0" mnemonicParsing="false" onAction="#btnSignInOnAction" prefHeight="40.0" prefWidth="320.0" style="-fx-background-color: #3366FF; -fx-text-fill: white;" text="Sign In">
-               <font>
-                  <Font size="18.0" />
-               </font>
-            </Button>
-
-            <Label fx:id="lblForgotPassword" layoutX="164.0" layoutY="273.0" text="Forgot your password?" textFill="#2980b9" />
-            <Label layoutX="98.0" layoutY="392.0" text="Don't have an account ? " />
-            <Label fx:id="lblCreateAcc" layoutX="240.0" layoutY="392.0" onMouseClicked="#lblCreateAccOnClick" text="Create new account" textFill="#2980b9" />
+            <ImageView fitHeight="500.0" fitWidth="450.0" layoutX="25.0" layoutY="50.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../images/login-page.png" />
+               </image>
+            </ImageView>
          </children>
       </AnchorPane>
-      <ImageView fitHeight="506.0" fitWidth="464.0" layoutX="631.0" layoutY="140.0" pickOnBounds="true" preserveRatio="true">
-         <image>
-            <Image url="@../images/login-page.png" />
-         </image>
-      </ImageView>
+
+      <!-- Right Side: Login Form -->
+      <AnchorPane layoutX="670.0" layoutY="100.0" prefHeight="600.0" prefWidth="550.0" style="-fx-background-color: white; -fx-background-radius: 20; -fx-effect: dropshadow(three-pass-box, rgba(0,0,0,0.1), 10, 0, 0, 0);">
+         <children>
+            <VBox alignment="CENTER_LEFT" layoutX="85.0" layoutY="80.0" prefHeight="440.0" prefWidth="380.0" spacing="15">
+               <children>
+                  <Label text="Welcome to ZenithMind">
+                     <font>
+                        <Font name="System Bold" size="28.0" />
+                     </font>
+                  </Label>
+
+                  <Label text="Begin your journey to wellness" textFill="#5a6a8a">
+                     <font>
+                        <Font size="16.0" />
+                     </font>
+                  </Label>
+
+                  <Rectangle fill="transparent" height="20.0" width="380.0" />
+
+                  <Label text="Username">
+                     <font>
+                        <Font size="14.0" />
+                     </font>
+                  </Label>
+
+                  <TextField fx:id="txtUsername" prefHeight="45.0" prefWidth="380.0" promptText="Enter your username" style="-fx-background-radius: 8; -fx-border-radius: 8; -fx-border-color: #E0E7FF; -fx-border-width: 1; -fx-background-color: #F8FAFF;">
+                     <font>
+                        <Font size="14.0" />
+                     </font>
+                  </TextField>
+
+                  <Label text="Password">
+                     <font>
+                        <Font size="14.0" />
+                     </font>
+                  </Label>
+
+                  <PasswordField fx:id="txtPassword" prefHeight="45.0" prefWidth="380.0" promptText="Enter your password" style="-fx-background-radius: 8; -fx-border-radius: 8; -fx-border-color: #E0E7FF; -fx-border-width: 1; -fx-background-color: #F8FAFF;">
+                     <font>
+                        <Font size="14.0" />
+                     </font>
+                  </PasswordField>
+
+                  <Label fx:id="lblForgotPassword" style="-fx-cursor: hand;" text="Forgot password?" textFill="#5D9CEC">
+                     <font>
+                        <Font size="14.0" />
+                     </font>
+                  </Label>
+
+                  <Rectangle fill="transparent" height="10.0" width="380.0" />
+
+                  <Button fx:id="btnSignIn" mnemonicParsing="false" onAction="#btnSignInOnAction" prefHeight="50.0" prefWidth="380.0" style="-fx-background-color: #5D9CEC; -fx-background-radius: 8; -fx-cursor: hand;" text="Sign In" textFill="WHITE">
+                     <font>
+                        <Font name="System Bold" size="16.0" />
+                     </font>
+                  </Button>
+
+                  <AnchorPane prefHeight="30.0" prefWidth="380.0">
+                     <children>
+                        <Label layoutX="68.0" layoutY="5.0" text="Don't have an account?" textFill="#5a6a8a">
+                           <font>
+                              <Font size="14.0" />
+                           </font>
+                        </Label>
+                        <Label fx:id="lblCreateAcc" layoutX="230.0" layoutY="5.0" onMouseClicked="#lblCreateAccOnClick" style="-fx-cursor: hand;" text="Create account" textFill="#5D9CEC">
+                           <font>
+                              <Font name="System Bold" size="14.0" />
+                           </font>
+                        </Label>
+                     </children>
+                  </AnchorPane>
+               </children>
+            </VBox>
+         </children>
+      </AnchorPane>
    </children>
 </AnchorPane>

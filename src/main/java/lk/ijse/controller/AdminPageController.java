@@ -56,13 +56,19 @@ public class AdminPageController implements Initializable {
 
     @FXML
     void btnAppointmentOnAction(ActionEvent event) {
-        loadUI("/view/Manage-Therapy-Session-Form.fxml");
+        loadUI("/view/Session.fxml");
+
+    }
+
+    @FXML
+    void btnMediRepoOnAction(ActionEvent event) {
+        loadUI("/view/Medical-Record-Form.fxml");
 
     }
 
     @FXML
     void btnDashboardOnAction(ActionEvent event) {
-        loadUI("/view/MainDashboardView.fxml");
+        loadUI("/view/ReportForm.fxml");
 
     }
 
@@ -118,5 +124,9 @@ public class AdminPageController implements Initializable {
     @Override
     public void initialize(URL location, ResourceBundle resources) {
         loadUI("/view/MainDashboardView.fxml");
+    }
+
+    public void btnAssignProgramsOnAction(ActionEvent actionEvent) {
+        loadUI("/view/AssignProgram.fxml");
     }
 }

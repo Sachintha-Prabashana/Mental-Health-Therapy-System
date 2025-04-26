@@ -2,6 +2,7 @@ package lk.ijse.bo.custom;
 
 import lk.ijse.dto.TherapistDTO;
 import lk.ijse.dto.TherapyProgramDTO;
+import lk.ijse.entity.TherapyProgram;
 import org.hibernate.Session;
 
 import java.sql.SQLException;
@@ -14,4 +15,6 @@ public interface TherapyProgramsBO {
     boolean deleteTherapyPrograms(String id) throws Exception;
     ArrayList<TherapyProgramDTO> loadAllTherapyPrograms() throws SQLException, ClassNotFoundException ;
     String getNextTherapyProgramId();
+
+    ArrayList<TherapyProgram> loadAllProgramsInCombo();
 }

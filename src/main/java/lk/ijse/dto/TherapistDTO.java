@@ -15,6 +15,8 @@ public class TherapistDTO {
     private String therapistID;
     private String therapistName;
     private String specialization;
+    private int contactNumber;
+    private String mail;
     private String availability;
 
 //    private List<String> programIds = new ArrayList<>();

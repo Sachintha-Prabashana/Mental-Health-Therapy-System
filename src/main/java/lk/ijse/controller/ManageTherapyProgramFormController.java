@@ -162,10 +162,10 @@ public class ManageTherapyProgramFormController implements Initializable {
     void btnSave_OnAction(ActionEvent event) {
         String id = txtProgramId.getText();
         String name = txtProgramName.getText();
-        int duration = Integer.parseInt(txtProgramDuration.getText());
+        String duration = txtProgramDuration.getText();
         double fee = Double.parseDouble(txtFee.getText());
 
-        if(id.isEmpty() || name.isEmpty() || duration < 0 || fee < 0)  {
+        if(id.isEmpty() || name.isEmpty() || duration.isEmpty()|| fee < 0)  {
             showAlert("Warning", "Please fill all fields!", Alert.AlertType.WARNING);
             return;
         }
@@ -184,16 +184,18 @@ public class ManageTherapyProgramFormController implements Initializable {
         }catch (Exception e){
             e.printStackTrace();
         }
+        loadTherapyPrograms();
+
     }
 
     @FXML
     void btnUpdate_OnAction(ActionEvent event) {
         String id = txtProgramId.getText();
         String name = txtProgramName.getText();
-        int duration = Integer.parseInt(txtProgramDuration.getText());
+        String duration = txtProgramDuration.getText();
         double fee = Double.parseDouble(txtFee.getText());
 
-        if(id.isEmpty() || name.isEmpty() || duration < 0 || fee < 0)  {
+        if(id.isEmpty() || name.isEmpty() || duration.isEmpty() || fee < 0)  {
             showAlert("Warning", "Please fill all fields!", Alert.AlertType.WARNING);
             return;
         }

@@ -7,11 +7,13 @@ import lk.ijse.dao.custom.impl.TherapistDAOImpl;
 import lk.ijse.dao.custom.impl.TherapyProgramDAOImpl;
 import lk.ijse.dto.TherapistDTO;
 import lk.ijse.dto.TherapyProgramDTO;
+import lk.ijse.entity.Patient;
 import lk.ijse.entity.Therapist;
 import lk.ijse.entity.TherapyProgram;
 
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.List;
 
 public class TherapyProgramsBOImpl implements TherapyProgramsBO {
 
@@ -40,6 +42,18 @@ public class TherapyProgramsBOImpl implements TherapyProgramsBO {
     @Override
     public String getNextTherapyProgramId() {
         return therapyProgramDAO.getNextId();
+    }
+
+    @Override
+    public ArrayList<TherapyProgram> loadAllProgramsInCombo() {
+        ArrayList<TherapyProgram> programs = new ArrayList<>();
+        try {
+            List<TherapyProgram> allPrograms = therapyProgramDAO.getAll(); // DAO method
+            programs.addAll(allPrograms);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return programs;
     }
 
     @Override

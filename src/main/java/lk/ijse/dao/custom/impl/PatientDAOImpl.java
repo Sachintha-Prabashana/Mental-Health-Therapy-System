@@ -1,6 +1,7 @@
 package lk.ijse.dao.custom.impl;
 
 import lk.ijse.bo.exception.DuplicateException;
+import lk.ijse.bo.exception.NotFoundException;
 import lk.ijse.config.FactoryConfiguration;
 import lk.ijse.dao.custom.PatientDAO;
 import lk.ijse.entity.Patient;
@@ -40,12 +41,45 @@ public class PatientDAOImpl implements PatientDAO {
 
     @Override
     public boolean update(Patient entity) {
-        return false;
+        Session session = factoryConfiguration.getSession();
+        Transaction transaction = session.beginTransaction();
+
+        try {
+            session.merge(entity);//update
+            transaction.commit();
+            return true;
+        }catch (Exception e) {
+            transaction.rollback();
+            return false;
+        }
+        finally {
+            if (session != null) {
+                session.close();
+            }
+        }
     }
 
     @Override
     public boolean deleteByPK(String id) throws Exception {
-        return false;
+        Session session = factoryConfiguration.getSession();
+        Transaction transaction = session.beginTransaction();
+
+        try {
+            Patient patient = session.get(Patient.class, id);
+            if (patient == null) {
+                throw new NotFoundException("Patient not found");
+            }
+            session.remove(patient);
+            transaction.commit();
+            return true;
+        }catch (Exception e) {
+            transaction.rollback();
+            return false;
+        }finally {
+            if (session != null) {
+                session.close();
+            }
+        }
     }
 
     @Override
@@ -78,5 +112,10 @@ public class PatientDAOImpl implements PatientDAO {
         Patient patient = session.get(Patient.class, id);
         session.close();
         return patient;
+    }
+
+    @Override
+    public Patient search(String patientId) {
+        return findById(patientId);
     }
 }

@@ -24,6 +24,7 @@ import lk.ijse.view.tdm.PatientTM;
 import lk.ijse.view.tdm.PaymentTM;
 import lk.ijse.view.tdm.TherapistTM;
 
+import java.io.IOException;
 import java.net.URL;
 import java.time.LocalDate;
 import java.util.*;
@@ -106,9 +107,9 @@ public class ManagePaymentFormController  implements Initializable {
         this.txtSessionId.setText(sessionId);
     }
 
-    private ManageTherapySessionController parentController;
+    private SessionController parentController;
 
-    public void setParentController(ManageTherapySessionController controller) {
+    public void setParentController(SessionController controller) {
         this.parentController = controller;
     }
 
@@ -130,7 +131,6 @@ public class ManagePaymentFormController  implements Initializable {
         loadPayments();
         cmbStatus.setItems(FXCollections.observableArrayList("PENDING", "COMPLETED"));
         cmbFilterStatus.setItems(FXCollections.observableArrayList("ALL", "PENDING", "COMPLETED"));
-//        cmbFilterStatus.setOnAction(event -> loadPaymentsByStatus(cmbFilterStatus.getValue()));
 
 
 
@@ -207,13 +207,14 @@ public class ManagePaymentFormController  implements Initializable {
     }
 
     @FXML
-    void btnSave_OnAction(ActionEvent event) {
+    void btnSave_OnAction(ActionEvent event) throws IOException {
         boolean isSave =  savePaymentWithSession();
         if (isSave) {
             showAlert("Success", "Payment Saved!", Alert.AlertType.INFORMATION);
         }else{
             showAlert("Error", "Failed to save payment!", Alert.AlertType.ERROR);
         }
+        loadPayments();
     }
 
     @FXML
@@ -221,7 +222,7 @@ public class ManagePaymentFormController  implements Initializable {
 
     }
 
-    public boolean savePaymentWithSession() {
+    public boolean savePaymentWithSession() throws IOException {
         String paymentId = txtPaymentId.getText();
         String amountText = txtAmount.getText();
         LocalDate date = dpPaymentDate.getValue();

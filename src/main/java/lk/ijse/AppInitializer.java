@@ -14,7 +14,7 @@ public class AppInitializer extends Application {
 
         Scene scene = new Scene(root);
         stage.setScene(scene);
-//        stage.getIcons().add(new Image(getClass().getResourceAsStream("/Image/icon-inspira.png")));
+        stage.getIcons().add(new Image(getClass().getResourceAsStream("/images/project-img.png")));
         stage.setTitle("ZenithMind");
 
         stage.show();

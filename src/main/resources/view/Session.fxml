@@ -1,0 +1,170 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.Cursor?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ComboBox?>
+<?import javafx.scene.control.DatePicker?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.effect.DropShadow?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.ColumnConstraints?>
+<?import javafx.scene.layout.GridPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.RowConstraints?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.paint.Color?>
+<?import javafx.scene.paint.LinearGradient?>
+<?import javafx.scene.paint.Stop?>
+<?import javafx.scene.shape.Rectangle?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane fx:id="sessionPane" prefHeight="784.0" prefWidth="1085.0" style="-fx-background-color: #f5f7fa;" xmlns="http://javafx.com/javafx/22" xmlns:fx="http://javafx.com/fxml/1" fx:controller="lk.ijse.controller.SessionController">
+
+    <children>
+      <Rectangle arcHeight="15.0" arcWidth="15.0" height="90.0" layoutX="20.0" layoutY="14.0" stroke="TRANSPARENT" strokeType="INSIDE" width="1046.0">
+         <fill>
+            <LinearGradient endX="1.0">
+               <stops>
+                  <Stop>
+                     <color>
+                        <Color red="0.08235294371843338" green="0.5960784554481506" blue="0.8392156958580017" />
+                     </color>
+                  </Stop>
+                  <Stop offset="1.0">
+                     <color>
+                        <Color red="0.27843138575553894" green="0.7098039388656616" blue="0.8941176533699036" />
+                     </color>
+                  </Stop>
+               </stops>
+            </LinearGradient>
+         </fill>
+         <effect>
+            <DropShadow height="10.0" radius="4.5" width="10.0">
+               <color>
+                  <Color opacity="0.25" />
+               </color>
+            </DropShadow>
+         </effect>
+      </Rectangle>
+      <HBox alignment="CENTER_LEFT" layoutX="20.0" layoutY="14.0" prefHeight="90.0" prefWidth="1046.0" spacing="15.0">
+         <padding>
+            <Insets left="15.0" />
+         </padding>
+         <children>
+            <ImageView id="imgHome" fx:id="imgHome" fitHeight="50.0" fitWidth="50.0" onMouseClicked="#navigateToHome" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../images/home-icon.png" />
+               </image>
+               <cursor>
+                  <Cursor fx:constant="HAND" />
+               </cursor>
+            </ImageView>
+            <Label prefHeight="40.0" prefWidth="440.0" text="Manage TherapySession" textFill="WHITE">
+               <font>
+                  <Font name="System Bold" size="28.0" />
+               </font>
+            </Label>
+            <HBox alignment="CENTER_RIGHT" prefHeight="90.0" prefWidth="481.0">
+               <HBox.margin>
+                  <Insets left="5.0" />
+               </HBox.margin>
+               <padding>
+                  <Insets left="5.0" />
+               </padding>
+            </HBox>
+         </children>
+      </HBox>
+        <!-- Top Area: Left (Form) and Right (Therapist Table) -->
+        <HBox layoutX="19.0" layoutY="132.0" prefHeight="372.0" prefWidth="1046.0" spacing="20.0">
+            <!-- Left Side: Form -->
+            <VBox prefHeight="372.0" prefWidth="402.0" spacing="20.0" style="-fx-background-color: white; -fx-background-radius: 15; -fx-padding: 25;">
+                <effect>
+                    <DropShadow color="#cfd8dc" radius="10.0" />
+                </effect>
+
+                <Label style="-fx-font-size: 20px; -fx-font-weight: bold; -fx-text-fill: #37474f;" text="📆 Schedule a Therapy Session" />
+
+                <GridPane hgap="20.0" vgap="10.0">
+                    <columnConstraints>
+                        <ColumnConstraints percentWidth="40" />
+                        <ColumnConstraints percentWidth="60" />
+                    </columnConstraints>
+
+                    <Label text="Session ID:" GridPane.columnIndex="0" GridPane.rowIndex="0" />
+                    <TextField fx:id="txtSessionId" promptText="Auto-generated or enter ID" style="-fx-background-radius: 6;" GridPane.columnIndex="1" GridPane.rowIndex="0" />
+
+                    <Label text="Patient:" GridPane.columnIndex="0" GridPane.rowIndex="1" />
+                    <ComboBox fx:id="cmbPatient" promptText="Select a patient" style="-fx-background-radius: 6;" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+
+                    <Label text="Program:" GridPane.columnIndex="0" GridPane.rowIndex="2" />
+                    <ComboBox fx:id="cmbProgram" onAction="#cmbProgramOnAction" promptText="Select a program" style="-fx-background-radius: 6;" GridPane.columnIndex="1" GridPane.rowIndex="2" />
+
+                    <Label text="Date:" GridPane.columnIndex="0" GridPane.rowIndex="3" />
+                    <DatePicker fx:id="dpDate" style="-fx-background-radius: 6;" GridPane.columnIndex="1" GridPane.rowIndex="3" />
+
+                    <Label text="Start Time:" GridPane.columnIndex="0" GridPane.rowIndex="4" />
+                    <ComboBox fx:id="cmbStartTime" promptText="e.g., 08:00" style="-fx-background-radius: 6;" GridPane.columnIndex="1" GridPane.rowIndex="4" />
+
+                    <Label text="End Time:" GridPane.columnIndex="0" GridPane.rowIndex="5" />
+                    <ComboBox fx:id="cmbEndTime" promptText="e.g., 09:00" style="-fx-background-radius: 6;" GridPane.columnIndex="1" GridPane.rowIndex="5" />
+                    <rowConstraints>
+                        <RowConstraints />
+                        <RowConstraints />
+                        <RowConstraints />
+                        <RowConstraints />
+                        <RowConstraints />
+                        <RowConstraints />
+                        <RowConstraints />
+                    </rowConstraints>
+                </GridPane>
+
+                <HBox alignment="CENTER_RIGHT" spacing="15.0" style="-fx-padding: 10 0 0 0;">
+                    <Button fx:id="btnSave" onAction="#btnSaveOnAction" prefHeight="26.0" prefWidth="50.0" style="-fx-background-color: #26a69a; -fx-text-fill: white; -fx-font-weight: bold; -fx-background-radius: 8;" text="Save" />
+                    <Button fx:id="btnUpdate" onAction="#btnUpdateOnAction" style="-fx-background-color: #ffa726; -fx-text-fill: white; -fx-font-weight: bold; -fx-background-radius: 8;" text="Reschedule" />
+                </HBox>
+            </VBox>
+
+            <!-- Right Side: Therapist Table -->
+            <VBox prefHeight="372.0" prefWidth="694.0" spacing="10.0" style="-fx-background-color: white; -fx-background-radius: 15; -fx-padding: 15;">
+                <effect>
+                    <DropShadow color="#cfd8dc" radius="10.0" />
+                </effect>
+
+                <Label style="-fx-font-size: 18px; -fx-font-weight: bold; -fx-text-fill: #37474f;" text="👨‍⚕ Available Therapists" />
+                <TableView fx:id="tblTherapists" prefHeight="330.0" prefWidth="630.0" style="-fx-background-radius: 8; -fx-border-radius: 8; -fx-border-color: #ccc;">
+                    <columns>
+                        <TableColumn fx:id="colTherapistId" prefWidth="60.0" text="ID" />
+                        <TableColumn fx:id="colTherapistName" prefWidth="68.8000602722168" text="Name" />
+                        <TableColumn fx:id="colSpecialization" prefWidth="139.19992065429688" text="Specialization" />
+                  <TableColumn fx:id="colContact" prefWidth="84.800048828125" text="Contact" />
+                  <TableColumn fx:id="colMail" prefWidth="161.60003662109375" text="Email" />
+                        <TableColumn fx:id="colAvailability" prefWidth="113.599853515625" text="Availability" />
+                    </columns>
+                </TableView>
+
+                <!-- Add View Schedule Button -->
+                <HBox alignment="CENTER_RIGHT" spacing="10.0" />
+            </VBox>
+        </HBox>
+
+        <!-- Bottom: Session Table -->
+        <TableView fx:id="tblSessions" layoutX="20.0" layoutY="515.0" onMouseClicked="#tblSessionsOnClick" prefHeight="252.0" prefWidth="1046.0" style="-fx-background-radius: 10; -fx-border-radius: 10; -fx-border-color: #ccc;">
+            <columns>
+                <TableColumn fx:id="colSessionId" prefWidth="90.0" text="Session ID" />
+                <TableColumn fx:id="colPatient" prefWidth="126.39999389648438" text="Patient" />
+                <TableColumn fx:id="colProgram" prefWidth="137.59999084472656" text="Program" />
+                <TableColumn fx:id="colTherapist" prefWidth="116.800048828125" text="Therapist" />
+                <TableColumn fx:id="colDate" prefWidth="113.5999755859375" text="Date" />
+                <TableColumn fx:id="colStartTime" prefWidth="120.0" text="Start Time" />
+                <TableColumn fx:id="colEndTime" prefWidth="143.199951171875" text="End Time" />
+            <TableColumn fx:id="colStatus" prefWidth="192.79998779296875" text="Status" />
+            </columns>
+        </TableView>
+    </children>
+</AnchorPane>

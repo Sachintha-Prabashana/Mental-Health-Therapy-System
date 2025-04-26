@@ -4,4 +4,5 @@ import lk.ijse.entity.Patient;
 
 public interface PatientDAO extends CrudDAO<Patient>{
 
+    Patient search(String patientId);
 }

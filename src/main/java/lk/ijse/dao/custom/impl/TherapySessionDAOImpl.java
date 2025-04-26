@@ -45,7 +45,18 @@ public class TherapySessionDAOImpl implements TherapySessionDAO {
 
     @Override
     public String getNextId() {
-        return "";
+        Session session = factoryConfiguration.getSession();
+        // Get the last user ID from the database
+        String lastId = session.createQuery("SELECT s.id FROM TherapySession s ORDER BY s.id DESC", String.class)
+                .setMaxResults(1)
+                .uniqueResult();
+
+        if (lastId != null) {
+            int numericPart = Integer.parseInt(lastId.split("-")[1]) + 1;
+            return String.format("S00-%03d", numericPart);
+        } else {
+            return "S00-001"; // First user ID
+        }
     }
 
     @Override
@@ -57,16 +68,26 @@ public class TherapySessionDAOImpl implements TherapySessionDAO {
     }
 
     @Override
-    public List<TherapySession> findByTherapistAndTime(String therapistId, LocalDate date, LocalTime time) {
-        Session s = factoryConfiguration.getSession();
-        Query<TherapySession> query = s.createQuery("FROM TherapySession WHERE therapist.therapistID = :tid AND sessionDate = :date AND sessionTime = :time", TherapySession.class);
-        query.setParameter("tid", therapistId);
-        query.setParameter("date", date);
-        query.setParameter("time", time);
-        List<TherapySession> results = query.getResultList();
-        s.close();
-        return results;
+    public List<TherapySession> findByTherapistAndTime(String therapistId, LocalDate date, LocalTime startTime, LocalTime endTime) {
+        Session session = factoryConfiguration.getSession();
+        try {
+            Query<TherapySession> query = session.createQuery(
+                    "FROM TherapySession WHERE therapist.therapistID = :tid " +
+                            "AND sessionDate = :date " +
+                            "AND startTime < :endTime " +
+                            "AND endTime > :startTime", TherapySession.class
+            );
+            query.setParameter("tid", therapistId);
+            query.setParameter("date", date);
+            query.setParameter("startTime", startTime);
+            query.setParameter("endTime", endTime);
+
+            return query.getResultList();
+        } finally {
+            session.close();
+        }
     }
+
 
     @Override
     public TherapySession getSessionByPatientName(String name) {
@@ -84,5 +105,7 @@ public class TherapySessionDAOImpl implements TherapySessionDAO {
             session.close();
         }
     }
+
+
 
 }

@@ -1,74 +1,170 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import com.jfoenix.controls.JFXButton?>
+<?import javafx.geometry.Insets?>
 <?import javafx.scene.Cursor?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.TableColumn?>
 <?import javafx.scene.control.TableView?>
 <?import javafx.scene.control.TextField?>
+<?import javafx.scene.effect.DropShadow?>
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.paint.Color?>
 <?import javafx.scene.paint.LinearGradient?>
 <?import javafx.scene.paint.Stop?>
 <?import javafx.scene.shape.Rectangle?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane prefHeight="632.0" prefWidth="963.0" xmlns="http://javafx.com/javafx/22" xmlns:fx="http://javafx.com/fxml/1" fx:controller="lk.ijse.controller.ManageTherapistFormController">
+<AnchorPane prefHeight="784.0" prefWidth="1085.0" style="-fx-background-color: #f5f7fa;" xmlns="http://javafx.com/javafx/22" xmlns:fx="http://javafx.com/fxml/1" fx:controller="lk.ijse.controller.ManageTherapistFormController">
     <children>
-        <!-- Header Section -->
-        <Rectangle arcHeight="5.0" arcWidth="5.0" height="80.0" layoutX="20.0" layoutY="20.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" width="923.0">
+        <!-- Modern Header Section with gradient and shadow -->
+        <Rectangle arcHeight="15.0" arcWidth="15.0" height="90.0" layoutX="20.0" layoutY="20.0" stroke="TRANSPARENT" strokeType="INSIDE" width="1046.0">
             <fill>
-                <LinearGradient endX="0.048" endY="0.712">
+                <LinearGradient endX="1.0" endY="0.0">
                     <stops>
-                        <Stop color="#1598d6" />
-                        <Stop color="WHITE" offset="1.0" />
+                        <Stop>
+                            <color>
+                                <Color red="0.082" green="0.596" blue="0.839" />
+                            </color>
+                        </Stop>
+                        <Stop offset="1.0">
+                            <color>
+                                <Color red="0.278" green="0.710" blue="0.894" />
+                            </color>
+                        </Stop>
                     </stops>
                 </LinearGradient>
             </fill>
+            <effect>
+                <DropShadow height="10.0" radius="4.5" width="10.0">
+                    <color>
+                        <Color opacity="0.25" />
+                    </color>
+                </DropShadow>
+            </effect>
         </Rectangle>
-        <ImageView id="imgHome" fx:id="imgHome" fitHeight="53.0" fitWidth="55.0" layoutX="32.0" layoutY="26.0" onMouseClicked="#navigateToHome" pickOnBounds="true" preserveRatio="true">
-            <image>
-                <Image url="@../images/home-icon.png" />
-            </image>
-            <cursor>
-                <Cursor fx:constant="HAND" />
-            </cursor>
-        </ImageView>
-        <Label layoutX="105.0" layoutY="34.0" text="Manage Therapists">
-            <font>
-                <Font name="Ubuntu" size="27.0" />
-            </font>
-        </Label>
-        <JFXButton id="btnAddNewTherapist" fx:id="btnAddNewTherapist" layoutX="776.0" layoutY="42.0" onAction="#btnAddNew_OnAction" prefHeight="35.0" prefWidth="150.0" style="-fx-cursor: hand; -fx-background-color: #007bff;" text="+ New Therapist" textFill="WHITE" />
 
-        <!-- Therapist Form Fields -->
-        <TextField fx:id="txtTherapistId" layoutX="20.0" layoutY="132.0" prefHeight="26.0" prefWidth="191.0" promptText="Therapist ID:" />
-        <TextField fx:id="txtTherapistName" layoutX="20.0" layoutY="172.0" prefHeight="26.0" prefWidth="330.0" promptText="Therapist Name:" />
-        <TextField fx:id="txtTherapistSpecialty" layoutX="20.0" layoutY="212.0" prefHeight="26.0" prefWidth="330.0" promptText="Specialty:" />
-        <TextField fx:id="txtTherapistAvailability" layoutX="20.0" layoutY="252.0" prefHeight="26.0" prefWidth="330.0" promptText="Availability Schedule:" />
+        <HBox alignment="CENTER_LEFT" layoutX="20.0" layoutY="20.0" prefHeight="90.0" prefWidth="1046.0" spacing="15.0">
+            <padding>
+                <Insets left="15.0" />
+            </padding>
 
-        <!-- Action Buttons -->
-        <JFXButton id="btnSave" fx:id="btnSave" layoutX="85.0" layoutY="592.0" onAction="#btnSave_OnAction" prefHeight="28.0" prefWidth="74.0" style="-fx-cursor: hand; -fx-background-color: #218838;" text="Save" />
-        <JFXButton id="btnUpdate" fx:id="btnUpdate" layoutX="180.0" layoutY="592.0" onAction="#btnUpdate_OnAction" prefHeight="28.0" prefWidth="74.0" style="-fx-cursor: hand; -fx-background-color: #F9CB43;" text="Update" />
-        <JFXButton id="btnDelete" fx:id="btnDelete" layoutX="275.0" layoutY="592.0" onAction="#btnDelete_OnAction" prefHeight="28.0" prefWidth="74.0" style="-fx-cursor: hand; -fx-background-color: red;" text="Delete" textFill="WHITE" />
+            <ImageView id="imgHome" fx:id="imgHome" fitHeight="50.0" fitWidth="50.0" onMouseClicked="#navigateToHome" pickOnBounds="true" preserveRatio="true">
+                <image>
+                    <Image url="@../images/home-icon.png" />
+                </image>
+                <cursor>
+                    <Cursor fx:constant="HAND" />
+                </cursor>
+            </ImageView>
 
-        <!-- Assign Programs -->
-        <Label layoutX="24.0" layoutY="306.0" text="Assign Therapy Programs:">
-            <font>
-                <Font size="16.0" />
-            </font>
-        </Label>
-        <AnchorPane fx:id="programListContainer" layoutX="20.0" layoutY="336.0" prefHeight="240.0" prefWidth="330.0" style="-fx-background-color: #f2f2f2; -fx-border-color: #ccc; -fx-border-radius: 5;" />
+            <Label prefHeight="40.0" prefWidth="342.0" text="Manage Therapists" textFill="WHITE">
+                <font>
+                    <Font name="System Bold" size="28.0" />
+                </font>
+            </Label>
 
-        <!-- Therapist Table -->
-        <TableView fx:id="tblTherapists" layoutX="390.0" layoutY="132.0" onMouseClicked="#tblTherapistsOnClick" prefHeight="474.0" prefWidth="553.0">
-            <columns>
-                <TableColumn fx:id="clmTherapistId" prefWidth="85.6" text="Therapist ID" />
-                <TableColumn fx:id="clmTherapistName" prefWidth="154.4" text="Therapist Name" />
-                <TableColumn fx:id="clmTherapistSpeciality" prefWidth="185.6" text="Specialty" />
-                <TableColumn fx:id="clmTherapisstAvailability" prefWidth="124.0" text="Availability" />
-            </columns>
-        </TableView>
+            <HBox alignment="CENTER_RIGHT" prefHeight="90.0" prefWidth="579.0">
+                <JFXButton id="btnAddNewTherapist" fx:id="btnAddNewTherapist" onAction="#btnAddNew_OnAction" prefHeight="46.0" prefWidth="178.0" style="-fx-background-color: white; -fx-text-fill: #0277bd; -fx-font-weight: bold; -fx-background-radius: 25;" text="+ New Therapist">
+                    <cursor>
+                        <Cursor fx:constant="HAND" />
+                    </cursor>
+                    <effect>
+                        <DropShadow height="8.0" radius="3.5" width="8.0">
+                            <color>
+                                <Color opacity="0.15" />
+                            </color>
+                        </DropShadow>
+                    </effect>
+                </JFXButton>
+            <HBox.margin>
+               <Insets left="5.0" />
+            </HBox.margin>
+            <padding>
+               <Insets left="5.0" />
+            </padding>
+            </HBox>
+        </HBox>
+
+        <!-- Content Area with Cards -->
+        <AnchorPane layoutX="20.0" layoutY="125.0" prefHeight="417.0" prefWidth="342.0" style="-fx-background-color: white; -fx-background-radius: 15;">
+            <effect>
+                <DropShadow height="10.0" radius="4.5" width="10.0">
+                    <color>
+                        <Color opacity="0.1" />
+                    </color>
+                </DropShadow>
+            </effect>
+
+            <children>
+                <VBox layoutX="16.0" layoutY="34.0" prefHeight="336.0" prefWidth="310.0" spacing="12.0">
+                    <Label style="-fx-font-size: 16px; -fx-font-weight: bold; -fx-text-fill: #37474f;" text="Therapist Information" />
+
+                    <TextField fx:id="txtTherapistId" promptText="Therapist ID" style="-fx-background-radius: 8; -fx-border-radius: 8; -fx-border-color: #e0e0e0; -fx-background-color: #f9f9f9;" />
+
+                    <TextField fx:id="txtTherapistName" promptText="Full Name" style="-fx-background-radius: 8; -fx-border-radius: 8; -fx-border-color: #e0e0e0; -fx-background-color: #f9f9f9;" />
+
+                    <TextField fx:id="txtTherapistSpecialty" promptText="Specialty" style="-fx-background-radius: 8; -fx-border-radius: 8; -fx-border-color: #e0e0e0; -fx-background-color: #f9f9f9;" />
+
+                    <TextField fx:id="txtContactNumber" promptText="Contact Number" style="-fx-background-radius: 8; -fx-border-radius: 8; -fx-border-color: #e0e0e0; -fx-background-color: #f9f9f9;" />
+
+                    <TextField fx:id="txtEmail" promptText="Email Address" style="-fx-background-radius: 8; -fx-border-radius: 8; -fx-border-color: #e0e0e0; -fx-background-color: #f9f9f9;" />
+               <HBox prefHeight="45.0" prefWidth="320.0">
+                  <children>
+                     <TextField fx:id="txtAvilability" prefHeight="27.0" prefWidth="325.0" promptText="Avilability" style="-fx-background-radius: 8; -fx-border-radius: 8; -fx-border-color: #e0e0e0; -fx-background-color: #f9f9f9;" />
+                  </children></HBox>
+
+                    <HBox alignment="CENTER" prefHeight="48.0" prefWidth="320.0" spacing="15.0">
+                        <JFXButton id="btnSave" fx:id="btnSave" onAction="#btnSave_OnAction" prefHeight="40.0" prefWidth="95.0" style="-fx-background-color: #26a69a; -fx-text-fill: white; -fx-font-weight: bold; -fx-background-radius: 20;" text="Save">
+                            <cursor>
+                                <Cursor fx:constant="HAND" />
+                            </cursor>
+                        </JFXButton>
+
+                        <JFXButton id="btnUpdate" fx:id="btnUpdate" onAction="#btnUpdate_OnAction" prefHeight="40.0" prefWidth="95.0" style="-fx-background-color: #ffb74d; -fx-text-fill: white; -fx-font-weight: bold; -fx-background-radius: 20;" text="Update">
+                            <cursor>
+                                <Cursor fx:constant="HAND" />
+                            </cursor>
+                        </JFXButton>
+
+                        <JFXButton id="btnDelete" fx:id="btnDelete" onAction="#btnDelete_OnAction" prefHeight="40.0" prefWidth="95.0" style="-fx-background-color: #ef5350; -fx-text-fill: white; -fx-font-weight: bold; -fx-background-radius: 20;" text="Delete">
+                            <cursor>
+                                <Cursor fx:constant="HAND" />
+                            </cursor>
+                        </JFXButton>
+                    </HBox>
+                </VBox>
+            </children>
+        </AnchorPane>
+
+        <!-- Modern Table with Shadow -->
+        <AnchorPane layoutX="374.0" layoutY="125.0" prefHeight="634.0" prefWidth="694.0" style="-fx-background-color: white; -fx-background-radius: 15;">
+            <effect>
+                <DropShadow height="10.0" radius="4.5" width="10.0">
+                    <color>
+                        <Color opacity="0.1" />
+                    </color>
+                </DropShadow>
+            </effect>
+
+            <children>
+                <Label layoutX="15.0" layoutY="29.0" style="-fx-font-size: 16px; -fx-font-weight: bold; -fx-text-fill: #37474f;" text="Therapist Records" />
+
+                <TableView fx:id="tblTherapists" layoutX="15.0" layoutY="68.0" onMouseClicked="#tblTherapistsOnClick" prefHeight="551.0" prefWidth="662.0" style="-fx-background-radius: 8; -fx-border-radius: 8; -fx-border-color: #e0e0e0;">
+                    <columns>
+                        <TableColumn fx:id="clmTherapistId" prefWidth="67.20001220703125" text="ID" />
+                        <TableColumn fx:id="clmTherapistName" prefWidth="91.20001220703125" text="Name" />
+                        <TableColumn fx:id="clmTherapistSpeciality" prefWidth="95.199951171875" text="Specialty" />
+                        <TableColumn fx:id="clmContactNumber" prefWidth="91.20001220703125" text="Contact" />
+                  <TableColumn fx:id="clmEmail" prefWidth="194.39996337890625" text="Email" />
+                  <TableColumn fx:id="clmAvailability" prefWidth="116.79998779296875" text="Avilability" />
+                    </columns>
+                </TableView>
+            </children>
+        </AnchorPane>
     </children>
 </AnchorPane>

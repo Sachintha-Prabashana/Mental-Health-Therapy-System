@@ -9,68 +9,341 @@
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.PasswordField?>
 <?import javafx.scene.control.TextField?>
+<?import javafx.scene.effect.DropShadow?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.Region?>
 <?import javafx.scene.layout.VBox?>
+<?import javafx.scene.paint.LinearGradient?>
+<?import javafx.scene.paint.Stop?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane fx:id="signupPage" prefHeight="750.0" prefWidth="1200.0" style="-fx-background-color: #f0f4f8;" xmlns="http://javafx.com/javafx/22" xmlns:fx="http://javafx.com/fxml/1" fx:controller="lk.ijse.controller.SignupPageController">
+<AnchorPane fx:id="signupPage" prefHeight="832.0" prefWidth="1332.0" style="-fx-background-color: #FAFAFA;" xmlns="http://javafx.com/javafx/22" xmlns:fx="http://javafx.com/fxml/1" fx:controller="lk.ijse.controller.SignupPageController">
 
-    <VBox alignment="CENTER" layoutX="50" layoutY="80" prefHeight="563.0" prefWidth="512.0" spacing="15">
-        <!-- Title -->
-        <Label prefHeight="54.0" prefWidth="220.0" style="-fx-font-size: 22px; -fx-font-weight: bold;" text="Create Account" textAlignment="CENTER">
-         <font>
-            <Font size="36.0" />
-         </font></Label>
+    <!-- Background Design Elements -->
+    <Region layoutX="-200" layoutY="-200" prefHeight="600" prefWidth="600" style="-fx-background-color: #6A11CB; -fx-opacity: 0.05; -fx-background-radius: 100;" />
 
-        <!-- Username Input -->
-        <TextField fx:id="txtUsername" maxWidth="300" prefHeight="40.0" promptText="Enter Username">
-         <font>
-            <Font size="14.0" />
-         </font></TextField>
+    <!-- Main Content Container -->
+    <HBox alignment="CENTER" layoutX="0" layoutY="0" prefHeight="832.0" prefWidth="1342.0" spacing="50.0">
 
-        <!-- Password Input -->
-        <PasswordField fx:id="txtPassword" maxWidth="300" prefHeight="40.0" promptText="Enter Password">
-         <font>
-            <Font size="14.0" />
-         </font></PasswordField>
+        <!-- Left Side - Branding -->
+        <VBox alignment="CENTER" prefHeight="798.0" prefWidth="643.0" style="-fx-background-color: transparent;">
+            <padding>
+                <Insets bottom="50.0" top="50.0" />
+            </padding>
 
-        <!-- Confirm Password -->
-        <PasswordField fx:id="txtConfirmPassword" maxWidth="300" prefHeight="40.0" promptText="Confirm Password">
-         <font>
-            <Font size="14.0" />
-         </font></PasswordField>
+            <ImageView fitHeight="200.0" fitWidth="200.0" preserveRatio="true">
+                <image>
+                    <Image url="@../images/project-img.png" />
+                </image>
+            </ImageView>
 
-        <!-- Role Selection -->
-        <HBox prefHeight="40.0" prefWidth="459.0" spacing="10">
-            <Label prefHeight="40.0" prefWidth="60.0" style="-fx-font-size: 14px;" text="Role:">
-            <font>
-               <Font size="14.0" />
-            </font></Label>
-            <ComboBox fx:id="cmbRole" maxWidth="180" prefHeight="40.0">
-                <items>
-                    <FXCollections fx:factory="observableArrayList">
-                        <String fx:value="ADMIN" />
-                        <String fx:value="RECEPTIONIST" />
-                    </FXCollections>
-                </items>
-            </ComboBox>
-         <VBox.margin>
-            <Insets left="105.0" right="100.0" />
-         </VBox.margin>
-        </HBox>
+            <Label style="-fx-font-weight: bold;" text="ZenithMind">
+                <font>
+                    <Font name="System Bold" size="56.0" />
+                </font>
+                <VBox.margin>
+                    <Insets bottom="10.0" top="30.0" />
+                </VBox.margin>
+                <textFill>
+                    <LinearGradient endX="1.0" endY="1.0">
+                        <stops>
+                            <Stop color="#6A11CB" />
+                            <Stop color="#2575FC" offset="1.0" />
+                        </stops>
+                    </LinearGradient>
+                </textFill>
+            </Label>
 
-        <!-- Signup Button -->
-        <Button fx:id="btnSignUp" maxWidth="300" onAction="#btnSignUpOnAction" prefHeight="50.0" prefWidth="300.0" style="-fx-background-color: #3498db; -fx-text-fill: white;" text="Sign Up">
-         <font>
-            <Font size="18.0" />
-         </font></Button>
+            <Label style="-fx-text-fill: #666666;" text="Mental Health Therapy System">
+                <font>
+                    <Font size="24.0" />
+                </font>
+                <VBox.margin>
+                    <Insets bottom="50.0" />
+                </VBox.margin>
+            </Label>
 
-        <!-- Login Redirect -->
-        <Hyperlink onAction="#goToLogin" text="Already have an account? Login">
-         <font>
-            <Font size="18.0" />
-         </font></Hyperlink>
+            <VBox maxWidth="450.0" prefHeight="291.0" prefWidth="450.0" spacing="25.0">
+                <HBox alignment="CENTER_LEFT" spacing="20.0" style="-fx-background-color: white; -fx-background-radius: 15; -fx-padding: 20;">
+                    <effect>
+                        <DropShadow color="#0000001a" radius="10" spread="0.05" />
+                    </effect>
 
-    </VBox>
+                    <VBox spacing="5">
+                        <Label style="-fx-font-weight: bold; -fx-text-fill: #333333;" text="Secure">
+                            <font>
+                                <Font size="16.0" />
+                            </font>
+                        </Label>
+                        <Label style="-fx-text-fill: #666666;" text="End-to-end encryption and HIPAA compliance" wrapText="true">
+                            <font>
+                                <Font size="14.0" />
+                            </font>
+                        </Label>
+                    </VBox>
+                </HBox>
+
+                <HBox alignment="CENTER_LEFT" spacing="20.0" style="-fx-background-color: white; -fx-background-radius: 15; -fx-padding: 20;">
+                    <effect>
+                        <DropShadow color="#0000001a" radius="10" spread="0.05" />
+                    </effect>
+                    <VBox spacing="5">
+                        <Label style="-fx-font-weight: bold; -fx-text-fill: #333333;" text="Comprehensive">
+                            <font>
+                                <Font size="16.0" />
+                            </font>
+                        </Label>
+                        <Label style="-fx-text-fill: #666666;" text="Full therapy management and progress tracking" wrapText="true">
+                            <font>
+                                <Font size="14.0" />
+                            </font>
+                        </Label>
+                    </VBox>
+                </HBox>
+
+                <HBox alignment="CENTER_LEFT" spacing="20.0" style="-fx-background-color: white; -fx-background-radius: 15; -fx-padding: 20;">
+                    <effect>
+                        <DropShadow color="#0000001a" radius="10" spread="0.05" />
+                    </effect>
+                    <VBox spacing="5">
+                        <Label style="-fx-font-weight: bold; -fx-text-fill: #333333;" text="Supportive">
+                            <font>
+                                <Font size="16.0" />
+                            </font>
+                        </Label>
+                        <Label style="-fx-text-fill: #666666;" text="24/7 access to professional support resources" wrapText="true">
+                            <font>
+                                <Font size="14.0" />
+                            </font>
+                        </Label>
+                    </VBox>
+                </HBox>
+            </VBox>
+        </VBox>
+
+        <!-- Right Side - Form -->
+        <VBox alignment="CENTER" maxHeight="796.0" prefHeight="767.0" prefWidth="626.0" style="-fx-background-color: white; -fx-background-radius: 20;">
+            <effect>
+                <DropShadow color="#00000033" radius="15" spread="0.05" />
+            </effect>
+
+            <VBox prefHeight="771.0" prefWidth="626.0" spacing="10.0" style="-fx-padding: 40 50;">
+                <Label style="-fx-font-weight: bold; -fx-text-fill: #333333;" text="Create Account">
+                    <font>
+                        <Font size="32.0" />
+                    </font>
+                </Label>
+
+                <Label style="-fx-text-fill: #666666;" text="Join the ZenithMind community">
+                    <font>
+                        <Font size="16.0" />
+                    </font>
+                    <VBox.margin>
+                        <Insets bottom="30.0" />
+                    </VBox.margin>
+                </Label>
+
+                <!-- Form Fields -->
+                <HBox spacing="20.0">
+                    <!-- First Name -->
+                    <VBox spacing="8.0" HBox.hgrow="ALWAYS">
+                        <HBox spacing="5">
+                            <Label style="-fx-font-weight: bold; -fx-text-fill: #333333;" text="First Name">
+                                <font>
+                                    <Font size="14.0" />
+                                </font>
+                            </Label>
+                            <Label style="-fx-text-fill: #e74c3c;" text="*">
+                                <font>
+                                    <Font size="14.0" />
+                                </font>
+                            </Label>
+                        </HBox>
+                        <TextField fx:id="txtFirstName" prefHeight="50.0" promptText="John" style="-fx-background-radius: 8; -fx-border-radius: 8; -fx-border-color: #E0E0E0; -fx-border-width: 1px; -fx-background-color: #F7F9FC; -fx-padding: 10;">
+                            <font>
+                                <Font size="14.0" />
+                            </font>
+                        </TextField>
+                    </VBox>
+
+                    <!-- Last Name -->
+                    <VBox spacing="8.0" HBox.hgrow="ALWAYS">
+                        <HBox spacing="5">
+                            <Label style="-fx-font-weight: bold; -fx-text-fill: #333333;" text="Last Name">
+                                <font>
+                                    <Font size="14.0" />
+                                </font>
+                            </Label>
+                            <Label style="-fx-text-fill: #e74c3c;" text="*">
+                                <font>
+                                    <Font size="14.0" />
+                                </font>
+                            </Label>
+                        </HBox>
+                        <TextField fx:id="txtLastName" prefHeight="50.0" promptText="Doe" style="-fx-background-radius: 8; -fx-border-radius: 8; -fx-border-color: #E0E0E0; -fx-border-width: 1px; -fx-background-color: #F7F9FC; -fx-padding: 10;">
+                            <font>
+                                <Font size="14.0" />
+                            </font>
+                        </TextField>
+                    </VBox>
+                </HBox>
+
+                <!-- Email -->
+                <VBox spacing="8.0">
+                    <VBox.margin>
+                        <Insets top="15.0" />
+                    </VBox.margin>
+                    <HBox spacing="5">
+                        <Label style="-fx-font-weight: bold; -fx-text-fill: #333333;" text="Email Address">
+                            <font>
+                                <Font size="14.0" />
+                            </font>
+                        </Label>
+                        <Label style="-fx-text-fill: #e74c3c;" text="*">
+                            <font>
+                                <Font size="14.0" />
+                            </font>
+                        </Label>
+                    </HBox>
+                    <TextField fx:id="txtEmail" prefHeight="50.0" promptText="example@email.com" style="-fx-background-radius: 8; -fx-border-radius: 8; -fx-border-color: #E0E0E0; -fx-border-width: 1px; -fx-background-color: #F7F9FC; -fx-padding: 10;">
+                        <font>
+                            <Font size="14.0" />
+                        </font>
+                    </TextField>
+                </VBox>
+
+                <!-- Username -->
+                <VBox spacing="8.0">
+                    <VBox.margin>
+                        <Insets top="15.0" />
+                    </VBox.margin>
+                    <HBox spacing="5">
+                        <Label style="-fx-font-weight: bold; -fx-text-fill: #333333;" text="Username">
+                            <font>
+                                <Font size="14.0" />
+                            </font>
+                        </Label>
+                        <Label style="-fx-text-fill: #e74c3c;" text="*">
+                            <font>
+                                <Font size="14.0" />
+                            </font>
+                        </Label>
+                    </HBox>
+                    <TextField fx:id="txtUsername" prefHeight="50.0" promptText="Choose a unique username" style="-fx-background-radius: 8; -fx-border-radius: 8; -fx-border-color: #E0E0E0; -fx-border-width: 1px; -fx-background-color: #F7F9FC; -fx-padding: 10;">
+                        <font>
+                            <Font size="14.0" />
+                        </font>
+                    </TextField>
+                </VBox>
+
+                <!-- Password Fields -->
+                <HBox spacing="20.0">
+                    <VBox.margin>
+                        <Insets top="15.0" />
+                    </VBox.margin>
+                    <!-- Password -->
+                    <VBox spacing="8.0" HBox.hgrow="ALWAYS">
+                        <HBox spacing="5">
+                            <Label style="-fx-font-weight: bold; -fx-text-fill: #333333;" text="Password">
+                                <font>
+                                    <Font size="14.0" />
+                                </font>
+                            </Label>
+                            <Label style="-fx-text-fill: #e74c3c;" text="*">
+                                <font>
+                                    <Font size="14.0" />
+                                </font>
+                            </Label>
+                        </HBox>
+                        <PasswordField fx:id="txtPassword" prefHeight="50.0" promptText="••••••••" style="-fx-background-radius: 8; -fx-border-radius: 8; -fx-border-color: #E0E0E0; -fx-border-width: 1px; -fx-background-color: #F7F9FC; -fx-padding: 10;">
+                            <font>
+                                <Font size="14.0" />
+                            </font>
+                        </PasswordField>
+                    </VBox>
+
+                    <!-- Confirm Password -->
+                    <VBox spacing="8.0" HBox.hgrow="ALWAYS">
+                        <HBox spacing="5">
+                            <Label style="-fx-font-weight: bold; -fx-text-fill: #333333;" text="Confirm Password">
+                                <font>
+                                    <Font size="14.0" />
+                                </font>
+                            </Label>
+                            <Label style="-fx-text-fill: #e74c3c;" text="*">
+                                <font>
+                                    <Font size="14.0" />
+                                </font>
+                            </Label>
+                        </HBox>
+                        <PasswordField fx:id="txtConfirmPassword" prefHeight="50.0" promptText="••••••••" style="-fx-background-radius: 8; -fx-border-radius: 8; -fx-border-color: #E0E0E0; -fx-border-width: 1px; -fx-background-color: #F7F9FC; -fx-padding: 10;">
+                            <font>
+                                <Font size="14.0" />
+                            </font>
+                        </PasswordField>
+                    </VBox>
+                </HBox>
+
+                <!-- Role Selection -->
+                <VBox spacing="8.0">
+                    <VBox.margin>
+                        <Insets top="15.0" />
+                    </VBox.margin>
+                    <HBox spacing="5">
+                        <Label style="-fx-font-weight: bold; -fx-text-fill: #333333;" text="Role">
+                            <font>
+                                <Font size="14.0" />
+                            </font>
+                        </Label>
+                        <Label style="-fx-text-fill: #e74c3c;" text="*">
+                            <font>
+                                <Font size="14.0" />
+                            </font>
+                        </Label>
+                    </HBox>
+                    <ComboBox fx:id="cmbRole" prefHeight="50.0" prefWidth="500.0" promptText="Select your role"
+                              style="-fx-background-radius: 8; -fx-border-radius: 8; -fx-border-color: #E0E0E0; -fx-border-width: 1px; -fx-background-color: #F7F9FC;"/>
+                </VBox>
+
+                <Label style="-fx-font-style: italic; -fx-text-fill: #888888;" text="* Required fields">
+                    <font>
+                        <Font size="12.0" />
+                    </font>
+                    <VBox.margin>
+                        <Insets bottom="15.0" top="10.0" />
+                    </VBox.margin>
+                </Label>
+
+                <!-- Signup Button with Gradient -->
+                <Button fx:id="btnSignUp" onAction="#btnSignUpOnAction" prefHeight="55.0" prefWidth="500.0" style="-fx-background-color: linear-gradient(to right, #6A11CB, #2575FC); -fx-text-fill: white; -fx-background-radius: 30; -fx-font-weight: bold; -fx-cursor: hand;" text="Create Account">
+                    <font>
+                        <Font size="16.0" />
+                    </font>
+                    <effect>
+                        <DropShadow color="#6A11CB33" radius="10" spread="0.05" />
+                    </effect>
+                </Button>
+
+                <!-- Login Redirect -->
+                <HBox alignment="CENTER" spacing="5.0">
+                    <VBox.margin>
+                        <Insets top="15.0" />
+                    </VBox.margin>
+                    <Label style="-fx-text-fill: #666666;" text="Already have an account?">
+                        <font>
+                            <Font size="14.0" />
+                        </font>
+                    </Label>
+                    <Hyperlink onAction="#goToLogin" style="-fx-text-fill: #6A11CB; -fx-font-weight: bold; -fx-border-color: transparent;" text="Log in">
+                        <font>
+                            <Font size="14.0" />
+                        </font>
+                    </Hyperlink>
+                </HBox>
+            </VBox>
+        </VBox>
+    </HBox>
 </AnchorPane>

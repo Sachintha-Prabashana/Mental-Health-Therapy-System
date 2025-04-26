@@ -86,7 +86,7 @@ public class TherapyProgramTableFormController implements Initializable {
         if (selectedItem == null) {
             showAlert("Warning", "Please select a program", Alert.AlertType.WARNING);
         }else {
-            ManageTherapySessionController.getInstance().setProgramId(selectedItem.getProgramId());
+//            ManageTherapySessionController.getInstance().setProgramId(selectedItem.getProgramId());
 
         }
     }

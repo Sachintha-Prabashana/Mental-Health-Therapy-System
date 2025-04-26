@@ -14,7 +14,8 @@ import java.time.LocalTime;
 public class TherapySessionDTO {
     private String sessionId;
     private LocalDate sessionDate;
-    private LocalTime sessionTime;
+    private LocalTime startTime;
+    private LocalTime endTime;
     private String status;
     private String patientId;
     private String programId;
