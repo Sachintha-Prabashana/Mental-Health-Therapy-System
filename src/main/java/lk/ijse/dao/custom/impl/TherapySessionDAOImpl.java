@@ -27,7 +27,15 @@ public class TherapySessionDAOImpl implements TherapySessionDAO {
 
     @Override
     public boolean update(TherapySession entity) {
-        return false;
+        try (Session session = FactoryConfiguration.getInstance().getSession()) {
+            Transaction tx = session.beginTransaction();
+            session.merge(entity);
+            tx.commit();
+            return true;
+        } catch (Exception e) {
+            e.printStackTrace();
+            return false;
+        }
     }
 
     @Override

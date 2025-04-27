@@ -2,6 +2,7 @@ package lk.ijse.dao.custom.impl;
 
 import lk.ijse.bo.exception.DuplicateException;
 import lk.ijse.bo.exception.NotFoundException;
+import lk.ijse.bo.exception.PaymentProcessingException;
 import lk.ijse.config.FactoryConfiguration;
 import lk.ijse.dao.custom.PaymentDAO;
 import lk.ijse.entity.Patient;
@@ -65,7 +66,7 @@ public class PaymentDAOImpl implements PaymentDAO {
             transaction.commit();
         } catch (Exception e) {
             if (transaction != null) transaction.rollback();
-            e.printStackTrace();
+            throw new PaymentProcessingException("Error while retrieving all payments");
         } finally {
             session.close();
         }

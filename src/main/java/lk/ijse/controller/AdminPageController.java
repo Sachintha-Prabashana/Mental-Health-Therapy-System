@@ -68,7 +68,7 @@ public class AdminPageController implements Initializable {
 
     @FXML
     void btnDashboardOnAction(ActionEvent event) {
-        loadUI("/view/ReportForm.fxml");
+        loadUI("/view/MainDashboardView.fxml");
 
     }
 

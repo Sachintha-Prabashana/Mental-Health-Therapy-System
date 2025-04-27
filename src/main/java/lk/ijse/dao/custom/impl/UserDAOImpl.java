@@ -1,6 +1,7 @@
 package lk.ijse.dao.custom.impl;
 
 
+import lk.ijse.bo.exception.RegistationException;
 import lk.ijse.config.FactoryConfiguration;
 import lk.ijse.dao.custom.UserDAO;
 import lk.ijse.entity.User;
@@ -39,6 +40,8 @@ public class UserDAOImpl  implements UserDAO {
             return session.createQuery("FROM User WHERE username = :username", User.class)
                     .setParameter("username", username)
                     .uniqueResult();
+        }catch (Exception e) {
+            return null;
         }
     }
 
@@ -51,7 +54,7 @@ public class UserDAOImpl  implements UserDAO {
             transaction.commit();
         } catch (Exception e) {
             if (transaction != null) transaction.rollback();
-            e.printStackTrace();
+            throw new RegistationException("Registration failed");
         }
         return false;
     }
