@@ -30,7 +30,7 @@ git clone git@github.com:<your-org-or-user>/ZenithMind.git
 cd ZenithMind
 
 # Or using HTTPS
-git clone https://github.com/<your-org-or-user>/ZenithMind.git
+git clone https://github.com/Sachintha-Prabashana/Mental-Health-Therapy-System
 cd ZenithMind
 ```
 
